@@ -1,0 +1,40 @@
+import type {Languages, UserRoleType} from '@shared/types/api.types'
+import type {UserInfo} from '@entities/user/model/user.types'
+
+// Auth Response Types
+export interface AuthResponse {
+  accessToken: string
+  refreshToken: string
+  tokenType: string
+  user: UserInfo
+}
+
+export interface RegisterResponse {
+  userId: number
+  email: string
+  firstName: string
+  lastName: string
+  secondLastName?: string
+  fullName: string
+  role: UserRoleType
+  emailVerified: boolean
+  message?: string
+}
+
+// Auth Request Types
+export interface LoginRequest {
+  email: string
+  password: string
+}
+
+export interface RegisterRequest {
+  email: string
+  password: string
+  firstName: string
+  lastName: string
+  secondLastName?: string
+  phone?: string
+  mobilePhone?: string
+  role: UserRoleType
+  preferredLanguage?: Languages
+}

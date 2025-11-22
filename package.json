@@ -6,9 +6,13 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "format": "prettier --write \"src/**/*.{js,ts,vue,json,css,scss,md}\"",
+    "format:check": "prettier --check \"src/**/*.{js,ts,vue,json,css,scss,md}\"",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@eslint/js": "^9.39.1",
     "@vueuse/core": "^14.0.0",
     "axios": "^1.13.2",
     "pinia": "^3.0.4",
@@ -19,12 +23,21 @@
     "zod": "^4.1.12"
   },
   "devDependencies": {
+    "@intlify/unplugin-vue-i18n": "^1.0.11",
     "@types/node": "^24.10.1",
+    "@typescript-eslint/eslint-plugin": "^8.47.0",
+    "@typescript-eslint/parser": "^8.47.0",
     "@vitejs/plugin-vue": "^6.0.1",
+    "@vue/eslint-config-prettier": "^10.2.0",
+    "@vue/eslint-config-typescript": "^14.2.0",
     "@vue/tsconfig": "^0.8.1",
+    "eslint": "^9.18.0",
+    "eslint-config-prettier": "^9.1.2",
+    "eslint-plugin-prettier": "^5.5.4",
+    "eslint-plugin-vue": "^9.32.0",
+    "prettier": "^3.4.2",
     "sass": "^1.94.0",
     "typescript": "~5.9.3",
-    "unplugin-vue-i18n": "^1.0.11",
     "vite": "^7.2.2",
     "vue-tsc": "^3.1.3"
   }
