@@ -1,0 +1,100 @@
+@use '@shared/styles/variables' as *;
+
+.login-form-card {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xl;
+}
+
+.form-header {
+  text-align: center;
+}
+
+.form-title {
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-bold;
+  margin-bottom: $spacing-sm;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.form-subtitle {
+  font-size: $font-size-base;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+}
+
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: $spacing-md;
+
+  @media (max-width: $breakpoint-sm) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.forgot-password-link {
+  font-size: $font-size-sm;
+  color: var(--color-primary);
+  font-weight: $font-weight-medium;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+
+  &:hover {
+    color: var(--color-primary-dark);
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--border-focus);
+    outline-offset: 2px;
+    border-radius: $radius-sm;
+  }
+}
+
+.form-footer {
+  text-align: center;
+  padding-top: $spacing-md;
+  border-top: 1px solid var(--border-color);
+}
+
+.footer-text {
+  font-size: $font-size-sm;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.register-link {
+  color: var(--color-primary);
+  font-weight: $font-weight-semibold;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+
+  &:hover {
+    color: var(--color-primary-dark);
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--border-focus);
+    outline-offset: 2px;
+    border-radius: $radius-sm;
+  }
+}

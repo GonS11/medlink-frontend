@@ -1,14 +1,20 @@
 import {z} from 'zod';
 
-type TranslationFunction = (key: string, params?: Record<string, any>) => string;
+export type TranslationFunction = (key: string, params?: Record<string, any>) => string;
 
 export const createCommonValidations = (t: TranslationFunction) => {
-  const requiredString = (message: string) => z.string().min(1, message);
-  const maxString = (max: number, message: string) => z.string().max(max, message).or(z.literal(''));
-
   const MIN_PASS_LENGTH = 8;
   const MAX_PHONE_LENGTH = 20;
   const MAX_NAME_LENGTH = 40;
+
+  const requiredString = (key: string) =>
+    z.string().min(1, t(key));
+
+  const optionalString = (max: number, key: string) =>
+    z.string()
+      .max(max, t(key, {max}))
+      .optional()
+      .or(z.literal(''));
 
   return {
     email: z
@@ -31,9 +37,11 @@ export const createCommonValidations = (t: TranslationFunction) => {
       .optional()
       .or(z.literal('')),
 
-    name: requiredString(t('validation.firstNameRequired'))
-      .max(MAX_NAME_LENGTH, t('validation.nameMaxLength', {max: MAX_NAME_LENGTH})),
+    name: requiredString('validation.firstNameRequired').max(
+      MAX_NAME_LENGTH,
+      t('validation.nameMaxLength', {max: MAX_NAME_LENGTH})
+    ),
 
-    optionalName: maxString(MAX_NAME_LENGTH, t('validation.nameMaxLength', {max: MAX_NAME_LENGTH}))
+    optionalName: optionalString(MAX_NAME_LENGTH, 'validation.nameMaxLength')
   };
 };

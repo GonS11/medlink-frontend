@@ -1,0 +1,151 @@
+@use '@shared/styles/variables' as *;
+
+.switch-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.switch-container {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+
+  &-label-left {
+    flex-direction: row;
+  }
+
+  &-label-right {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+}
+
+.switch-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  background-color: var(--border-color);
+  border-radius: 9999px;
+  transition: all var(--transition-base);
+  cursor: pointer;
+  flex-shrink: 0;
+
+  &-sm {
+    width: 36px;
+    height: 20px;
+
+    .switch-handle {
+      width: 16px;
+      height: 16px;
+    }
+
+    &.switch-checked .switch-handle {
+      transform: translateX(16px);
+    }
+  }
+
+  &-md {
+    width: 44px;
+    height: 24px;
+
+    .switch-handle {
+      width: 20px;
+      height: 20px;
+    }
+
+    &.switch-checked .switch-handle {
+      transform: translateX(20px);
+    }
+  }
+
+  &-lg {
+    width: 52px;
+    height: 28px;
+
+    .switch-handle {
+      width: 24px;
+      height: 24px;
+    }
+
+    &.switch-checked .switch-handle {
+      transform: translateX(24px);
+    }
+  }
+
+  &:hover:not(.switch-disabled) {
+    background-color: var(--border-dark);
+  }
+
+  &-focused {
+    box-shadow: 0 0 0 3px rgba(var(--color-primary), 0.1);
+  }
+
+  &-checked {
+    background-color: var(--color-primary);
+
+    &:hover:not(.switch-disabled) {
+      background-color: var(--color-primary-dark);
+    }
+  }
+
+  &-error {
+    background-color: var(--color-error);
+
+    &.switch-focused {
+      box-shadow: 0 0 0 3px rgba(var(--color-error), 0.1);
+    }
+  }
+
+  &-disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.switch-handle {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform var(--transition-base);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.switch-label-container {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  cursor: pointer;
+
+  .switch-disabled ~ & {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+.switch-label {
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+.switch-description {
+  font-size: $font-size-sm;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.switch-error {
+  font-size: $font-size-sm;
+  color: var(--color-error);
+  margin: 0;
+}

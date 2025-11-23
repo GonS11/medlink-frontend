@@ -1,0 +1,64 @@
+@use '@shared/styles/variables' as *;
+
+.form-fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+
+  &-default {
+    .form-fieldset-content {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-lg;
+    }
+  }
+
+  &-bordered {
+    border: 2px solid var(--border-color);
+    border-radius: $radius-lg;
+    padding: $spacing-lg;
+
+    .form-fieldset-content {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-lg;
+    }
+  }
+
+  &-filled {
+    background-color: var(--bg-secondary);
+    border-radius: $radius-lg;
+    padding: $spacing-lg;
+
+    .form-fieldset-content {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-lg;
+    }
+  }
+}
+
+.form-fieldset-header {
+  margin-bottom: $spacing-lg;
+}
+
+.form-fieldset-legend {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  color: var(--text-primary);
+  margin-bottom: $spacing-xs;
+  padding: 0;
+}
+
+.form-fieldset-description {
+  font-size: $font-size-sm;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.form-fieldset-content {
+  display: flex;
+  flex-direction: column;
+}

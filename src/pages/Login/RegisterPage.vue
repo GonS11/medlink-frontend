@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import RegisterForm from '@features/auth/ui/RegisterForm.vue'
+import RegisterForm from '@features/auth/ui/RegisterForm/RegisterForm.vue'
 import LogoIcon from "@shared/ui/icons/LogoIcon.vue";
 </script>
 

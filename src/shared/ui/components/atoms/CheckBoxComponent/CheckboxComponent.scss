@@ -1,0 +1,136 @@
+@use '@shared/styles/variables' as *;
+
+.checkbox-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  position: relative;
+}
+
+.checkbox-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background-color: var(--bg-primary);
+  border: 2px solid var(--border-color);
+  border-radius: $radius-sm;
+  transition: all var(--transition-base);
+  cursor: pointer;
+
+  &-sm {
+    width: 16px;
+    height: 16px;
+
+    .checkbox-icon {
+      width: 12px;
+      height: 12px;
+    }
+  }
+
+  &-md {
+    width: 20px;
+    height: 20px;
+
+    .checkbox-icon {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  &-lg {
+    width: 24px;
+    height: 24px;
+
+    .checkbox-icon {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  &:hover:not(.checkbox-disabled) {
+    border-color: var(--border-dark);
+  }
+
+  &-focused {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(var(--color-primary), 0.1);
+  }
+
+  &-checked {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+
+    &:hover:not(.checkbox-disabled) {
+      background-color: var(--color-primary-dark);
+      border-color: var(--color-primary-dark);
+    }
+  }
+
+  &-error {
+    border-color: var(--color-error);
+
+    &.checkbox-focused {
+      box-shadow: 0 0 0 3px rgba(var(--color-error), 0.1);
+    }
+  }
+
+  &-disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.checkbox-icon {
+  color: white;
+  transition: all var(--transition-fast);
+}
+
+.checkbox-label-container {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  cursor: pointer;
+
+  .checkbox-disabled ~ & {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+.checkbox-label {
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
+  color: var(--text-primary);
+  line-height: 1.5;
+
+  .required {
+    color: var(--color-error);
+  }
+}
+
+.checkbox-description {
+  font-size: $font-size-sm;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.checkbox-error {
+  font-size: $font-size-sm;
+  color: var(--color-error);
+  margin: 0;
+  padding-left: calc(20px + $spacing-sm);
+}

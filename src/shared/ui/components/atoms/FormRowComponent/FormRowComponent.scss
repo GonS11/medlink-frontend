@@ -1,0 +1,48 @@
+@use '@shared/styles/variables' as *;
+
+.form-row {
+  display: grid;
+  width: 100%;
+
+  &-columns-1 {
+    grid-template-columns: 1fr;
+  }
+
+  &-columns-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  &-columns-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  &-columns-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  &-columns-auto {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  &-gap-sm {
+    gap: $spacing-sm;
+  }
+
+  &-gap-md {
+    gap: $spacing-md;
+  }
+
+  &-gap-lg {
+    gap: $spacing-lg;
+  }
+
+  &-gap-xl {
+    gap: $spacing-xl;
+  }
+
+  &-responsive {
+    @media (max-width: $breakpoint-md) {
+      grid-template-columns: 1fr;
+    }
+  }
+}

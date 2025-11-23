@@ -36,7 +36,9 @@
     "logout": "Logout",
     "register": "Register",
     "email": "Email",
+    "emailPlaceholder": "Enter your email",
     "password": "Password",
+    "passwordPlaceholder": "Enter your password",
     "confirmPassword": "Confirm Password",
     "forgotPassword": "Forgot Password?",
     "rememberMe": "Remember me",
@@ -50,9 +52,16 @@
     "loginTitle": "Welcome Back",
     "loginSubtitle": "Sign in to your account to continue",
     "registerTitle": "Create Account",
-    "registerSubtitle": "Fill in your details to get started"
+    "registerSubtitle": "Fill in your details to get started",
+    "security": "Security",
+    "securityDescription": "Set up your unique password for your account."
   },
   "user": {
+    "personalInfo": "Personal Information",
+    "personalInfoDescription": "Enter your full legal name details.",
+    "contactInfo": "Contact Information",
+    "contactInfoDescription": "Provide details to help us contact you.",
+    "selectRole": "Select Role",
     "profile": "Profile",
     "settings": "Settings",
     "firstName": "First Name",
@@ -97,6 +106,7 @@
     "validation": {
       "emailRequired": "Email is required",
       "emailInvalid": "Email must be valid",
+      "passwordRequired": "Password is required",
       "passwordMinLength": "Password must be at least {min} characters",
       "passwordRequirements": "Password must contain at least one uppercase letter, one lowercase letter, and one number",
       "phoneMaxLength": "Phone must not exceed {max} characters",
@@ -108,5 +118,17 @@
       "passwordsMustMatch": "Passwords must match",
       "roleRequired": "Role is required"
     }
+  },
+  "icon": {
+    "check": "Check icon",
+    "clearButton": "Clear button icon",
+    "chevronDown": "Down arrow icon",
+    "email": "Email icon",
+    "mobilePhone": "Mobile phone icon",
+    "submit": "Submit icon",
+    "spinner": "Spinner icon",
+    "user": "USer icon",
+    "password": "Password icon",
+    "phone": "Phone icon"
   }
 }

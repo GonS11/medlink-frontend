@@ -18,6 +18,8 @@
 
 .input-container {
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .input {
@@ -58,6 +60,101 @@
     background-color: var(--bg-tertiary);
     cursor: not-allowed;
     opacity: 0.6;
+  }
+
+  &-with-prefix {
+    padding-left: calc($spacing-md + 40px);
+  }
+
+  &-with-suffix {
+    padding-right: calc($spacing-md + 40px);
+  }
+
+  // Hide default password reveal button in Edge/IE
+  &::-ms-reveal {
+    display: none;
+  }
+
+  // Hide number input spinners
+  &[type="number"] {
+    -moz-appearance: textfield;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+
+  // Hide search input clear button
+  &[type="search"] {
+    &::-webkit-search-decoration,
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-results-button,
+    &::-webkit-search-results-decoration {
+      -webkit-appearance: none;
+    }
+  }
+}
+
+.input-addon {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  pointer-events: none;
+
+  :deep(svg) {
+    color: var(--text-secondary);
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  &-text {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: var(--text-secondary);
+  }
+}
+
+.input-prefix {
+  left: $spacing-md;
+  pointer-events: auto;
+}
+
+.input-suffix {
+  right: $spacing-md;
+  pointer-events: auto;
+  gap: $spacing-xs;
+}
+
+.input-action-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-xs;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: color var(--transition-fast);
+  border-radius: $radius-sm;
+
+  svg {
+    color: var(--text-secondary);
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  &:hover {
+    color: var(--text-primary);
+    background-color: var(--bg-secondary);
+  }
+
+  &:focus {
+    outline: none;
+    color: var(--color-primary);
   }
 }
 

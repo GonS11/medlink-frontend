@@ -1,15 +1,17 @@
 @use '@shared/styles/variables' as *;
 
 .card {
+  position: relative;
   background-color: var(--card-bg);
   border-radius: $radius-lg;
   overflow: hidden;
-  transition: box-shadow var(--transition-fast), border var(--transition-fast);
+  transition: all var(--transition-base);
   border: 1px solid var(--card-border);
-  box-shadow: none;
 
+  // --- Variantes ---
   &--default {
     border: 1px solid var(--card-border);
+    box-shadow: none;
   }
 
   &--borderless {
@@ -19,48 +21,165 @@
   &--shadow {
     box-shadow: var(--card-shadow);
     border: 1px solid var(--border-light);
+  }
+
+  &--elevated {
+    box-shadow: var(--shadow-lg);
+    border: none;
+  }
+
+  &--outlined {
+    border: 2px solid var(--border-color);
+  }
+
+  // --- Modificadores ---
+  &--hoverable {
+    &:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+  }
+
+  &--clickable {
+    cursor: pointer;
+    user-select: none;
 
     &:hover {
       box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
     }
+
+    &:active {
+      transform: translateY(0);
+      box-shadow: var(--shadow-sm);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--border-focus);
+      outline-offset: 2px;
+    }
+  }
+
+  &--loading {
+    pointer-events: none;
+  }
+
+  // --- Header ---
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $spacing-md;
+    padding: $spacing-md $spacing-lg;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--bg-secondary);
+  }
+
+  &__header-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-semibold;
+    color: var(--text-primary);
+    line-height: 1.4;
+  }
+
+  &__subtitle {
+    margin: $spacing-xs 0 0;
+    font-size: $font-size-sm;
+    color: var(--text-secondary);
+    line-height: 1.4;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    flex-shrink: 0;
+  }
+
+  // --- Body ---
+  &__body {
+    transition: background-color var(--transition-base);
+
+    &--padding-none {
+      padding: 0;
+    }
+
+    &--padding-sm {
+      padding: $spacing-md;
+    }
+
+    &--padding-md {
+      padding: $spacing-lg;
+    }
+
+    &--padding-lg {
+      padding: $spacing-xl;
+    }
+
+    &--padding-xl {
+      padding: calc($spacing-xl * 1.5);
+    }
+  }
+
+  // --- Footer ---
+  &__footer {
+    padding: $spacing-md $spacing-lg;
+    border-top: 1px solid var(--border-color);
+    background-color: var(--bg-secondary);
+  }
+
+  // --- Loading Overlay ---
+  &__loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(var(--card-bg), 0.8);
+    backdrop-filter: blur(2px);
+    z-index: 10;
   }
 }
 
-.card__header {
-  padding: $spacing-md $spacing-lg;
-  border-bottom: 1px solid var(--border-color);
-  background-color: var(--bg-secondary);
+// Spinner Animation
+.spinner {
+  animation: rotate 1s linear infinite;
+  color: var(--color-primary);
 }
 
-.card__title {
-  margin: 0;
-  font-size: $font-size-xl;
-  font-weight: $font-weight-semibold;
-  color: var(--text-primary);
+.spinner-circle {
+  stroke-dasharray: 50, 200;
+  stroke-dashoffset: 0;
+  animation: dash 1.5s ease-in-out infinite;
+  stroke-linecap: round;
 }
 
-.card__body {
-  transition: background-color var(--transition-base);
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
-.card__body--padding-none {
-  padding: 0;
-}
-
-.card__body--padding-sm {
-  padding: $spacing-md;
-}
-
-.card__body--padding-md {
-  padding: $spacing-lg;
-}
-
-.card__body--padding-lg {
-  padding: $spacing-xl;
-}
-
-.card__footer {
-  padding: $spacing-md $spacing-lg;
-  border-top: 1px solid var(--border-color);
-  background-color: var(--bg-secondary);
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 200;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dasharray: 90, 200;
+    stroke-dashoffset: -125px;
+  }
 }
