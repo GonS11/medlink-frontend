@@ -56,10 +56,10 @@ export function useAuth() {
     }
   }
 
-  const logout = () => {
+  const logout = async () => {
     authStore.clearAuth()
     notification.success('Logged out successfully')
-    router.push(ROUTES.LOGIN)
+    await router.push(ROUTES.LOGIN)
   }
 
   return {

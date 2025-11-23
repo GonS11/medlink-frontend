@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type {UserResponse} from '@entities/user/model/user.types'
 import type {PageResponse} from '@shared/types/api.types'
-import ButtonComponent from "@shared/ui/components/ButtonComponent.vue";
+import ButtonComponent from "@shared/ui/components/atoms/ButtonComponent/ButtonComponent.vue";
 
 interface Props {
   users: UserResponse[]
@@ -83,7 +83,7 @@ defineEmits<{
         <ButtonComponent
           variant="ghost"
           :disabled="pagination.first"
-          @click="$emit('page-change', pagination.number - 1)"
+          @click="$emit('pageChange', pagination.number - 1)"
         >
           {{ $t('common.previous') }}
         </ButtonComponent>
@@ -95,7 +95,7 @@ defineEmits<{
         <ButtonComponent
           variant="ghost"
           :disabled="pagination.last"
-          @click="$emit('page-change', pagination.number + 1)"
+          @click="$emit('pageChange', pagination.number + 1)"
         >
           {{ $t('common.next') }}
         </ButtonComponent>
@@ -106,7 +106,8 @@ defineEmits<{
 
 
 <style scoped lang="scss">
-@import '@/shared/styles/variables.scss';
+@use '@/shared/styles/_variables' as *;
+
 
 .users-table {
   width: 100%;
@@ -136,17 +137,17 @@ defineEmits<{
     th, td {
       padding: $spacing-md;
       text-align: left;
-      border-bottom: 1px solid $border-color;
+      border-bottom: 1px solid var(--border-color);
     }
 
     th {
       font-weight: $font-weight-semibold;
-      color: $text-secondary;
-      background: $bg-secondary;
+      color: var(--text-secondary);
+      background: var(--bg-secondary);
     }
 
     tr:hover {
-      background: $bg-tertiary;
+      background: var(--bg-tertiary);
     }
   }
 }
@@ -159,23 +160,23 @@ defineEmits<{
   font-weight: $font-weight-medium;
 
   &.role-admin {
-    background: rgba($primary, 0.1);
-    color: $primary;
+    background: rgba(var(--color-primary), 0.1);
+    color: var(--color-primary);
   }
 
   &.role-doctor {
-    background: rgba($secondary, 0.1);
-    color: $secondary;
+    background: rgba(var(--color-secondary), 0.1);
+    color: var(--color-secondary);
   }
 
   &.role-nurse {
-    background: rgba($accent, 0.1);
-    color: $accent;
+    background: rgba(var(--color-accent), 0.1);
+    color: var(--color-accent);
   }
 
   &.role-patient {
-    background: rgba($text-muted, 0.1);
-    color: $text-muted;
+    background: rgba(var(--text-muted), 0.1);
+    color: var(--text-muted);
   }
 }
 
@@ -187,13 +188,13 @@ defineEmits<{
   font-weight: $font-weight-medium;
 
   &.active {
-    background: rgba($success, 0.1);
-    color: $success;
+    background: rgba(var(--color-success), 0.1);
+    color: var(--color-success);
   }
 
   &.inactive {
-    background: rgba($error, 0.1);
-    color: $error;
+    background: rgba(var(--color-error), 0.1);
+    color: var(--color-error);
   }
 }
 
@@ -212,6 +213,6 @@ defineEmits<{
 
 .pagination-info {
   font-weight: $font-weight-medium;
-  color: $text-secondary;
+  color: var(--text-secondary);
 }
 </style>

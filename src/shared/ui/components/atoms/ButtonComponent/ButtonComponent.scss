@@ -1,0 +1,170 @@
+@use '@/shared/styles/_variables' as *;
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  font-family: $font-family-base;
+  font-weight: $font-weight-medium;
+  border: 1px solid transparent;
+  border-radius: $radius-lg;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  white-space: nowrap;
+  user-select: none;
+
+  // Estado Deshabilitado
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  // Estado de Foco (Accesibilidad)
+  &:focus-visible {
+    outline: 2px solid var(--border-focus);
+    outline-offset: 2px;
+  }
+
+  // Elemento BEM: Spinner
+  &__spinner {
+    // El estilo base del spinner está en main.scss, solo ajustamos tamaño si es necesario
+    font-size: 1em;
+  }
+
+  // --- Modificadores de Tamaño (BEM Modifiers) ---
+  &--sm {
+    padding: $spacing-sm $spacing-md;
+    font-size: $font-size-sm;
+  }
+
+  &--md {
+    padding: $spacing-sm $spacing-lg; // Ajustado para ser más estándar
+    font-size: $font-size-base;
+  }
+
+  &--lg {
+    padding: $spacing-md $spacing-xl;
+    font-size: $font-size-lg;
+  }
+
+  // --- Modificadores de Variante (Flat Design Style) ---
+
+  // Variante Primary: Azul de Confianza
+  &--primary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
+
+    &:hover:not(:disabled) {
+      background-color: var(--color-primary-hover);
+      transform: translateY(-2px); // Efecto de elevación sutil
+      box-shadow: var(--shadow-md); // Sombra sutil para el efecto Flat
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+      background-color: var(--color-primary-dark);
+      box-shadow: var(--shadow-sm);
+    }
+  }
+
+  // Variante Secondary: Teal de Bienestar
+  &--secondary {
+    background-color: var(--color-secondary);
+    color: var(--color-white);
+    border-color: var(--color-secondary);
+
+    &:hover:not(:disabled) {
+      background-color: var(--color-secondary-dark);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+      background-color: var(--color-secondary-dark);
+      box-shadow: var(--shadow-sm);
+    }
+  }
+
+  // Variante Accent: Púrpura para Highlights
+  &--accent {
+    background-color: var(--color-accent);
+    color: var(--color-white);
+    border-color: var(--color-accent);
+
+    &:hover:not(:disabled) {
+      background-color: var(--color-accent-dark);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+      background-color: var(--color-accent-dark);
+      box-shadow: var(--shadow-sm);
+    }
+  }
+
+  // Variante Danger: Rojo de Error/Confirmación
+  &--danger {
+    background-color: var(--color-error);
+    color: var(--color-white);
+    border-color: var(--color-error);
+
+    &:hover:not(:disabled) {
+      background-color: var(--color-error);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+      background-color: rgba(var(--color-error), 0.3);
+      box-shadow: var(--shadow-sm);
+    }
+  }
+
+  // Variante Outline
+  &--outline {
+    background: transparent;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+
+    &:hover:not(:disabled) {
+      background-color: var(--color-primary);
+      color: var(--color-white);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-sm);
+    }
+  }
+
+  // Variante Ghost
+  &--ghost {
+    background: transparent;
+    color: var(--color-primary);
+    border-color: transparent;
+
+    &:hover:not(:disabled) {
+      background-color: var(--bg-hover);
+      color: var(--color-primary-hover);
+      box-shadow: none;
+    }
+
+    &:active:not(:disabled) {
+      background-color: var(--bg-active);
+    }
+  }
+
+  &--full-width {
+    width: 100%;
+  }
+
+  &--loading {
+    pointer-events: none;
+    opacity: 0.8;
+  }
+}

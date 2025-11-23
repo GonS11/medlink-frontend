@@ -1,0 +1,239 @@
+:root {
+  // --- Colores de Marca y Confianza (Más limpios y vibrantes) ---
+  --color-primary: #1E88E5; /* Azul de Confianza (Salud) */
+  --color-primary-dark: #1565C0;
+  --color-primary-light: #42A5F5;
+  --color-primary-hover: #1976D2;
+
+  --color-secondary: #00BFA5; /* Teal de Bienestar (Acción/Data) */
+  --color-secondary-dark: #00897B;
+  --color-secondary-light: #1DE9B6;
+
+  --color-accent: #5E35B1; /* Púrpura/Índigo para Highlights */
+  --color-accent-dark: #4527A0;
+
+  // --- Colores de Estado ---
+  --color-success: #4CAF50;
+  --color-warning: #FFC107;
+  --color-error: #E53935; /* Rojo más limpio */
+  --color-info: #2196F3;
+
+  // --- Colores Neutros (Aclarados para Flat Design) ---
+  --color-antracita: #212121;
+  --color-white: #FFFFFF;
+  --color-gray-50: #FAFAFA;
+  --color-gray-100: #F5F5F5;
+  --color-gray-200: #EEEEEE;
+  --color-gray-300: #E0E0E0;
+  --color-gray-400: #BDBDBD;
+  --color-gray-500: #9E9E9E;
+  --color-gray-600: #757575;
+  --color-gray-700: #616161;
+  --color-gray-800: #424242;
+  --color-gray-900: #212121;
+
+  // --- Textos (Modo Claro) ---
+  --text-primary: #212121;
+  --text-secondary: #757575;
+  --text-muted: #BDBDBD;
+  --text-disabled: #E0E0E0;
+  --text-link: var(--color-primary);
+  --text-inverse: var(--color-white);
+
+  // --- Fondos (Modo Claro) ---
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F5F5F5;
+  --bg-tertiary: #FAFAFA;
+  --bg-hover: #F0F0F0;
+  --bg-active: #E0E0E0;
+  --bg-disabled: #FAFAFA;
+  --bg-overlay: rgba(0, 0, 0, 0.4);
+
+  // --- Bordes ---
+  --border-color: #E0E0E0;
+  --border-light: #F5F5F5;
+  --border-dark: #BDBDBD;
+  --border-focus: var(--color-primary);
+
+  // --- Sombras (Más sutiles para Flat Design) ---
+  --shadow-color-sm: rgba(0, 0, 0, 0.05);
+  --shadow-color-md: rgba(0, 0, 0, 0.08);
+  --shadow-color-lg: rgba(0, 0, 0, 0.12);
+  --shadow-sm: 0 1px 3px 0 var(--shadow-color-sm);
+  --shadow-md: 0 4px 6px -1px var(--shadow-color-md), 0 2px 4px -2px var(--shadow-color-md);
+  --shadow-lg: 0 10px 15px -3px var(--shadow-color-lg), 0 4px 6px -4px var(--shadow-color-lg);
+  --shadow-xl: 0 20px 25px -5px var(--shadow-color-lg);
+
+  // --- Otros tokens...
+  --input-bg: var(--color-white);
+  --input-border: var(--border-color);
+  --input-focus-border: var(--color-primary);
+  --input-disabled-bg: var(--bg-disabled);
+  --input-placeholder: var(--text-muted);
+  --scrollbar-track: var(--bg-tertiary);
+  --scrollbar-thumb: var(--border-dark);
+  --scrollbar-thumb-hover: var(--color-gray-500);
+  --sidebar-bg: var(--color-white);
+  --sidebar-text: var(--text-secondary);
+  --sidebar-active-bg: var(--bg-hover);
+  --sidebar-active-text: var(--color-primary);
+  --sidebar-hover-bg: var(--bg-hover);
+  --header-bg: var(--color-white);
+  --header-text: var(--text-primary);
+  --header-border: var(--border-color);
+  --card-bg: var(--color-white);
+  --card-border: var(--border-color);
+  --card-shadow: var(--shadow-sm);
+  --modal-bg: var(--color-white);
+  --modal-overlay: rgba(0, 0, 0, 0.5);
+  --table-header-bg: var(--bg-tertiary);
+  --table-row-hover: var(--bg-hover);
+  --table-border: var(--border-color);
+  --badge-primary-bg: var(--color-primary);
+  --badge-primary-text: var(--color-white);
+  --badge-success-bg: #DCFCE7;
+  --badge-success-text: #166534;
+  --badge-warning-bg: #FEF3C7;
+  --badge-warning-text: #92400E;
+  --badge-error-bg: #FEE2E2;
+  --badge-error-text: #991B1B;
+  --badge-info-bg: #DBEAFE;
+  --badge-info-text: #1E40AF;
+  --chart-primary: var(--color-primary);
+  --chart-secondary: var(--color-secondary);
+  --chart-tertiary: var(--color-warning);
+  --chart-grid: var(--border-light);
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// Modo Oscuro - Colores ajustados para el nuevo esquema
+.dark-mode {
+  --text-primary: #FAFAFA;
+  --text-secondary: #BDBDBD;
+  --text-muted: #757575;
+  --text-disabled: #424242;
+  --text-link: var(--color-primary-light);
+  --text-inverse: #212121;
+  --bg-primary: #212121;
+  --bg-secondary: #121212;
+  --bg-tertiary: #333333;
+  --bg-hover: #333333;
+  --bg-active: #424242;
+  --bg-disabled: #333333;
+  --bg-overlay: rgba(0, 0, 0, 0.7);
+  --border-color: #333333;
+  --border-light: #212121;
+  --border-dark: #424242;
+  --shadow-color-sm: rgba(0, 0, 0, 0.2);
+  --shadow-color-md: rgba(0, 0, 0, 0.3);
+  --shadow-color-lg: rgba(0, 0, 0, 0.4);
+  --input-bg: #212121;
+  --input-border: #424242;
+  --input-focus-border: var(--color-primary-light);
+  --input-disabled-bg: #333333;
+  --input-placeholder: #757575;
+  --scrollbar-track: var(--bg-tertiary);
+  --scrollbar-thumb: #424242;
+  --scrollbar-thumb-hover: #757575;
+  --sidebar-bg: #212121;
+  --sidebar-text: #BDBDBD;
+  --sidebar-active-bg: #333333;
+  --sidebar-active-text: var(--color-primary-light);
+  --sidebar-hover-bg: #333333;
+  --header-bg: #212121;
+  --header-text: #FAFAFA;
+  --header-border: #333333;
+  --card-bg: #212121;
+  --card-border: #333333;
+  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  --modal-bg: #212121;
+  --modal-overlay: rgba(0, 0, 0, 0.8);
+  --table-header-bg: #121212;
+  --table-row-hover: #333333;
+  --table-border: #333333;
+}
+
+// Espaciado
+$spacing-xs: 0.25rem; // 4px
+$spacing-sm: 0.5rem; // 8px
+$spacing-md: 1rem; // 16px
+$spacing-lg: 1.5rem; // 24px
+$spacing-xl: 2rem; // 32px
+$spacing-2xl: 3rem; // 48px
+$spacing-3xl: 4rem; // 64px
+
+// Border Radius (Mantenemos radio grande)
+$radius-xs: 0.25rem; // 4px
+$radius-sm: 0.375rem; // 6px
+$radius-md: 0.5rem; // 8px
+$radius-lg: 0.75rem; // 12px
+$radius-xl: 1rem; // 16px
+$radius-2xl: 1.5rem; // 24px
+$radius-full: 9999px;
+
+// Typography (Añadimos Poppins/Montserrat para más modernidad)
+$font-family-base: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+$font-family-heading: 'Montserrat', 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+$font-family-mono: 'JetBrains Mono', monospace;
+
+$font-size-xs: 0.75rem; // 12px
+$font-size-sm: 0.875rem; // 14px
+$font-size-base: 1rem; // 16px
+$font-size-lg: 1.125rem; // 18px
+$font-size-xl: 1.25rem; // 20px
+$font-size-2xl: 1.5rem; // 24px
+$font-size-3xl: 1.875rem; // 30px
+$font-size-4xl: 2.25rem; // 36px
+$font-size-5xl: 3rem; // 48px
+
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-extrabold: 800;
+
+$line-height-tight: 1.25;
+$line-height-normal: 1.5;
+$line-height-relaxed: 1.75;
+
+// Z-Index Scale
+$z-dropdown: 1000;
+$z-sticky: 1020;
+$z-fixed: 1030;
+$z-modal-backdrop: 1040;
+$z-modal: 1050;
+$z-popover: 1060;
+$z-tooltip: 1070;
+
+// Breakpoints
+$breakpoint-xs: 480px;
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+$breakpoint-2xl: 1536px;
+
+// Container Max Widths
+$container-sm: 640px;
+$container-md: 768px;
+$container-lg: 1024px;
+$container-xl: 1280px;
+
+// Grid
+$grid-columns: 12;
+$grid-gutter: $spacing-lg;
+
+// Sidebar Width
+$sidebar-width: 280px;
+$sidebar-collapsed-width: 80px;
+
+// Header Height
+$header-height: 64px;
+
+// Form Elements
+$input-height: 48px; // Un poco más altos para el tacto
+$input-padding-x: $spacing-md;
+$input-padding-y: $spacing-sm;

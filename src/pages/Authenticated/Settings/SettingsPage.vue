@@ -6,9 +6,9 @@ import {useUser} from '@features/user/model/useUser'
 import {changePasswordSchema, type ChangePasswordFormData} from '@entities/user/model/validation/user.validation'
 import {useForm} from '@shared/composables/useForm'
 import {setLanguage} from '@app/providers/i18n'
-import ButtonComponent from "@shared/ui/components/ButtonComponent.vue";
-import CardComponent from "@shared/ui/components/CardComponent.vue";
-import InputComponent from "@shared/ui/components/InputComponent.vue";
+import ButtonComponent from "@shared/ui/components/atoms/ButtonComponent/ButtonComponent.vue";
+import CardComponent from "@shared/ui/components/atoms/CardComponent/CardComponent.vue";
+import InputComponent from "@shared/ui/components/atoms/InputComponent/InputComponent.vue";
 import {useRouter} from "vue-router";
 
 const {locale} = useI18n()
@@ -68,7 +68,7 @@ const changeLanguage = (langCode: string) => {
     </div>
 
     <div class="settings-grid">
-      <CardComponent variant="elevated" padding="lg">
+      <CardComponent variant="shadow" padding="lg">
         <template #header>
           <h3>{{ $t('user.changePassword') }}</h3>
         </template>
@@ -109,7 +109,7 @@ const changeLanguage = (langCode: string) => {
         </form>
       </CardComponent>
 
-      <CardComponent variant="elevated" padding="lg">
+      <CardComponent variant="shadow" padding="lg">
         <template #header>
           <h3>{{ $t('user.preferredLanguage') }}</h3>
         </template>
@@ -131,7 +131,8 @@ const changeLanguage = (langCode: string) => {
 
 
 <style scoped lang="scss">
-@import '@/shared/styles/variables.scss';
+@use '@/shared/styles/_variables' as *;
+
 
 .settings-page {
   padding: $spacing-2xl;
@@ -178,22 +179,22 @@ const changeLanguage = (langCode: string) => {
   font-family: $font-family-base;
   font-size: $font-size-base;
   font-weight: $font-weight-medium;
-  color: $text-primary;
+  color: var(--text-primary);
   background: transparent;
-  border: 2px solid $border-color;
+  border: 2px solid var(--border-color);
   border-radius: $radius-lg;
   cursor: pointer;
-  transition: all $transition-base;
+  transition: all var(--transition-base);
 
   &:hover {
-    border-color: $primary;
-    color: $primary;
+    border-color: var(--color-primary);
+    color: var(--color-primary);
   }
 
   &.active {
-    background: $primary;
+    background: var(--color-primary);
     color: white;
-    border-color: $primary;
+    border-color: var(--color-primary);
   }
 }
 </style>

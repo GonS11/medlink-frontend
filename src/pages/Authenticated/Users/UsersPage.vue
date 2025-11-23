@@ -2,8 +2,8 @@
 import {onMounted} from 'vue'
 import {useUser} from '@features/user/model/useUser'
 import UsersTable from '@features/user/ui/UsersTable.vue'
-import ButtonComponent from "@shared/ui/components/ButtonComponent.vue";
-import CardComponent from "@shared/ui/components/CardComponent.vue";
+import ButtonComponent from "@shared/ui/components/atoms/ButtonComponent/ButtonComponent.vue";
+import CardComponent from "@shared/ui/components/atoms/CardComponent/CardComponent.vue";
 import {useRouter} from "vue-router";
 
 const {fetchAllUsers, lockAccount, unlockAccount, users, loading, pagination} = useUser()
@@ -37,7 +37,7 @@ const handleUnlockUser = async (userId: number) => {
       </ButtonComponent>
     </div>
 
-    <CardComponent variant="elevated" padding="lg">
+    <CardComponent variant="shadow" padding="lg">
       <UsersTable
         :users="users"
         :pagination="pagination"
@@ -52,7 +52,8 @@ const handleUnlockUser = async (userId: number) => {
 
 
 <style scoped lang="scss">
-@import '@/shared/styles/variables.scss';
+@use '@/shared/styles/_variables' as *;
+
 
 .users-page {
   padding: $spacing-2xl;

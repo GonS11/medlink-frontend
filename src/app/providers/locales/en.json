@@ -92,5 +92,21 @@
     "users": "Users",
     "profile": "Profile",
     "settings": "Settings"
+  },
+  "validation": {
+    "validation": {
+      "emailRequired": "Email is required",
+      "emailInvalid": "Email must be valid",
+      "passwordMinLength": "Password must be at least {min} characters",
+      "passwordRequirements": "Password must contain at least one uppercase letter, one lowercase letter, and one number",
+      "phoneMaxLength": "Phone must not exceed {max} characters",
+      "phoneInvalid": "Phone must be a valid phone number",
+      "firstNameRequired": "First name is required",
+      "lastNameRequired": "Last name is required",
+      "nameMaxLength": "Must not exceed {max} characters",
+      "confirmPasswordRequired": "Confirm password is required",
+      "passwordsMustMatch": "Passwords must match",
+      "roleRequired": "Role is required"
+    }
   }
 }

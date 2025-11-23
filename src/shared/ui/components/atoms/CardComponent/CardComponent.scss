@@ -1,0 +1,66 @@
+@use '@shared/styles/variables' as *;
+
+.card {
+  background-color: var(--card-bg);
+  border-radius: $radius-lg;
+  overflow: hidden;
+  transition: box-shadow var(--transition-fast), border var(--transition-fast);
+  border: 1px solid var(--card-border);
+  box-shadow: none;
+
+  &--default {
+    border: 1px solid var(--card-border);
+  }
+
+  &--borderless {
+    border: none;
+  }
+
+  &--shadow {
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-light);
+
+    &:hover {
+      box-shadow: var(--shadow-md);
+    }
+  }
+}
+
+.card__header {
+  padding: $spacing-md $spacing-lg;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--bg-secondary);
+}
+
+.card__title {
+  margin: 0;
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  color: var(--text-primary);
+}
+
+.card__body {
+  transition: background-color var(--transition-base);
+}
+
+.card__body--padding-none {
+  padding: 0;
+}
+
+.card__body--padding-sm {
+  padding: $spacing-md;
+}
+
+.card__body--padding-md {
+  padding: $spacing-lg;
+}
+
+.card__body--padding-lg {
+  padding: $spacing-xl;
+}
+
+.card__footer {
+  padding: $spacing-md $spacing-lg;
+  border-top: 1px solid var(--border-color);
+  background-color: var(--bg-secondary);
+}

@@ -1,17 +1,18 @@
-import httpClient from '@shared/lib/http-client'
-import type {ApiResponse, PageResponse, PaginationParams} from '@shared/types/api.types'
-import type {
-  UserResponse,
-  UpdateUserRequest,
+import {
   ChangePasswordRequest,
   LockAccountRequest,
-} from '../model/user.types'
+  UpdateUserRequest,
+  UserResponse
+} from "@entities/user/model/user.types.ts";
+import httpClient from "@shared/lib/httpClient.ts";
+import {ApiResponse, PageResponse, PaginationParams} from "@shared/types/api.types.ts";
+
 
 /**
  * Get current user
  */
 export async function getCurrentUser(): Promise<UserResponse> {
-  const response = await httpClient.get<ApiResponse<UserResponse>>('/users/me')
+  const response = await httpClient.get<ApiResponse<UserResponse>>(`/users/me`)
   return response.data.data!
 }
 
@@ -27,7 +28,7 @@ export async function getUserById(userId: number): Promise<UserResponse> {
  * Get all users (paginated)
  */
 export async function getAllUsers(params?: PaginationParams): Promise<PageResponse<UserResponse>> {
-  const response = await httpClient.get<ApiResponse<PageResponse<UserResponse>>>('/users', {
+  const response = await httpClient.get<ApiResponse<PageResponse<UserResponse>>>(`/users`, {
     params,
   })
   return response.data.data!

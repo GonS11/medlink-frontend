@@ -1,9 +1,8 @@
-@import './variables.scss';
+@use '@/shared/styles/_variables' as *;
 
-// Import fonts
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+// Importación de Fuentes: Roboto (Base) y Montserrat (Encabezados)
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
-// Reset & Base Styles
 *,
 *::before,
 *::after {
@@ -23,17 +22,17 @@ body {
   font-size: $font-size-base;
   font-weight: $font-weight-normal;
   line-height: $line-height-normal;
-  color: $text-primary;
-  background-color: $bg-secondary;
+  color: var(--text-primary);
+  background-color: var(--bg-secondary); /* Fondo ligeramente gris */
   overflow-x: hidden;
+  transition: background-color var(--transition-base), color var(--transition-base);
 }
 
-// Typography
 h1, h2, h3, h4, h5, h6 {
   font-family: $font-family-heading;
   font-weight: $font-weight-bold;
   line-height: $line-height-tight;
-  color: $text-primary;
+  color: var(--text-primary);
   margin-bottom: $spacing-md;
 }
 
@@ -61,57 +60,118 @@ h6 {
   font-size: $font-size-base;
 }
 
+a {
+  color: var(--text-link);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+
+  &:hover {
+    color: var(--color-primary-hover);
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--border-focus);
+    outline-offset: 2px;
+    border-radius: $radius-xs;
+  }
+}
+
 p {
+  margin-bottom: $spacing-md;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+ul, ol {
+  padding-left: $spacing-xl;
   margin-bottom: $spacing-md;
 }
 
-a {
-  color: $primary;
-  text-decoration: none;
-  transition: color $transition-fast;
+code {
+  font-family: $font-family-mono;
+  font-size: 0.9em;
+  background-color: var(--bg-tertiary);
+  padding: 0.2em 0.4em;
+  border-radius: $radius-xs;
+  color: var(--text-primary);
+}
 
-  &:hover {
-    color: $primary-dark;
+pre {
+  font-family: $font-family-mono;
+  background-color: var(--bg-tertiary);
+  padding: $spacing-md;
+  border-radius: $radius-md;
+  overflow-x: auto;
+  margin-bottom: $spacing-md;
+
+  code {
+    background: none;
+    padding: 0;
   }
 }
 
-// Scrollbar
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 12px;
+  height: 12px;
 }
 
 ::-webkit-scrollbar-track {
-  background: $bg-tertiary;
+  background: var(--scrollbar-track);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: $border-color;
+  background: var(--scrollbar-thumb);
   border-radius: $radius-full;
+  border: 3px solid var(--scrollbar-track);
 
   &:hover {
-    background: darken($border-color, 10%);
+    background: var(--scrollbar-thumb-hover);
   }
 }
 
-// Selection
 ::selection {
-  background-color: rgba($primary, 0.2);
-  color: $text-primary;
+  background-color: var(--color-primary-light);
+  opacity: 0.3;
+  color: var(--text-primary);
 }
 
-// Focus
 :focus-visible {
-  outline: 2px solid $primary;
+  outline: 2px solid var(--border-focus);
   outline-offset: 2px;
+  border-radius: $radius-xs;
 }
 
-// Utility Classes
+:disabled,
+[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+// Global utility classes (mantienen la estructura)
 .container {
   width: 100%;
-  max-width: 1280px;
+  max-width: $container-xl;
   margin: 0 auto;
   padding: 0 $spacing-lg;
+
+  &--sm {
+    max-width: $container-sm;
+  }
+
+  &--md {
+    max-width: $container-md;
+  }
+
+  &--lg {
+    max-width: $container-lg;
+  }
+
+  &--fluid {
+    max-width: 100%;
+  }
 }
 
 .text-center {
@@ -126,27 +186,322 @@ a {
   text-align: left;
 }
 
-.font-bold {
-  font-weight: $font-weight-bold;
+.text-justify {
+  text-align: justify;
 }
 
-.font-semibold {
-  font-weight: $font-weight-semibold;
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.text-lowercase {
+  text-transform: lowercase;
+}
+
+.text-capitalize {
+  text-transform: capitalize;
+}
+
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.font-light {
+  font-weight: $font-weight-light;
+}
+
+.font-normal {
+  font-weight: $font-weight-normal;
 }
 
 .font-medium {
   font-weight: $font-weight-medium;
 }
 
-.text-muted {
-  color: $text-muted;
+.font-semibold {
+  font-weight: $font-weight-semibold;
+}
+
+.font-bold {
+  font-weight: $font-weight-bold;
+}
+
+.font-extrabold {
+  font-weight: $font-weight-extrabold;
+}
+
+.text-primary {
+  color: var(--text-primary);
 }
 
 .text-secondary {
-  color: $text-secondary;
+  color: var(--text-secondary);
 }
 
-// Loading spinner
+.text-muted {
+  color: var(--text-muted);
+}
+
+.text-disabled {
+  color: var(--text-disabled);
+}
+
+.text-inverse {
+  color: var(--text-inverse);
+}
+
+.text-success {
+  color: var(--color-success);
+}
+
+.text-warning {
+  color: var(--color-warning);
+}
+
+.text-error {
+  color: var(--color-error);
+}
+
+.text-info {
+  color: var(--color-info);
+}
+
+.d-none {
+  display: none !important;
+}
+
+.d-block {
+  display: block !important;
+}
+
+.d-inline {
+  display: inline !important;
+}
+
+.d-inline-block {
+  display: inline-block !important;
+}
+
+.d-flex {
+  display: flex !important;
+}
+
+.d-inline-flex {
+  display: inline-flex !important;
+}
+
+.d-grid {
+  display: grid !important;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-nowrap {
+  flex-wrap: nowrap;
+}
+
+.justify-start {
+  justify-content: flex-start;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-around {
+  justify-content: space-around;
+}
+
+.items-start {
+  align-items: flex-start;
+}
+
+.items-end {
+  align-items: flex-end;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.items-baseline {
+  align-items: baseline;
+}
+
+.items-stretch {
+  align-items: stretch;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-auto {
+  flex: auto;
+}
+
+.flex-none {
+  flex: none;
+}
+
+.gap-xs {
+  gap: $spacing-xs;
+}
+
+.gap-sm {
+  gap: $spacing-sm;
+}
+
+.gap-md {
+  gap: $spacing-md;
+}
+
+.gap-lg {
+  gap: $spacing-lg;
+}
+
+.gap-xl {
+  gap: $spacing-xl;
+}
+
+@each $size, $value in (
+  'xs': $spacing-xs,
+  'sm': $spacing-sm,
+  'md': $spacing-md,
+  'lg': $spacing-lg,
+  'xl': $spacing-xl,
+  '2xl': $spacing-2xl,
+  '3xl': $spacing-3xl
+) {
+  .m-#{$size} {
+    margin: $value;
+  }
+  .mt-#{$size} {
+    margin-top: $value;
+  }
+  .mr-#{$size} {
+    margin-right: $value;
+  }
+  .mb-#{$size} {
+    margin-bottom: $value;
+  }
+  .ml-#{$size} {
+    margin-left: $value;
+  }
+  .mx-#{$size} {
+    margin-left: $value;
+    margin-right: $value;
+  }
+  .my-#{$size} {
+    margin-top: $value;
+    margin-bottom: $value;
+  }
+
+  .p-#{$size} {
+    padding: $value;
+  }
+  .pt-#{$size} {
+    padding-top: $value;
+  }
+  .pr-#{$size} {
+    padding-right: $value;
+  }
+  .pb-#{$size} {
+    padding-bottom: $value;
+  }
+  .pl-#{$size} {
+    padding-left: $value;
+  }
+  .px-#{$size} {
+    padding-left: $value;
+    padding-right: $value;
+  }
+  .py-#{$size} {
+    padding-top: $value;
+    padding-bottom: $value;
+  }
+}
+
+.m-0 {
+  margin: 0;
+}
+
+.p-0 {
+  padding: 0;
+}
+
+.m-auto {
+  margin: auto;
+}
+
+.rounded-xs {
+  border-radius: $radius-xs;
+}
+
+.rounded-sm {
+  border-radius: $radius-sm;
+}
+
+.rounded-md {
+  border-radius: $radius-md;
+}
+
+.rounded-lg {
+  border-radius: $radius-lg;
+}
+
+.rounded-xl {
+  border-radius: $radius-xl;
+}
+
+.rounded-full {
+  border-radius: $radius-full;
+}
+
+.rounded-none {
+  border-radius: 0;
+}
+
+.shadow-sm {
+  box-shadow: var(--shadow-sm);
+}
+
+.shadow-md {
+  box-shadow: var(--shadow-md);
+}
+
+.shadow-lg {
+  box-shadow: var(--shadow-lg);
+}
+
+.shadow-xl {
+  box-shadow: var(--shadow-xl);
+}
+
+.shadow-none {
+  box-shadow: none;
+}
+
 @keyframes spin {
   from {
     transform: rotate(0deg);
@@ -166,13 +521,66 @@ a {
   animation: spin 0.75s linear infinite;
 }
 
-// Transitions
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity $transition-base;
+  transition: opacity var(--transition-base);
 }
 
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+.slide-fade-enter-active {
+  transition: all var(--transition-base);
+}
+
+.slide-fade-leave-active {
+  transition: all var(--transition-fast);
+}
+
+.slide-fade-enter-from {
+  transform: translateX(-10px);
+  opacity: 0;
+}
+
+.slide-fade-leave-to {
+  transform: translateX(10px);
+  opacity: 0;
+}
+
+@media (max-width: $breakpoint-md) {
+  .hidden-mobile {
+    display: none !important;
+  }
+}
+
+@media (min-width: $breakpoint-md) {
+  .hidden-desktop {
+    display: none !important;
+  }
+}
+
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+
+  .no-print {
+    display: none !important;
+  }
 }

@@ -20,7 +20,7 @@ onMounted(() => {
 </template>
 
 <style lang="scss">
-@import '@/shared/styles/main.scss';
+@use '@/shared/styles/main.scss';
 
 #app {
   min-height: 100vh;

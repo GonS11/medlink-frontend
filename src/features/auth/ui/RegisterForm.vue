@@ -2,9 +2,9 @@
 import {registerSchema, type RegisterFormData} from '@entities/auth/model/validation/auth.validation'
 import {useAuth} from '../model/useAuth'
 import {useForm} from '@shared/composables/useForm'
-import CardComponent from "@shared/ui/components/CardComponent.vue";
-import InputComponent from "@shared/ui/components/InputComponent.vue";
-import ButtonComponent from "@shared/ui/components/ButtonComponent.vue";
+import CardComponent from "@shared/ui/components/atoms/CardComponent/CardComponent.vue";
+import InputComponent from "@shared/ui/components/atoms/InputComponent/InputComponent.vue";
+import ButtonComponent from "@shared/ui/components/atoms/ButtonComponent/ButtonComponent.vue";
 import {UserRoleArray} from "@shared/types/api.types.ts";
 import {RegisterRequest} from "@entities/auth/model/auth.types.ts";
 
@@ -41,7 +41,7 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <CardComponent class="register-form-card" variant="elevated" padding="lg">
+  <CardComponent class="register-form-card" variant="default" padding="lg">
     <div class="form-container">
       <div class="form-header">
         <h1 class="form-title">{{ $t('auth.registerTitle') }}</h1>
@@ -159,7 +159,7 @@ const handleSubmit = async () => {
 
 
 <style scoped lang="scss">
-@import '@/shared/styles/variables.scss';
+@use '@/shared/styles/_variables' as *;
 
 .register-form-card {
   width: 100%;
@@ -180,7 +180,7 @@ const handleSubmit = async () => {
   font-size: $font-size-3xl;
   font-weight: $font-weight-bold;
   margin-bottom: $spacing-sm;
-  background: linear-gradient(135deg, $primary 0%, $primary-dark 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -188,7 +188,7 @@ const handleSubmit = async () => {
 
 .form-subtitle {
   font-size: $font-size-base;
-  color: $text-secondary;
+  color: var(--text-secondary);
   margin: 0;
 }
 
@@ -218,44 +218,44 @@ const handleSubmit = async () => {
   padding: $spacing-md;
   font-family: $font-family-base;
   font-size: $font-size-base;
-  color: $text-primary;
-  background-color: $bg-primary;
-  border: 2px solid $border-color;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  border: 2px solid var(--border-color);
   border-radius: $radius-lg;
-  transition: all $transition-base;
+  transition: all var(--transition-base);
   cursor: pointer;
 
   &:hover {
-    border-color: darken($border-color, 10%);
+    border-color: var(--border-dark);
   }
 
   &:focus {
     outline: none;
-    border-color: $primary;
-    box-shadow: 0 0 0 3px rgba($primary, 0.1);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(var(--color-primary), 0.1);
   }
 }
 
 .input-label {
   font-size: $font-size-sm;
   font-weight: $font-weight-medium;
-  color: $text-primary;
+  color: var(--text-primary);
 
   .required {
-    color: $error;
+    color: var(--color-error);
   }
 }
 
 .input-error {
   font-size: $font-size-sm;
-  color: $error;
+  color: var(--color-error);
   margin: 0;
 }
 
 .form-footer {
   text-align: center;
   font-size: $font-size-sm;
-  color: $text-secondary;
+  color: var(--text-secondary);
 
   p {
     margin: 0;
@@ -263,12 +263,12 @@ const handleSubmit = async () => {
 }
 
 .login-link {
-  color: $primary;
+  color: var(--color-primary);
   font-weight: $font-weight-semibold;
-  transition: color $transition-fast;
+  transition: color var(--transition-fast);
 
   &:hover {
-    color: $primary-dark;
+    color: var(--color-primary-dark);
   }
 }
 </style>

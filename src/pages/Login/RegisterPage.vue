@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import RegisterForm from '@features/auth/ui/RegisterForm.vue'
+import LogoIcon from "@shared/ui/icons/LogoIcon.vue";
 </script>
 
 <template>
@@ -8,21 +9,7 @@ import RegisterForm from '@features/auth/ui/RegisterForm.vue'
       <div class="register-branding">
         <div class="logo-container">
           <div class="logo">
-            <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-              <rect width="60" height="60" rx="14" fill="url(#gradient)"/>
-              <path d="M30 15L15 25V40L30 50L45 40V25L30 15Z" fill="white" opacity="0.95"/>
-              <path d="M30 20L22 26V38L30 44L38 38V26L30 20Z" fill="url(#gradient2)"/>
-              <defs>
-                <linearGradient id="gradient" x1="0" y1="0" x2="60" y2="60">
-                  <stop stop-color="#00C896"/>
-                  <stop offset="1" stop-color="#009573"/>
-                </linearGradient>
-                <linearGradient id="gradient2" x1="22" y1="20" x2="38" y2="44">
-                  <stop stop-color="#00C896"/>
-                  <stop offset="1" stop-color="#0066CC"/>
-                </linearGradient>
-              </defs>
-            </svg>
+            <LogoIcon label="Logo"/>
           </div>
           <h2 class="brand-name">{{ $t('app.name') }}</h2>
           <p class="brand-tagline">{{ $t('app.tagline') }}</p>
@@ -38,7 +25,8 @@ import RegisterForm from '@features/auth/ui/RegisterForm.vue'
 
 
 <style scoped lang="scss">
-@import '@/shared/styles/variables.scss';
+@use '@/shared/styles/_variables' as *;
+
 
 .register-page {
   min-height: 100vh;
@@ -46,7 +34,7 @@ import RegisterForm from '@features/auth/ui/RegisterForm.vue'
   align-items: center;
   justify-content: center;
   padding: $spacing-xl;
-  background: linear-gradient(135deg, $bg-secondary 0%, $bg-tertiary 100%);
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
 }
 
 .register-container {
@@ -87,7 +75,7 @@ import RegisterForm from '@features/auth/ui/RegisterForm.vue'
   font-size: $font-size-4xl;
   font-weight: $font-weight-bold;
   margin-bottom: $spacing-sm;
-  background: linear-gradient(135deg, $secondary 0%, $secondary-dark 100%);
+  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-dark) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -95,7 +83,7 @@ import RegisterForm from '@features/auth/ui/RegisterForm.vue'
 
 .brand-tagline {
   font-size: $font-size-xl;
-  color: $text-secondary;
+  color: var(--text-secondary);
   margin: 0;
 }
 

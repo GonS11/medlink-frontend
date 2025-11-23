@@ -3,9 +3,9 @@ import {ref} from 'vue'
 import {loginSchema, type LoginFormData} from '@entities/auth/model/validation/auth.validation'
 import {useAuth} from '../model/useAuth'
 import {useForm} from '@shared/composables/useForm'
-import CardComponent from "@shared/ui/components/CardComponent.vue";
-import InputComponent from "@shared/ui/components/InputComponent.vue";
-import ButtonComponent from "@shared/ui/components/ButtonComponent.vue";
+import CardComponent from "@shared/ui/components/atoms/CardComponent/CardComponent.vue";
+import InputComponent from "@shared/ui/components/atoms/InputComponent/InputComponent.vue";
+import ButtonComponent from "@shared/ui/components/atoms/ButtonComponent/ButtonComponent.vue";
 
 const {login, loading} = useAuth()
 
@@ -34,7 +34,7 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <CardComponent class="login-form-card" variant="elevated" padding="lg">
+  <CardComponent class="login-form-card" variant="shadow" padding="lg">
     <div class="form-container">
       <div class="form-header">
         <h1 class="form-title">{{ $t('auth.loginTitle') }}</h1>
@@ -96,7 +96,8 @@ const handleSubmit = async () => {
 
 
 <style scoped lang="scss">
-@import '@/shared/styles/variables.scss';
+@use '@/shared/styles/_variables' as *;
+
 
 .login-form-card {
   width: 100%;
@@ -117,7 +118,7 @@ const handleSubmit = async () => {
   font-size: $font-size-3xl;
   font-weight: $font-weight-bold;
   margin-bottom: $spacing-sm;
-  background: linear-gradient(135deg, $primary 0%, $primary-dark 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -125,7 +126,7 @@ const handleSubmit = async () => {
 
 .form-subtitle {
   font-size: $font-size-base;
-  color: $text-secondary;
+  color: var(--text-secondary);
   margin: 0;
 }
 
@@ -152,24 +153,24 @@ const handleSubmit = async () => {
     width: 18px;
     height: 18px;
     cursor: pointer;
-    accent-color: $primary;
+    accent-color: var(--color-primary);
   }
 }
 
 .forgot-password {
-  color: $primary;
+  color: var(--color-primary);
   font-weight: $font-weight-medium;
-  transition: color $transition-fast;
+  transition: color var(--transition-fast);
 
   &:hover {
-    color: $primary-dark;
+    color: var(--color-primary-dark);
   }
 }
 
 .form-footer {
   text-align: center;
   font-size: $font-size-sm;
-  color: $text-secondary;
+  color: var(--text-secondary);
 
   p {
     margin: 0;
@@ -177,12 +178,12 @@ const handleSubmit = async () => {
 }
 
 .register-link {
-  color: $primary;
+  color: var(--color-primary);
   font-weight: $font-weight-semibold;
-  transition: color $transition-fast;
+  transition: color var(--transition-fast);
 
   &:hover {
-    color: $primary-dark;
+    color: var(--color-primary-dark);
   }
 }
 </style>

@@ -8,10 +8,10 @@ export const useAuthStore = defineStore('auth', () => {
   const user = ref<UserInfo | null>(storage.get<UserInfo>(STORAGE_KEYS.USER))
   const loading = ref(false)
   const error = ref<string | null>(null)
+  const accessToken = ref<string | null>(storage.get<string>(STORAGE_KEYS.ACCESS_TOKEN))
 
   const isAuthenticated = computed(() => {
-    const token = storage.get<string>(STORAGE_KEYS.ACCESS_TOKEN)
-    return !!token && !!user.value
+    return !!accessToken.value && !!user.value
   })
 
   const currentUser = computed(() => user.value)
@@ -26,13 +26,15 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
-  function setTokens(accessToken: string, refreshToken: string) {
-    storage.set(STORAGE_KEYS.ACCESS_TOKEN, accessToken)
+  function setTokens(newAccessToken: string, refreshToken: string) {
+    accessToken.value = newAccessToken
+    storage.set(STORAGE_KEYS.ACCESS_TOKEN, newAccessToken)
     storage.set(STORAGE_KEYS.REFRESH_TOKEN, refreshToken)
   }
 
   function clearAuth() {
     user.value = null
+    accessToken.value = null
     storage.remove(STORAGE_KEYS.ACCESS_TOKEN)
     storage.remove(STORAGE_KEYS.REFRESH_TOKEN)
     storage.remove(STORAGE_KEYS.USER)
@@ -54,9 +56,9 @@ export const useAuthStore = defineStore('auth', () => {
 
   return {
     user,
+    isAuthenticated,
     loading,
     error,
-    isAuthenticated,
     currentUser,
     userRole,
     setUser,

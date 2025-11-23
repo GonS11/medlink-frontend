@@ -4,8 +4,8 @@ import {useUser} from '@features/user/model/useUser'
 import {getInitials} from '@shared/utils/format.utils'
 import type {UpdateUserFormData} from '@entities/user/model/validation/user.validation'
 import {useAuthStore} from '@entities/auth/model/store/auth.store'
-import ButtonComponent from "@shared/ui/components/ButtonComponent.vue";
-import CardComponent from "@shared/ui/components/CardComponent.vue";
+import ButtonComponent from "@shared/ui/components/atoms/ButtonComponent/ButtonComponent.vue";
+import CardComponent from "@shared/ui/components/atoms/CardComponent/CardComponent.vue";
 import UserEditForm from "@entities/user/ui/UserEditForm/UserEditForm.vue";
 import {useRouter} from "vue-router";
 
@@ -35,7 +35,7 @@ const handleSubmit = async (data: UpdateUserFormData) => {
       </ButtonComponent>
     </div>
 
-    <CardComponent variant="elevated" padding="lg">
+    <CardComponent variant="shadow" padding="lg">
       <template #header>
         <h3>{{ $t('user.updateProfile') }}</h3>
       </template>
@@ -82,7 +82,8 @@ const handleSubmit = async (data: UpdateUserFormData) => {
 
 
 <style scoped lang="scss">
-@import '@/shared/styles/variables.scss';
+@use '@/shared/styles/_variables' as *;
+
 
 .profile-page {
   padding: $spacing-2xl;
@@ -133,14 +134,14 @@ const handleSubmit = async (data: UpdateUserFormData) => {
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  background: linear-gradient(135deg, $primary 0%, $primary-dark 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: $font-size-4xl;
   font-weight: $font-weight-bold;
-  box-shadow: $shadow-lg;
+  box-shadow: var(--shadow-lg);
 }
 
 .avatar-name {
@@ -151,7 +152,7 @@ const handleSubmit = async (data: UpdateUserFormData) => {
 
 .avatar-role {
   font-size: $font-size-base;
-  color: $text-secondary;
+  color: var(--text-secondary);
   margin: 0;
 }
 
@@ -160,7 +161,7 @@ const handleSubmit = async (data: UpdateUserFormData) => {
   flex-direction: column;
   gap: $spacing-md;
   padding: $spacing-lg;
-  background: $bg-secondary;
+  background: var(--bg-secondary);
   border-radius: $radius-lg;
 }
 
@@ -168,7 +169,7 @@ const handleSubmit = async (data: UpdateUserFormData) => {
   display: flex;
   justify-content: space-between;
   padding: $spacing-sm 0;
-  border-bottom: 1px solid $border-color;
+  border-bottom: 1px solid var(--border-color);
 
   &:last-child {
     border-bottom: none;
@@ -177,11 +178,11 @@ const handleSubmit = async (data: UpdateUserFormData) => {
 
 .detail-label {
   font-weight: $font-weight-medium;
-  color: $text-secondary;
+  color: var(--text-secondary);
 }
 
 .detail-value {
   font-weight: $font-weight-medium;
-  color: $text-primary;
+  color: var(--text-primary);
 }
 </style>

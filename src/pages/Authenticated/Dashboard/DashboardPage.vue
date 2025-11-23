@@ -3,8 +3,8 @@ import {computed} from 'vue'
 import {useRouter} from 'vue-router'
 import {useAuthStore} from '@entities/auth/model/store/auth.store'
 import {useAuth} from '@features/auth/model/useAuth'
-import CardComponent from "@shared/ui/components/CardComponent.vue";
-import ButtonComponent from "@shared/ui/components/ButtonComponent.vue";
+import CardComponent from "@shared/ui/components/atoms/CardComponent/CardComponent.vue";
+import ButtonComponent from "@shared/ui/components/atoms/ButtonComponent/ButtonComponent.vue";
 import {useRole} from "@shared/composables/useUserRole.ts";
 
 const router = useRouter()
@@ -29,7 +29,7 @@ const handleLogout = () => {
     </div>
 
     <div class="dashboard-grid">
-      <CardComponent variant="elevated" padding="lg">
+      <CardComponent variant="shadow" padding="lg">
         <template #header>
           <h3>User Information</h3>
         </template>
@@ -40,7 +40,7 @@ const handleLogout = () => {
         </div>
       </CardComponent>
 
-      <CardComponent variant="elevated" padding="lg">
+      <CardComponent variant="shadow" padding="lg">
         <template #header>
           <h3>Quick Actions</h3>
         </template>
@@ -67,7 +67,8 @@ const handleLogout = () => {
 
 
 <style scoped lang="scss">
-@import '@/shared/styles/variables.scss';
+@use '@/shared/styles/_variables' as *;
+
 
 .dashboard-page {
   padding: $spacing-2xl;
@@ -85,7 +86,7 @@ const handleLogout = () => {
 
   .welcome-message {
     font-size: $font-size-lg;
-    color: $text-secondary;
+    color: var(--text-secondary);
   }
 }
 

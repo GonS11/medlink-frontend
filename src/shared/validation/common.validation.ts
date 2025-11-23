@@ -1,28 +1,39 @@
-import {z} from 'zod'
+import {z} from 'zod';
 
-const requiredString = (message: string) => z.string().min(1, message)
-const maxString = (max: number, message: string) => z.string().max(max, message).or(z.literal(''))
+type TranslationFunction = (key: string, params?: Record<string, any>) => string;
 
-export const commonValidations = {
-  email: z.string().min(1, 'Email is required').email('Email must be valid'),
+export const createCommonValidations = (t: TranslationFunction) => {
+  const requiredString = (message: string) => z.string().min(1, message);
+  const maxString = (max: number, message: string) => z.string().max(max, message).or(z.literal(''));
 
-  password: z
-    .string()
-    .min(8, 'Password must be at least 8 characters')
-    .regex(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$/,
-      'Password must contain at least one uppercase letter, one lowercase letter, and one number'
-    ),
+  const MIN_PASS_LENGTH = 8;
+  const MAX_PHONE_LENGTH = 20;
+  const MAX_NAME_LENGTH = 40;
 
-  phone: z
-    .string()
-    .max(20, 'Phone must not exceed 20 characters')
-    .regex(/^\+?[0-9\s\-()]*$/, 'Phone must be a valid phone number')
-    .optional()
-    .or(z.literal('')),
+  return {
+    email: z
+      .string()
+      .min(1, t('validation.emailRequired'))
+      .email(t('validation.emailInvalid')),
 
-  name: requiredString('First name is required')
-    .max(255, 'Must not exceed 255 characters'),
+    password: z
+      .string()
+      .min(MIN_PASS_LENGTH, t('validation.passwordMinLength', {min: MIN_PASS_LENGTH}))
+      .regex(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$/,
+        t('validation.passwordRequirements')
+      ),
 
-  optionalName: maxString(255, 'Must not exceed 255 characters')
-}
+    phone: z
+      .string()
+      .max(MAX_PHONE_LENGTH, t('validation.phoneMaxLength', {max: MAX_PHONE_LENGTH}))
+      .regex(/^\+?[0-9\s\-()]*$/, t('validation.phoneInvalid'))
+      .optional()
+      .or(z.literal('')),
+
+    name: requiredString(t('validation.firstNameRequired'))
+      .max(MAX_NAME_LENGTH, t('validation.nameMaxLength', {max: MAX_NAME_LENGTH})),
+
+    optionalName: maxString(MAX_NAME_LENGTH, t('validation.nameMaxLength', {max: MAX_NAME_LENGTH}))
+  };
+};

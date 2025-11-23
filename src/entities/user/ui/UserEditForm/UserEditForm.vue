@@ -3,8 +3,8 @@ import {watch} from 'vue'
 import {useForm} from '@shared/composables/useForm'
 import {UserResponse} from "@entities/user/model/user.types.ts";
 import {UpdateUserFormData, updateUserSchema} from "@entities/user/model/validation/user.validation.ts";
-import InputComponent from "@shared/ui/components/InputComponent.vue";
-import ButtonComponent from "@shared/ui/components/ButtonComponent.vue";
+import InputComponent from "@shared/ui/components/atoms/InputComponent/InputComponent.vue";
+import ButtonComponent from "@shared/ui/components/atoms/ButtonComponent/ButtonComponent.vue";
 
 interface Props {
   user: UserResponse
@@ -102,7 +102,7 @@ const handleSubmit = () => {
 
 
 <style scoped lang="scss">
-@import '@/shared/styles/variables.scss';
+@use '@/shared/styles/_variables' as *;
 
 .user-edit-form {
   display: flex;

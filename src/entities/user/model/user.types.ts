@@ -1,6 +1,5 @@
-import type { UserRole, Languages } from '@shared/types/api.types'
+import type {Languages, UserRoleType} from '@shared/types/api.types'
 
-// User Response Type
 export interface UserResponse {
   id: number
   email: string
@@ -10,7 +9,7 @@ export interface UserResponse {
   fullName: string
   phone?: string
   mobilePhone?: string
-  role: UserRole
+  role: UserRoleType
   isActive: boolean
   emailVerified: boolean
   requiresPasswordChange: boolean
@@ -23,7 +22,6 @@ export interface UserResponse {
   isAccountLocked?: boolean
 }
 
-// User Request Types
 export interface UpdateUserRequest {
   firstName?: string
   lastName?: string
@@ -35,7 +33,6 @@ export interface UpdateUserRequest {
 }
 
 export interface ChangePasswordRequest {
-  currentPassword: string
   newPassword: string
 }
 
@@ -54,7 +51,7 @@ export interface UserInfo {
   fullName: string
   phone?: string
   mobilePhone?: string
-  role: UserRole
+  role: UserRoleType
   isActive: boolean
   emailVerified: boolean
   requiresPasswordChange: boolean
