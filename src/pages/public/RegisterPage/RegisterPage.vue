@@ -17,4 +17,4 @@ import AuthPageBranding from "@features/auth/ui/components/atoms/AuthPageBrandin
   </div>
 </template>
 
-<style scoped lang="scss" src="./RegisterPage.scss"></style>
+<style scoped lang="scss" src="RegisterPage.scss"></style>

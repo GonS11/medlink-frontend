@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {computed} from 'vue'
 import {useRouter} from 'vue-router'
-import {useAuthStore} from '@entities/auth/model/store/auth.store'
+import {useAuthStore} from '@entities/auth/model/store/auth.store.ts'
 import {useAuth} from '@features/auth/model/composables/useAuth.ts'
 import CardComponent from "@shared/ui/components/atoms/CardComponent/CardComponent.vue";
 import ButtonComponent from "@shared/ui/components/atoms/ButtonComponent/ButtonComponent.vue";

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {computed} from 'vue'
 import {useI18n} from 'vue-i18n'
-import {setLanguage} from '@app/providers/i18n'
+import {setLanguage} from '@app/providers/i18n.ts'
 import ButtonComponent from "@shared/ui/components/atoms/ButtonComponent/ButtonComponent.vue"
 import CardComponent from "@shared/ui/components/atoms/CardComponent/CardComponent.vue"
 import {useRouter} from "vue-router"

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {onMounted} from 'vue'
-import {useUser} from '@features/user/model/useUser'
+import {useUser} from '@features/user/model/useUser.ts'
 import UsersTable from '@features/user/ui/UsersTable.vue'
 import ButtonComponent from "@shared/ui/components/atoms/ButtonComponent/ButtonComponent.vue";
 import CardComponent from "@shared/ui/components/atoms/CardComponent/CardComponent.vue";

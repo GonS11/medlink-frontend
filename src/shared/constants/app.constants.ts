@@ -1,3 +1,5 @@
+// @shared/constants/app.constants.ts
+
 export const APP_CONFIG = {
   apiBaseUrl: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/api',
   apiTimeout: 30000,
@@ -25,12 +27,59 @@ export const PAGINATION_CONFIG = {
 } as const
 
 export const ROUTES = {
+  // Public
   LOGIN: '/login',
   REGISTER: '/register',
   FORGOT_PASSWORD: '/forgot-password',
-  CHANGE_PASSWORD: '/change-password',
+
+  // Common (todos los roles autenticados)
   DASHBOARD: '/dashboard',
   PROFILE: '/profile',
   SETTINGS: '/settings',
-  USERS: '/users',
+
+  // Admin
+  ADMIN: {
+    USERS: '/admin/users',
+    HEALTH_CENTERS: '/admin/health-centers',
+    DEPARTMENTS: '/admin/departments',
+    SPECIALTIES: '/admin/specialties',
+    REPORTS: '/admin/reports',
+    AUDIT: '/admin/audit',
+  },
+
+  // Doctor
+  DOCTOR: {
+    APPOINTMENTS: '/doctor/appointments',
+    PATIENTS: '/doctor/patients',
+    MEDICAL_RECORDS: '/doctor/medical-records',
+    PRESCRIPTIONS: '/doctor/prescriptions',
+    LAB_TESTS: '/doctor/lab-tests',
+    REFERRALS: '/doctor/referrals',
+    SCHEDULE: '/doctor/schedule',
+    SHIFTS: '/doctor/shifts',
+  },
+
+  // Nurse
+  NURSE: {
+    PATIENT_CARE: '/nurse/patient-care',
+    VITAL_SIGNS: '/nurse/vital-signs',
+    VACCINATIONS: '/nurse/vaccinations',
+    MEDICATION_ADMIN: '/nurse/medication-admin',
+    SHIFTS: '/nurse/shifts',
+  },
+
+  // Patient
+  PATIENT: {
+    APPOINTMENTS: '/patient/appointments',
+    MEDICAL_HISTORY: '/patient/medical-history',
+    PRESCRIPTIONS: '/patient/prescriptions',
+    TEST_RESULTS: '/patient/test-results',
+  },
+
+  // Receptionist
+  RECEPTIONIST: {
+    APPOINTMENTS: '/receptionist/appointments',
+    CHECK_IN: '/receptionist/check-in',
+    PATIENTS: '/receptionist/patients',
+  },
 } as const

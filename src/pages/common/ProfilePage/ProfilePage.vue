@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import {onMounted} from 'vue'
-import {useUser} from '@features/user/model/useUser'
-import {getInitials} from '@shared/utils/format.utils'
-import type {UpdateUserFormData} from '@entities/user/model/validation/user.validation'
-import {useAuthStore} from '@entities/auth/model/store/auth.store'
+import {useRouter} from "vue-router";
+import {useUser} from "@features/user/model/useUser.ts";
+import {useAuthStore} from "@entities/auth/model/store/auth.store.ts";
+import {UpdateUserFormData} from "@entities/user/model/validation/user.validation.ts";
 import ButtonComponent from "@shared/ui/components/atoms/ButtonComponent/ButtonComponent.vue";
 import CardComponent from "@shared/ui/components/atoms/CardComponent/CardComponent.vue";
 import UserEditForm from "@entities/user/ui/UserEditForm/UserEditForm.vue";
-import {useRouter} from "vue-router";
+import {getInitials} from "@shared/utils/format.utils.ts";
 
 const {fetchCurrentUser, updateUser, currentUserProfile, loading} = useUser()
 const authStore = useAuthStore()
