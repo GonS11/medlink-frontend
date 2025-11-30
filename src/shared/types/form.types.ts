@@ -1,4 +1,8 @@
-import {ZodSchema} from "zod";
+import {ZodError, ZodSchema} from "zod"
+
+// ============================================================================
+// FORM COMPOSABLES
+// ============================================================================
 
 export interface UseFormFieldOptions<T> {
   initialValue: T
@@ -8,17 +12,37 @@ export interface UseFormFieldOptions<T> {
   required?: boolean
 }
 
-export interface FormFieldsetProps {
+export interface ZodValidationError extends ZodError {
+  errors: Array<{ path: (string | number)[]; message: string }>
+}
+
+export type ErrorRecord<T> = Partial<Record<keyof T, string | undefined>>
+export type FormRecord<T> = Record<keyof T, any>
+
+// ============================================================================
+// FORM COMPONENTS (Molecules)
+// ============================================================================
+
+export interface FormProps {
+  title?: string
+  subtitle?: string
+  variant?: 'default' | 'shadow' | 'borderless' | 'elevated' | 'outlined'
+  maxWidth?: 'sm' | 'md' | 'lg' | 'xl'
+  centered?: boolean
+}
+
+export interface FormFieldProps {
+  gap?: 'sm' | 'md' | 'lg'
+  columns?: number
+  responsive?: boolean
   legend?: string
   description?: string
   variant?: 'default' | 'bordered' | 'filled'
 }
 
-export interface FormRowProps {
-  columns?: number | 'auto'
-  gap?: 'sm' | 'md' | 'lg' | 'xl'
-  responsive?: boolean
-}
+// ============================================================================
+// INPUT COMPONENTS (Atoms)
+// ============================================================================
 
 export interface InputProps {
   modelValue?: string | number
@@ -30,8 +54,6 @@ export interface InputProps {
   disabled?: boolean
   readonly?: boolean
   required?: boolean
-  prefixIcon?: string
-  suffixIcon?: string
   prefix?: string
   suffix?: string
   clearable?: boolean
@@ -42,7 +64,7 @@ export interface InputProps {
   maxLength?: number
 }
 
-interface SelectOption {
+export interface SelectOption {
   value: string | number
   label: string
   disabled?: boolean
@@ -73,6 +95,10 @@ export interface TextAreaProps {
   showCounter?: boolean
   resize?: 'none' | 'both' | 'horizontal' | 'vertical'
 }
+
+// ============================================================================
+// SELECTION COMPONENTS (Atoms)
+// ============================================================================
 
 export interface CheckboxProps {
   modelValue?: boolean

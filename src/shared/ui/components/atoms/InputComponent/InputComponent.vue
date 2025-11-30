@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import {computed, ref, useSlots} from 'vue'
-import PasswordIcon from "@shared/ui/icons/PasswordIcon.vue";
-import ClearButtonIcon from "@shared/ui/icons/ClearButtonIcon.vue";
-import {InputProps} from "@shared/types/form.types.ts"; // Asumo que InputProps define las propiedades
+import EyeOpenIcon from "@shared/ui/icons/EyeOpenIcon.vue"
+import ClearButtonIcon from "@shared/ui/icons/ClearButtonIcon.vue"
+import EyeCloseIcon from "@shared/ui/icons/EyeCloseIcon.vue"
+import {InputProps} from "@shared/types/form.types.ts"
 
 const props = withDefaults(defineProps<InputProps>(), {
   type: 'text',
@@ -22,13 +23,14 @@ const emit = defineEmits<{
   'suffix-click': []
 }>()
 
-const slots = useSlots() // Asegurarse de importar useSlots para verificar si la ranura 'icon' está presente
+const slots = useSlots()
 const inputId = ref(`input-${Math.random().toString(36).substr(2, 9)}`)
 const isFocused = ref(false)
 const isPasswordVisible = ref(false)
+const hasInteracted = ref(false)
 
-const hasIconSlot = computed(() => !!slots.icon); // Renombrado a 'icon'
-const hasPrefixOrIcon = computed(() => props.prefix || hasIconSlot.value); // Usa la ranura 'icon' como prefijo
+const hasIconSlot = computed(() => !!slots.icon)
+const hasPrefixOrIcon = computed(() => props.prefix || hasIconSlot.value)
 
 const inputType = computed(() => {
   if (props.type === 'password' && props.showPasswordToggle) {
@@ -43,9 +45,7 @@ const inputClasses = computed(() => [
     'input-error-state': props.error,
     'input-focused': isFocused.value,
     'input-disabled': props.disabled,
-    // Se corrige 'prefixIcon' por el chequeo de la ranura 'icon'
     'input-with-prefix': hasPrefixOrIcon.value,
-    // Se corrige 'suffixIcon' por el chequeo de la ranura 'suffix' o acciones internas
     'input-with-suffix': props.suffix || props.clearable || (props.type === 'password' && props.showPasswordToggle),
   },
 ])
@@ -56,12 +56,17 @@ const showClearButton = computed(() => {
 
 const handleInput = (event: Event) => {
   const target = event.target as HTMLInputElement
+  hasInteracted.value = true // ✅ Marcar como interactuado
   emit('update:modelValue', target.value)
 }
 
 const handleBlur = (event: FocusEvent) => {
   isFocused.value = false
-  emit('blur', event)
+
+  // ✅ Solo emitir blur si el usuario ha interactuado con el campo
+  if (hasInteracted.value || props.modelValue) {
+    emit('blur', event)
+  }
 }
 
 const handleFocus = (event: FocusEvent) => {
@@ -70,6 +75,7 @@ const handleFocus = (event: FocusEvent) => {
 }
 
 const handleClear = () => {
+  hasInteracted.value = true
   emit('update:modelValue', '')
   emit('clear')
 }
@@ -133,7 +139,8 @@ const togglePasswordVisibility = () => {
           class="input-action-button"
           @click="togglePasswordVisibility"
         >
-          <PasswordIcon :label="$t('icon.password')" :isPasswordVisible="isPasswordVisible"/>
+          <EyeOpenIcon :label="$t('icon.seePassword')" v-if="isPasswordVisible"/>
+          <EyeCloseIcon :label="$t('icon.hidePassword')" v-else/>
         </button>
 
         <slot v-else name="suffix">

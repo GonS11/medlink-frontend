@@ -15,15 +15,19 @@ export const createUserSchemas = (t: TranslationFunction) => {
     isActive: z.boolean().optional(),
   });
 
-  const changePasswordSchema = z
-    .object({
-      currentPassword: z.string().min(1, t('validation.currentPasswordRequired')),
-      newPassword: v.password,
-      confirmPassword: z.string().min(1, t('validation.confirmPasswordRequired')),
-    })
-    .refine((data) => data.newPassword === data.confirmPassword, {
+  const passwordValidation = z.string()
+    .min(8, t('validation.passwordMinLength', {min:8}))
+    .regex(/^(?=.*[a-z])/, t('validation.passwordLowercase'))
+    .regex(/^(?=.*[A-Z])/, t('validation.passwordUppercase'))
+    .regex(/^(?=.*\d)/, t('validation.passwordNumber'));
+
+  const changePasswordSchema = z.object({
+    newPassword: passwordValidation,
+    confirmNewPassword: z.string().min(1, t('validation.confirmPasswordRequired')),
+  })
+    .refine((data) => data.newPassword === data.confirmNewPassword, {
       message: t('validation.passwordsMustMatch'),
-      path: ['confirmPassword'],
+      path: ['confirmNewPassword'], // Asigna el error al campo de confirmación
     });
 
   const lockAccountSchema = z.object({
@@ -31,13 +35,14 @@ export const createUserSchemas = (t: TranslationFunction) => {
     reason: z.string().max(500, t('validation.reasonMax')).optional().or(z.literal('')),
   });
 
+
   return {
     updateUserSchema,
-    changePasswordSchema,
     lockAccountSchema,
+    changePasswordSchema
   };
 };
 
 export type UpdateUserFormData = z.infer<ReturnType<typeof createUserSchemas>['updateUserSchema']>;
-export type ChangePasswordFormData = z.infer<ReturnType<typeof createUserSchemas>['changePasswordSchema']>;
 export type LockAccountFormData = z.infer<ReturnType<typeof createUserSchemas>['lockAccountSchema']>;
+export type ChangePasswordFormData = z.infer<ReturnType<typeof createUserSchemas>['changePasswordSchema']>;

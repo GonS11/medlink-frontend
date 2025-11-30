@@ -1,7 +1,6 @@
 @use '@shared/styles/variables' as *;
 
 .btn {
-  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -11,65 +10,60 @@
   border: 1px solid transparent;
   border-radius: $radius-lg;
   cursor: pointer;
-  transition: all var(--transition-base);
+  transition: background-color 0.2s, border-color 0.2s, opacity 0.2s;
   white-space: nowrap;
   user-select: none;
-  overflow: hidden;
 
-  // Estado Deshabilitado
   &:disabled {
     cursor: not-allowed;
-    opacity: 0.6;
-    transform: none !important;
-    box-shadow: none !important;
+    opacity: 0.5;
   }
 
-  // Estado de Foco (Accesibilidad)
   &:focus-visible {
     outline: 2px solid var(--border-focus);
     outline-offset: 2px;
   }
 
-  // --- Modificadores de Tamaño ---
   &--sm {
     padding: $spacing-sm $spacing-md;
     font-size: $font-size-sm;
     min-height: 32px;
-
-    &.btn--icon-only {
-      padding: $spacing-sm;
-      width: 32px;
-      height: 32px;
-    }
   }
 
   &--md {
     padding: $spacing-sm $spacing-lg;
     font-size: $font-size-base;
     min-height: 40px;
-
-    &.btn--icon-only {
-      padding: $spacing-sm;
-      width: 40px;
-      height: 40px;
-    }
   }
 
   &--lg {
     padding: $spacing-md $spacing-xl;
     font-size: $font-size-lg;
     min-height: 48px;
+  }
 
-    &.btn--icon-only {
-      padding: $spacing-md;
+  &--icon-only {
+    aspect-ratio: 1;
+
+    &.btn--sm {
+      width: 32px;
+      height: 32px;
+      padding: $spacing-sm;
+    }
+
+    &.btn--md {
+      width: 40px;
+      height: 40px;
+      padding: $spacing-sm;
+    }
+
+    &.btn--lg {
       width: 48px;
       height: 48px;
+      padding: $spacing-md;
     }
   }
 
-  // --- Modificadores de Variante ---
-
-  // Variante Primary
   &--primary {
     background-color: var(--color-primary);
     color: var(--color-white);
@@ -77,18 +71,13 @@
 
     &:hover:not(:disabled) {
       background-color: var(--color-primary-hover);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
     }
 
     &:active:not(:disabled) {
-      transform: translateY(0);
       background-color: var(--color-primary-dark);
-      box-shadow: var(--shadow-sm);
     }
   }
 
-  // Variante Secondary
   &--secondary {
     background-color: var(--color-secondary);
     color: var(--color-white);
@@ -96,18 +85,13 @@
 
     &:hover:not(:disabled) {
       background-color: var(--color-secondary-dark);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
     }
 
     &:active:not(:disabled) {
-      transform: translateY(0);
       background-color: var(--color-secondary-dark);
-      box-shadow: var(--shadow-sm);
     }
   }
 
-  // Variante Accent
   &--accent {
     background-color: var(--color-accent);
     color: var(--color-white);
@@ -115,37 +99,27 @@
 
     &:hover:not(:disabled) {
       background-color: var(--color-accent-dark);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
     }
 
     &:active:not(:disabled) {
-      transform: translateY(0);
       background-color: var(--color-accent-dark);
-      box-shadow: var(--shadow-sm);
     }
   }
 
-  // Variante Danger
   &--danger {
     background-color: var(--color-error);
     color: var(--color-white);
     border-color: var(--color-error);
 
     &:hover:not(:disabled) {
-      background-color: var(--color-error);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
+      background-color: var(--color-error-dark);
     }
 
     &:active:not(:disabled) {
-      transform: translateY(0);
-      background-color: rgba(var(--color-error), 0.3);
-      box-shadow: var(--shadow-sm);
+      background-color: var(--color-error-dark);
     }
   }
 
-  // Variante Outline
   &--outline {
     background: transparent;
     color: var(--color-primary);
@@ -154,21 +128,20 @@
     &:hover:not(:disabled) {
       background-color: var(--color-primary);
       color: var(--color-white);
-      transform: translateY(-1px);
-      box-shadow: var(--shadow-sm);
+    }
+
+    &:active:not(:disabled) {
+      background-color: var(--color-primary-dark);
+      color: var(--color-white);
     }
   }
 
-  // Variante Ghost
   &--ghost {
     background: transparent;
     color: var(--color-primary);
-    border-color: transparent;
 
     &:hover:not(:disabled) {
       background-color: var(--bg-hover);
-      color: var(--color-primary-hover);
-      box-shadow: none;
     }
 
     &:active:not(:disabled) {
@@ -176,31 +149,17 @@
     }
   }
 
-  // --- Modificadores Adicionales ---
-
   &--full-width {
     width: 100%;
-  }
-
-  &--loading {
-    pointer-events: none;
-    opacity: 0.8;
-  }
-
-  &--icon-only {
-    aspect-ratio: 1;
-    padding: $spacing-sm;
   }
 
   &--rounded {
     border-radius: 9999px;
   }
 
-  &--icon-right {
-    flex-direction: row-reverse;
+  &--loading {
+    pointer-events: none;
   }
-
-  // --- Elementos Internos ---
 
   &__spinner {
     display: inline-flex;
@@ -212,65 +171,15 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.25em;
+    font-size: 1.2em;
 
     &--only {
       font-size: 1.5em;
     }
   }
 
-  &__content {
+  &__text {
     display: inline-flex;
     align-items: center;
-  }
-}
-
-// Spinner Animation
-.spinner {
-  animation: rotate 1s linear infinite;
-}
-
-.spinner-circle {
-  stroke-dasharray: 50, 200;
-  stroke-dashoffset: 0;
-  animation: dash 1.5s ease-in-out infinite;
-  stroke-linecap: round;
-}
-
-@keyframes rotate {
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes dash {
-  0% {
-    stroke-dasharray: 1, 200;
-    stroke-dashoffset: 0;
-  }
-  50% {
-    stroke-dasharray: 90, 200;
-    stroke-dashoffset: -35px;
-  }
-  100% {
-    stroke-dasharray: 90, 200;
-    stroke-dashoffset: -125px;
-  }
-}
-
-// Ripple Effect
-.ripple {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.6);
-  transform: scale(0);
-  animation: ripple-animation 0.6s ease-out;
-  pointer-events: none;
-}
-
-@keyframes ripple-animation {
-  to {
-    transform: scale(4);
-    opacity: 0;
   }
 }

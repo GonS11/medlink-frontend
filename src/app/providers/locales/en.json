@@ -1,7 +1,8 @@
 {
   "app": {
     "name": "MedLink",
-    "tagline": "Healthcare Management System"
+    "taglineLogin": "Continue your care journey",
+    "taglineRegister": "Start caring smarter today"
   },
   "common": {
     "loading": "Loading...",
@@ -46,7 +47,7 @@
     "hasAccount": "Already have an account?",
     "loginSuccess": "Login successful!",
     "logoutSuccess": "Logged out successfully",
-    "registerSuccess": "Registration successful! Please login.",
+    "registerSuccess": "Registration successful! Please log in.",
     "invalidCredentials": "Invalid email or password",
     "accountLocked": "Your account has been locked",
     "loginTitle": "Welcome Back",
@@ -82,7 +83,17 @@
     "updateProfile": "Update Profile",
     "profileUpdated": "Profile updated successfully",
     "lockAccount": "Lock Account",
-    "unlockAccount": "Unlock Account"
+    "unlockAccount": "Unlock Account",
+    "changePasswordTitle": "Change Password",
+    "changePasswordSubtitle": "Enter and confirm your new password.",
+    "changePasswordButton": "Change Password",
+    "newPasswordPlaceholder": "Enter new password",
+    "confirmNewPassword": "Confirm New Password",
+    "confirmNewPasswordPlaceholder": "Re-enter new password",
+    "passwordRequirements": "Password Requirements",
+    "passwordChangeSuccess": "Password changed successfully!",
+    "passwordsMatch": "Passwords match",
+    "passwordsDontMatch": "Passwords don't match"
   },
   "roles": {
     "ADMIN": "Administrator",
@@ -103,32 +114,43 @@
     "settings": "Settings"
   },
   "validation": {
-    "validation": {
-      "emailRequired": "Email is required",
-      "emailInvalid": "Email must be valid",
-      "passwordRequired": "Password is required",
-      "passwordMinLength": "Password must be at least {min} characters",
-      "passwordRequirements": "Password must contain at least one uppercase letter, one lowercase letter, and one number",
-      "phoneMaxLength": "Phone must not exceed {max} characters",
-      "phoneInvalid": "Phone must be a valid phone number",
-      "firstNameRequired": "First name is required",
-      "lastNameRequired": "Last name is required",
-      "nameMaxLength": "Must not exceed {max} characters",
-      "confirmPasswordRequired": "Confirm password is required",
-      "passwordsMustMatch": "Passwords must match",
-      "roleRequired": "Role is required"
-    }
+    "emailRequired": "Email is required",
+    "emailInvalid": "Email must be valid",
+    "passwordRequired": "Password is required",
+    "newPasswordRequired": "New password is required",
+    "passwordMinLength": "Password must be at least {min} characters long",
+    "passwordLowercase": "Must contain at least one lowercase letter",
+    "passwordUppercase": "Must contain at least one uppercase letter",
+    "passwordNumber": "Must contain at least one number",
+    "phoneMaxLength": "Phone must not exceed {max} characters",
+    "phoneInvalid": "Phone must be a valid phone number",
+    "firstNameRequired": "First name is required",
+    "lastNameRequired": "Last name is required",
+    "nameMaxLength": "Must not exceed {max} characters",
+    "confirmPasswordRequired": "Confirm password is required",
+    "passwordsMustMatch": "Passwords must match",
+    "passwordsMatch": "Passwords match ✓",
+    "passwordsDontMatch": "Passwords don't match",
+    "roleRequired": "Role is required",
+    "minDuration": "Duration must be at least 1 minute",
+    "reasonMax": "Reason must not exceed 500 characters",
+    "validationFailed": "Validation failed",
+    "unexpectedError": "An unexpected error occurred"
   },
   "icon": {
     "check": "Check icon",
     "clearButton": "Clear button icon",
     "chevronDown": "Down arrow icon",
+    "arrowLeft": "Left arrow icon",
     "email": "Email icon",
+    "logo": "Logo icon",
     "mobilePhone": "Mobile phone icon",
     "submit": "Submit icon",
     "spinner": "Spinner icon",
-    "user": "USer icon",
-    "password": "Password icon",
-    "phone": "Phone icon"
+    "user": "User icon",
+    "seePassword": "See password icon",
+    "hidePassword": "Hide password icon",
+    "phone": "Phone icon",
+    "x": "X icon"
   }
 }

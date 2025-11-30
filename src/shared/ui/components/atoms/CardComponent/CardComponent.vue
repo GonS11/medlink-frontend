@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {computed} from 'vue'
-import SpinnerIcon from "@shared/ui/icons/SpinnerIcon.vue";
-import {CardProps} from "@shared/types/general.types.ts";
+import SpinnerIcon from "@shared/ui/icons/SpinnerIcon.vue"
+import {CardProps} from "@shared/types/general.types.ts"
 
 const props = withDefaults(defineProps<CardProps>(), {
   variant: 'default',
@@ -27,7 +27,7 @@ const cardClasses = computed(() => [
 
 const bodyClasses = computed(() => [
   'card__body',
-  `card__body--padding-${props.padding}`,
+  `card__body--${props.padding}`,
 ])
 
 const handleClick = (event: MouseEvent) => {
@@ -50,7 +50,7 @@ const handleClick = (event: MouseEvent) => {
 
     <div v-if="$slots.header || title || subtitle" class="card__header">
       <slot name="header">
-        <div class="card__header-content">
+        <div class="card__content">
           <h3 v-if="title" class="card__title">{{ title }}</h3>
           <p v-if="subtitle" class="card__subtitle">{{ subtitle }}</p>
         </div>

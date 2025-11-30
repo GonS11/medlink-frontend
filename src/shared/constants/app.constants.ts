@@ -4,10 +4,12 @@ export const APP_CONFIG = {
 } as const
 
 export const STORAGE_KEYS = {
-  ACCESS_TOKEN: 'medlink_access_token',
-  REFRESH_TOKEN: 'medlink_refresh_token',
-  USER: 'medlink_user',
-  LANGUAGE: 'medlink_language',
+  ACCESS_TOKEN: 'access_token',
+  REFRESH_TOKEN: 'refresh_token',
+  USER: 'user',
+  REMEMBER_EMAIL: 'remember_email',
+  LANGUAGE: 'language',
+  THEME: 'theme',
 } as const
 
 export const LANGUAGE_CONFIG = {
@@ -25,6 +27,8 @@ export const PAGINATION_CONFIG = {
 export const ROUTES = {
   LOGIN: '/login',
   REGISTER: '/register',
+  FORGOT_PASSWORD: '/forgot-password',
+  CHANGE_PASSWORD: '/change-password',
   DASHBOARD: '/dashboard',
   PROFILE: '/profile',
   SETTINGS: '/settings',

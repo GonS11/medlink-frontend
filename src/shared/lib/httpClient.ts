@@ -2,13 +2,16 @@ import axios, {AxiosInstance, AxiosError, InternalAxiosRequestConfig} from 'axio
 import type {ApiResponse} from '@shared/types/api.types'
 import {APP_CONFIG, STORAGE_KEYS, ROUTES} from '@shared/constants/app.constants'
 import {storage} from '@shared/utils/storage.utils'
+import {ref} from 'vue'
 
 const PUBLIC_API_PATHS = [
   '/auth/login',
   '/auth/register'
 ]
 
-// Create axios instance
+export const globalLoading = ref(false)
+let pendingRequests = 0
+
 const httpClient: AxiosInstance = axios.create({
   baseURL: APP_CONFIG.apiBaseUrl,
   timeout: APP_CONFIG.apiTimeout,
@@ -17,11 +20,12 @@ const httpClient: AxiosInstance = axios.create({
   },
 })
 
-// Request interceptor - add auth token
 httpClient.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    const token = storage.get<string>(STORAGE_KEYS.ACCESS_TOKEN)
+    pendingRequests++
+    globalLoading.value = true
 
+    const token = storage.get<string>(STORAGE_KEYS.ACCESS_TOKEN)
     if (token && config.headers) {
       config.headers.Authorization = `Bearer ${token}`
     }
@@ -29,26 +33,34 @@ httpClient.interceptors.request.use(
     return config
   },
   (error: AxiosError) => {
+    pendingRequests--
+    if (pendingRequests === 0) {
+      globalLoading.value = false
+    }
     return Promise.reject(error)
   }
 )
 
-// Response interceptor - handle errors
 httpClient.interceptors.response.use(
   (response) => {
+    pendingRequests--
+    if (pendingRequests === 0) {
+      globalLoading.value = false
+    }
     return response
   },
   async (error: AxiosError<ApiResponse>) => {
-    const originalRequest = error.config as InternalAxiosRequestConfig & { _retry?: boolean }
-    const requestPath = originalRequest.url || '' // Obtenemos la ruta de la solicitud (e.g., '/auth/login')
+    pendingRequests--
+    if (pendingRequests === 0) {
+      globalLoading.value = false
+    }
 
-    // 🚨 Nueva condición: No redirigir si la solicitud fallida fue a una ruta pública (Login/Register)
+    const originalRequest = error.config as InternalAxiosRequestConfig & { _retry?: boolean }
+    const requestPath = originalRequest.url || ''
+
     const isPublicRequest = PUBLIC_API_PATHS.some(path => requestPath.endsWith(path))
 
-    // Handle 401 Unauthorized
     if (error.response?.status === 401 && !originalRequest._retry) {
-
-      // 1. Si NO es una solicitud pública, forzamos el cierre de sesión y la recarga
       if (!isPublicRequest) {
         originalRequest._retry = true
 
@@ -59,12 +71,7 @@ httpClient.interceptors.response.use(
 
         window.location.href = ROUTES.LOGIN
       }
-
-      // 2. Si ES una solicitud pública (login fallido), solo rechazamos la promesa.
-      // La notificación y el manejo del error serán gestionados por el try/catch de useAuth.
     }
-
-    // Siempre rechazamos la promesa para que el error llegue al bloque try/catch en useAuth/login
     return Promise.reject(error)
   }
 )

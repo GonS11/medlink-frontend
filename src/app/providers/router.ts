@@ -4,8 +4,8 @@ import {ROUTES} from '@shared/constants/app.constants'
 import {UserRoleType} from '@shared/types/api.types'
 
 // Public pages
-const LoginPage = () => import('@pages/Login/LoginPage.vue')
-const RegisterPage = () => import('@pages/Login/RegisterPage.vue')
+const LoginPage = () => import('@pages/Login/LoginPage/LoginPage.vue')
+const RegisterPage = () => import('@pages/Login/RegisterPage/RegisterPage.vue')
 
 // Authenticated pages
 const DashboardPage = () => import('@pages/Authenticated/Dashboard/DashboardPage.vue')

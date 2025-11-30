@@ -1,23 +1,14 @@
 <script setup lang="ts">
-import {computed} from 'vue';
-
 interface Props {
   label: string;
-  size?: number;
   primaryColor?: string;
   secondaryColor?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  size: 250,
   primaryColor: '#006B9F',
   secondaryColor: '#4CAF50',
 });
-
-const style = computed(() => ({
-  width: `${props.size}px`,
-  height: `${props.size}px`,
-}));
 </script>
 
 <template>
@@ -26,7 +17,6 @@ const style = computed(() => ({
     role="img"
     viewBox="0 0 1024.000000 1024.000000"
     preserveAspectRatio="xMidYMid meet"
-    :style="style"
     xmlns="http://www.w3.org/2000/svg"
   >
     <g transform="translate(0.000000,1024.000000) scale(0.100000,-0.100000)" stroke="none">

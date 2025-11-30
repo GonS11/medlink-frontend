@@ -26,7 +26,8 @@ const {form, errors, validateField, validateForm} = useForm<UpdateUserFormData>(
     phone: props.user.phone || '',
     mobilePhone: props.user.mobilePhone || '',
   },
-  updateUserSchema
+  updateUserSchema,
+  t
 )
 
 // Update form when user prop changes

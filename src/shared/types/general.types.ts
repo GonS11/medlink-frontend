@@ -7,7 +7,6 @@ export interface ButtonProps {
   fullWidth?: boolean
   iconOnly?: boolean
   iconPosition?: 'left' | 'right'
-  ripple?: boolean
   rounded?: boolean
 }
 

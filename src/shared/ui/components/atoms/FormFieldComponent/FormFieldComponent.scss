@@ -1,0 +1,67 @@
+@use '@shared/styles/variables' as *;
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+
+  &--gap-sm {
+    gap: $spacing-sm;
+  }
+
+  &--gap-md {
+    gap: $spacing-md;
+  }
+
+  &--gap-lg {
+    gap: $spacing-lg;
+  }
+
+  &--group {
+    display: grid;
+
+    &.form-field--responsive {
+      @media (max-width: $breakpoint-md) {
+        grid-template-columns: 1fr !important;
+      }
+    }
+  }
+
+  &--section {
+    border: none;
+    padding: 0;
+    margin: 0;
+    gap: $spacing-lg;
+
+    &.form-field--bordered {
+      padding: $spacing-lg;
+      border: 1px solid var(--border-color);
+      border-radius: $radius-lg;
+    }
+
+    &.form-field--filled {
+      padding: $spacing-lg;
+      background-color: var(--bg-secondary);
+      border-radius: $radius-lg;
+    }
+  }
+
+  &__legend {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    color: var(--text-primary);
+    margin-bottom: $spacing-sm;
+    padding: 0;
+  }
+
+  &__description {
+    font-size: $font-size-sm;
+    color: var(--text-secondary);
+    margin: 0 0 $spacing-md 0;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+  }
+}

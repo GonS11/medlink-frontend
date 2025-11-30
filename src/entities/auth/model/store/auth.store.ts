@@ -6,9 +6,8 @@ import {storage} from '@shared/utils/storage.utils'
 
 export const useAuthStore = defineStore('auth', () => {
   const user = ref<UserInfo | null>(storage.get<UserInfo>(STORAGE_KEYS.USER))
-  const loading = ref(false)
-  const error = ref<string | null>(null)
   const accessToken = ref<string | null>(storage.get<string>(STORAGE_KEYS.ACCESS_TOKEN))
+  const error = ref<string | null>(null)
 
   const isAuthenticated = computed(() => {
     return !!accessToken.value && !!user.value
@@ -40,10 +39,6 @@ export const useAuthStore = defineStore('auth', () => {
     storage.remove(STORAGE_KEYS.USER)
   }
 
-  function setLoading(value: boolean) {
-    loading.value = value
-  }
-
   function setError(value: string | null) {
     error.value = value
   }
@@ -57,14 +52,12 @@ export const useAuthStore = defineStore('auth', () => {
   return {
     user,
     isAuthenticated,
-    loading,
     error,
     currentUser,
     userRole,
     setUser,
     setTokens,
     clearAuth,
-    setLoading,
     setError,
     initialize,
   }
