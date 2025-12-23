@@ -75,7 +75,7 @@ const handleFocus = (event: FocusEvent) => {
       </select>
 
       <div class="select-icon">
-        <ChevronDownIcon :label="$t('icon.chevronDown')"/>
+        <ChevronDownIcon :label="$t('icons.chevronDown')"/>
       </div>
     </div>
 

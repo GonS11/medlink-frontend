@@ -1,0 +1,27 @@
+@use '@/shared/styles/_variables' as *;
+
+.data-field {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+
+  &__label {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    margin: 0;
+  }
+
+  &__value {
+    font-size: $font-size-base;
+    color: var(--text-primary);
+    font-weight: $font-weight-medium;
+    margin: 0;
+    line-height: 1.5;
+    min-height: 1.5em; // Evita saltos si está vacío
+    display: flex; // Para alinear skeletons o slots correctamente
+    align-items: center;
+  }
+}

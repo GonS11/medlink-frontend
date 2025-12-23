@@ -1,3 +1,5 @@
+import {Component} from "vue";
+
 export interface ButtonProps {
   type?: 'button' | 'submit' | 'reset'
   variant?: 'primary' | 'secondary' | 'danger' | 'accent' | 'ghost' | 'outline'
@@ -5,17 +7,20 @@ export interface ButtonProps {
   disabled?: boolean
   loading?: boolean
   fullWidth?: boolean
+  icon?: Component
   iconOnly?: boolean
   iconPosition?: 'left' | 'right'
   rounded?: boolean
 }
 
-export interface CardProps {
-  title?: string
-  subtitle?: string
-  variant?: 'default' | 'shadow' | 'borderless' | 'elevated' | 'outlined'
-  padding?: 'none' | 'sm' | 'md' | 'lg' | 'xl'
-  hoverable?: boolean
-  clickable?: boolean
+
+
+
+export interface StatCardProps {
+  label: string
+  value: string | number
+  icon: Component
   loading?: boolean
 }
+
+

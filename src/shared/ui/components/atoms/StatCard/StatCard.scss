@@ -1,0 +1,57 @@
+@use '@/shared/styles/_variables' as *;
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: $spacing-lg;
+  padding: $spacing-lg;
+  background: var(--bg-primary);
+  border-radius: $radius-lg;
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-0.125rem);
+    box-shadow: var(--shadow-md);
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary));
+    border-radius: $radius-xl;
+    box-shadow: 0 0.25rem 0.75rem rgba(30, 136, 229, 0.2);
+
+    svg {
+      width: 2rem;
+      height: 2rem;
+      color: var(--color-white);
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.0313rem;
+  }
+
+  &__value {
+    font-size: $font-size-3xl;
+    font-weight: $font-weight-bold;
+    color: var(--text-primary);
+    line-height: 1;
+  }
+}

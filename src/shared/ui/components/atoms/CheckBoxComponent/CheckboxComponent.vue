@@ -59,7 +59,7 @@ const handleBlur = () => {
       />
 
       <div :class="checkboxClasses">
-        <CheckIcon :label="$t('icon.check')" :modelValue="modelValue"/>
+        <CheckIcon :label="$t('icons.check')" :modelValue="modelValue"/>
       </div>
 
       <label :for="checkboxId" class="checkbox-label-container">

@@ -10,9 +10,11 @@
   border: 1px solid transparent;
   border-radius: $radius-lg;
   cursor: pointer;
-  transition: background-color 0.2s, border-color 0.2s, opacity 0.2s;
+  transition: all 0.2s ease;
   white-space: nowrap;
   user-select: none;
+  max-width: 100%;
+  overflow: hidden;
 
   &:disabled {
     cursor: not-allowed;
@@ -20,54 +22,65 @@
   }
 
   &:focus-visible {
-    outline: 2px solid var(--border-focus);
-    outline-offset: 2px;
+    outline: 0.125rem solid var(--border-focus);
+    outline-offset: 0.125rem;
   }
 
+  // Sizes
   &--sm {
     padding: $spacing-sm $spacing-md;
     font-size: $font-size-sm;
-    min-height: 32px;
+    min-height: 2rem;
   }
 
   &--md {
     padding: $spacing-sm $spacing-lg;
     font-size: $font-size-base;
-    min-height: 40px;
+    min-height: 2.5rem;
   }
 
   &--lg {
     padding: $spacing-md $spacing-xl;
     font-size: $font-size-lg;
-    min-height: 48px;
+    min-height: 3rem;
   }
 
+  // Icon Only
   &--icon-only {
     aspect-ratio: 1;
 
     &.btn--sm {
-      width: 32px;
-      height: 32px;
+      width: 2rem;
+      height: 2rem;
       padding: $spacing-sm;
     }
 
     &.btn--md {
-      width: 40px;
-      height: 40px;
+      width: 2.5rem;
+      height: 2.5rem;
       padding: $spacing-sm;
     }
 
     &.btn--lg {
-      width: 48px;
-      height: 48px;
+      width: 3rem;
+      height: 3rem;
       padding: $spacing-md;
     }
   }
 
+  // Variants
   &--primary {
     background-color: var(--color-primary);
     color: var(--color-white);
     border-color: var(--color-primary);
+
+    .btn__icon svg {
+      color: var(--color-white);
+
+      path {
+        stroke: var(--color-white);
+      }
+    }
 
     &:hover:not(:disabled) {
       background-color: var(--color-primary-hover);
@@ -83,6 +96,14 @@
     color: var(--color-white);
     border-color: var(--color-secondary);
 
+    .btn__icon svg {
+      color: var(--color-white);
+
+      path {
+        stroke: var(--color-white);
+      }
+    }
+
     &:hover:not(:disabled) {
       background-color: var(--color-secondary-dark);
     }
@@ -96,6 +117,14 @@
     background-color: var(--color-accent);
     color: var(--color-white);
     border-color: var(--color-accent);
+
+    .btn__icon svg {
+      color: var(--color-white);
+
+      path {
+        stroke: var(--color-white);
+      }
+    }
 
     &:hover:not(:disabled) {
       background-color: var(--color-accent-dark);
@@ -111,6 +140,14 @@
     color: var(--color-white);
     border-color: var(--color-error);
 
+    .btn__icon svg {
+      color: var(--color-white);
+
+      path {
+        stroke: var(--color-white);
+      }
+    }
+
     &:hover:not(:disabled) {
       background-color: var(--color-error-dark);
     }
@@ -123,11 +160,27 @@
   &--outline {
     background: transparent;
     color: var(--color-primary);
-    border: 2px solid var(--color-primary);
+    border: 0.125rem solid var(--color-primary);
+
+    .btn__icon svg {
+      color: var(--color-primary);
+
+      path {
+        stroke: var(--color-primary);
+      }
+    }
 
     &:hover:not(:disabled) {
       background-color: var(--color-primary);
       color: var(--color-white);
+
+      .btn__icon svg {
+        color: var(--color-white);
+
+        path {
+          stroke: var(--color-white);
+        }
+      }
     }
 
     &:active:not(:disabled) {
@@ -138,10 +191,28 @@
 
   &--ghost {
     background: transparent;
-    color: var(--color-primary);
+    color: var(--text-secondary);
+
+    .btn__icon svg {
+      color: var(--text-secondary);
+
+      // ✅ CLAVE: Agregar stroke para iconos que lo usan
+      path {
+        stroke: var(--text-secondary);
+      }
+    }
 
     &:hover:not(:disabled) {
       background-color: var(--bg-hover);
+      color: var(--text-primary);
+
+      .btn__icon svg {
+        color: var(--text-primary);
+
+        path {
+          stroke: var(--text-primary);
+        }
+      }
     }
 
     &:active:not(:disabled) {
@@ -161,6 +232,7 @@
     pointer-events: none;
   }
 
+  // Icon & Text Components
   &__spinner {
     display: inline-flex;
     align-items: center;
@@ -171,15 +243,28 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2em;
+    flex-shrink: 0;
+
+    svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      display: block;
+      color: inherit;
+    }
 
     &--only {
-      font-size: 1.5em;
+      svg {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
     }
   }
 
   &__text {
     display: inline-flex;
     align-items: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
   }
 }

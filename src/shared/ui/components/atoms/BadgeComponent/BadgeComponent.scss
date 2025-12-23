@@ -1,0 +1,64 @@
+@use '@/shared/styles/_variables' as *;
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: $font-weight-medium;
+  white-space: nowrap;
+  border-radius: $radius-sm;
+  line-height: 1;
+
+  &--sm {
+    padding: $spacing-xs $spacing-sm;
+    font-size: $font-size-xs;
+    gap: $spacing-xs;
+  }
+
+  &--md {
+    padding: $spacing-sm $spacing-md;
+    font-size: $font-size-sm;
+    gap: $spacing-sm;
+  }
+
+  &--lg {
+    padding: $spacing-sm $spacing-lg;
+    font-size: $font-size-base;
+    gap: $spacing-sm;
+  }
+
+  &--primary {
+    background-color: var(--badge-primary-bg);
+    color: var(--badge-primary-text);
+  }
+
+  &--secondary {
+    background-color: var(--color-secondary-light);
+    color: var(--color-secondary-dark);
+  }
+
+  &--success {
+    background-color: var(--badge-success-bg);
+    color: var(--badge-success-text);
+  }
+
+  &--error {
+    background-color: var(--badge-error-bg);
+    color: var(--badge-error-text);
+  }
+
+  &--warning {
+    background-color: var(--badge-warning-bg);
+    color: var(--badge-warning-text);
+  }
+
+  &--info {
+    background-color: var(--badge-info-bg);
+    color: var(--badge-info-text);
+  }
+
+  &--accent {
+    background-color: var(--color-accent);
+    color: var(--color-white);
+  }
+}

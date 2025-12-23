@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {computed, useSlots} from 'vue'
-import {ButtonProps} from "@shared/types/general.types.ts"
 import SpinnerIcon from "@shared/ui/icons/SpinnerIcon.vue"
+import {ButtonProps} from "@shared/types/general.types.ts";
 
 const props = withDefaults(defineProps<ButtonProps>(), {
   type: 'button',
@@ -13,6 +13,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   iconOnly: false,
   iconPosition: 'left',
   rounded: false,
+  icon: undefined,
 })
 
 const emit = defineEmits<{
@@ -33,6 +34,8 @@ const buttonClasses = computed(() => [
   },
 ])
 
+const hasIcon = computed(() => !!props.icon || !!slots.icon)
+
 const handleClick = (event: MouseEvent) => {
   if (!props.disabled && !props.loading) {
     emit('click', event)
@@ -48,15 +51,18 @@ const handleClick = (event: MouseEvent) => {
     @click="handleClick"
   >
     <span v-if="loading" class="btn__spinner">
-      <SpinnerIcon :label="$t('icon.spinner')"/>
+      <SpinnerIcon :label="$t('icons.spinner')"/>
     </span>
 
     <template v-else>
+
       <span
-        v-if="slots.icon && iconPosition === 'left' && !iconOnly"
+        v-if="hasIcon && iconPosition === 'left' && !iconOnly"
         class="btn__icon btn__icon--left"
       >
-        <slot name="icon"/>
+        <slot name="icon">
+          <component :is="icon" v-if="icon"/>
+        </slot>
       </span>
 
       <span v-if="!iconOnly" class="btn__text">
@@ -64,17 +70,21 @@ const handleClick = (event: MouseEvent) => {
       </span>
 
       <span
-        v-if="iconOnly && slots.icon"
+        v-if="iconOnly && hasIcon"
         class="btn__icon btn__icon--only"
       >
-        <slot name="icon"/>
+        <slot name="icon">
+          <component :is="icon" v-if="icon"/>
+        </slot>
       </span>
 
       <span
-        v-if="slots.icon && iconPosition === 'right' && !iconOnly"
+        v-if="hasIcon && iconPosition === 'right' && !iconOnly"
         class="btn__icon btn__icon--right"
       >
-        <slot name="icon"/>
+        <slot name="icon">
+          <component :is="icon" v-if="icon"/>
+        </slot>
       </span>
     </template>
   </button>

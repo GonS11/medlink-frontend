@@ -7,41 +7,50 @@ export const createCommonValidations = (t: TranslationFunction) => {
   const MAX_PHONE_LENGTH = 20;
   const MAX_NAME_LENGTH = 40;
 
-  const requiredString = (key: string) =>
-    z.string().min(1, t(key));
-
-  const optionalString = (max: number, key: string) =>
-    z.string()
-      .max(max, t(key, {max}))
-      .optional()
-      .or(z.literal(''));
+  // Helper for required fields using the parameterized system
+  const requiredValidation = (fieldKey: string) =>
+    z.string().min(1, t('validation.required', {field: t(fieldKey)}));
 
   return {
     email: z
       .string()
-      .min(1, t('validation.emailRequired'))
-      .email(t('validation.emailInvalid')),
+      .min(1, t('validation.required', {field: t('fields.email')}))
+      .email(t('validation.invalid', {field: t('fields.email')})),
 
     password: z
       .string()
-      .min(MIN_PASS_LENGTH, t('validation.passwordMinLength', {min: MIN_PASS_LENGTH}))
-      .regex(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$/,
-        t('validation.passwordRequirements')
-      ),
+      .min(MIN_PASS_LENGTH, t('validation.minLength', {
+        field: t('fields.password'),
+        min: MIN_PASS_LENGTH
+      }))
+      // Using individual requirements from the JSON for better feedback
+      .regex(/[a-z]/, t('validation.password.lowercase'))
+      .regex(/[A-Z]/, t('validation.password.uppercase'))
+      .regex(/\d/, t('validation.password.number')),
 
     phone: z
       .string()
-      .max(MAX_PHONE_LENGTH, t('validation.phoneMaxLength', {max: MAX_PHONE_LENGTH}))
-      .regex(/^\+?[0-9\s\-()]*$/, t('validation.phoneInvalid'))
+      .max(MAX_PHONE_LENGTH, t('validation.maxLength', {
+        field: t('fields.phone'),
+        max: MAX_PHONE_LENGTH
+      }))
+      .regex(/^\+?[0-9\s\-()]*$/, t('validation.invalid', {field: t('fields.phone')}))
       .optional()
       .or(z.literal('')),
 
-    name: requiredString('validation.firstNameRequired').max(
-      MAX_NAME_LENGTH,
-      t('validation.nameMaxLength', {max: MAX_NAME_LENGTH})
-    ),
+    name: requiredValidation('fields.name')
+      .max(MAX_NAME_LENGTH, t('validation.maxLength', {
+        field: t('fields.name'),
+        max: MAX_NAME_LENGTH
+      })),
 
-    optionalName: optionalString(MAX_NAME_LENGTH, 'validation.nameMaxLength')
+    optionalName: z
+      .string()
+      .max(MAX_NAME_LENGTH, t('validation.maxLength', {
+        field: t('fields.name'),
+        max: MAX_NAME_LENGTH
+      }))
+      .optional()
+      .or(z.literal(''))
   };
 };

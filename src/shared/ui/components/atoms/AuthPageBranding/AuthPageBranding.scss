@@ -1,0 +1,114 @@
+@use '@/shared/styles/_variables' as *;
+
+.auth-branding {
+  color: var(--color-white);
+  max-width: 440px;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-xl;
+    animation: auth-fade-in 0.8s ease-out;
+  }
+
+  &__logo-wrapper {
+    background: rgba(255, 255, 255, 0.3);
+    padding: $spacing-md;
+    border-radius: $radius-lg;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    transition: transform var(--transition-base);
+
+    // Aseguramos que el contenedor no limite al logo
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  &__logo {
+    width: 7rem;
+    height: 8rem;
+    display: block;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+
+    // Forzamos al SVG interno a llenar este espacio
+    :deep(svg) {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+  }
+
+
+  &__text {
+    text-align: center;
+  }
+
+  &__title {
+    font-family: $font-family-heading;
+    font-size: $font-size-4xl;
+    font-weight: $font-weight-bold;
+    margin-bottom: $spacing-md;
+    letter-spacing: -0.02em;
+  }
+
+  &__divider {
+    width: 48px;
+    height: 4px;
+    background: var(--color-secondary-light);
+    margin: 0 auto $spacing-lg;
+    border-radius: $radius-full;
+  }
+
+  &__tagline {
+    font-size: $font-size-lg;
+    line-height: $line-height-relaxed;
+    opacity: 0.9;
+    font-weight: $font-weight-medium;
+  }
+
+  // Modificadores cromáticos
+  &--register {
+    .auth-branding__divider {
+      background: var(--color-primary-light);
+    }
+  }
+
+}
+
+@keyframes auth-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: $breakpoint-lg) {
+  .auth-branding {
+    &__logo-wrapper {
+      padding: $spacing-md;
+    }
+
+    &__logo {
+      width: 5rem;
+      height: 5.8rem;
+    }
+
+    &__title {
+      font-size: $font-size-2xl;
+    }
+
+    &__tagline {
+      font-size: $font-size-base;
+    }
+  }
+}

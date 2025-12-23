@@ -1,0 +1,50 @@
+@use '@/shared/styles/_variables' as *;
+
+.detail-section {
+  padding: $spacing-lg;
+  background-color: var(--card-bg);
+  border-radius: $radius-lg;
+  border: 1px solid var(--border-color);
+  margin-bottom: $spacing-lg;
+
+  // Modificadores de variante clínica
+  &--alert {
+    background-color: #FFF7ED; // Tinte naranja muy suave para alertas sanitarias
+    border-color: var(--color-warning);
+
+    .detail-section__title {
+      color: #9A3412;
+    }
+  }
+
+  &__title {
+    font-family: $font-family-heading;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    color: var(--color-primary-dark);
+    margin: 0 0 $spacing-lg 0;
+    display: flex;
+    align-items: center;
+
+    // Línea decorativa lateral para énfasis clínico
+    &::before {
+      content: '';
+      width: 4px;
+      height: 1.25rem;
+      background-color: currentColor;
+      margin-right: $spacing-sm;
+      border-radius: $radius-full;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    // Layout responsivo: 1 columna en móvil, auto-fit en escritorio
+    grid-template-columns: 1fr;
+    gap: $spacing-lg;
+
+    @media (min-width: $breakpoint-md) {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+  }
+}

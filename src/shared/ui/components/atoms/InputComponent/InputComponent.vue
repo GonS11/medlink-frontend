@@ -130,7 +130,7 @@ const togglePasswordVisibility = () => {
           class="input-action-button"
           @click="handleClear"
         >
-          <ClearButtonIcon :label="$t('icon.clearButton')"/>
+          <ClearButtonIcon :label="$t('icons.clearButton')"/>
         </button>
 
         <button
@@ -139,8 +139,8 @@ const togglePasswordVisibility = () => {
           class="input-action-button"
           @click="togglePasswordVisibility"
         >
-          <EyeOpenIcon :label="$t('icon.seePassword')" v-if="isPasswordVisible"/>
-          <EyeCloseIcon :label="$t('icon.hidePassword')" v-else/>
+          <EyeOpenIcon :label="$t('icons.seePassword')" v-if="isPasswordVisible"/>
+          <EyeCloseIcon :label="$t('icons.hidePassword')" v-else/>
         </button>
 
         <slot v-else name="suffix">
