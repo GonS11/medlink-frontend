@@ -1,0 +1,64 @@
+@use '@/shared/styles/_variables' as *;
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: $spacing-lg;
+  margin-bottom: $spacing-2xl;
+  width: 100%;
+
+  &__left {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+    flex: 1;
+    min-width: 0; // Evita desbordamiento de texto
+  }
+
+  &__back-btn {
+    align-self: flex-start;
+    padding-left: 0;
+  }
+
+  &__content {
+    .page-header__title {
+      font-family: $font-family-heading;
+      font-size: $font-size-3xl;
+      font-weight: $font-weight-bold;
+      color: var(--text-primary);
+      margin: 0;
+      line-height: $line-height-tight;
+    }
+
+    .page-header__subtitle {
+      margin-top: $spacing-xs;
+      color: var(--text-secondary);
+      font-size: $font-size-base;
+      line-height: $line-height-normal;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: $spacing-md;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  // Responsividad
+  @media (max-width: $breakpoint-md) {
+    flex-direction: column;
+    gap: $spacing-md;
+    margin-bottom: $spacing-xl;
+
+    &__actions {
+      width: 100%;
+
+      // En móvil, los botones de acción suelen ocupar el ancho completo
+      > * {
+        flex: 1;
+      }
+    }
+  }
+}

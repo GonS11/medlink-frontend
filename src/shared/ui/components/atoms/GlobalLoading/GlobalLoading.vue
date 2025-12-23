@@ -3,9 +3,9 @@ import {globalLoading} from "@shared/lib/httpClient.ts";
 </script>
 
 <template>
-  <Transition name="fade">
-    <div v-if="globalLoading" class="global-loading">
-      <div class="global-loading__bar"></div>
+  <Transition name="loading-fade">
+    <div v-if="globalLoading" class="global-loader" role="progressbar" aria-busy="true">
+      <div class="global-loader__progress"></div>
     </div>
   </Transition>
 </template>

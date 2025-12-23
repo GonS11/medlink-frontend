@@ -1,0 +1,43 @@
+@use '@/shared/styles/_variables' as *;
+
+.detail-layout {
+  width: 100%;
+  max-width: $container-xl;
+  margin: 0 auto;
+  padding: $spacing-md;
+
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+
+  @media (min-width: $breakpoint-md) {
+    padding: $spacing-xl;
+    gap: $spacing-xl;
+  }
+
+  &__header {
+    // Ajustes finos si PageHeader necesita override
+  }
+
+  &__actions {
+    display: flex;
+    gap: $spacing-sm;
+    align-items: center;
+  }
+
+  &__content {
+    // Animación de entrada sutil para todo el contenido
+    animation: fade-in-up 0.4s ease-out;
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

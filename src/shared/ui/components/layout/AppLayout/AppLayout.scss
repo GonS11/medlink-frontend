@@ -1,0 +1,86 @@
+@use '@/shared/styles/_variables' as *;
+
+.app-layout {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--bg-secondary);
+
+  &__overlay {
+    position: fixed;
+    inset: 0;
+    background-color: var(--bg-overlay);
+    z-index: $z-fixed - 1;
+    backdrop-filter: blur(2px);
+
+    @media (min-width: $breakpoint-md) {
+      display: none;
+    }
+  }
+
+  &__main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin-left: $sidebar-width;
+    transition: margin-left var(--transition-slow);
+
+    @media (max-width: ($breakpoint-md - 1px)) {
+      margin-left: 0;
+    }
+  }
+
+  &--collapsed &__main {
+    margin-left: $sidebar-collapsed-width;
+
+    @media (max-width: ($breakpoint-md - 1px)) {
+      margin-left: 0;
+    }
+  }
+
+  &__mobile-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    padding: 0 $spacing-md;
+    height: $header-height;
+    background-color: var(--header-bg);
+    border-bottom: 1px solid var(--header-border);
+    flex-shrink: 0;
+
+    @media (min-width: $breakpoint-md) {
+      display: none;
+    }
+  }
+
+  &__mobile-title {
+    font-family: $font-family-heading;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    color: var(--text-primary);
+  }
+
+  &__content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: $spacing-lg;
+
+    @media (max-width: $breakpoint-sm) {
+      padding: $spacing-md;
+    }
+  }
+}
+
+// Transiciones de página
+.fade-page-enter-active,
+.fade-page-leave-active {
+  transition: opacity var(--transition-fast);
+}
+
+.fade-page-enter-from,
+.fade-page-leave-to {
+  opacity: 0;
+}
