@@ -158,7 +158,7 @@ medlink-frontend/
 │   │   │   ├── model/
 │   │   │   │   ├── userStore.ts
 │   │   │   │   ├── types.ts
-│   │   │   │   └── useUser.ts
+│   │   │   │   └── useUserCrud.ts
 │   │   │   ├── api/
 │   │   │   │   └── userApi.ts
 │   │   │   ├── lib/

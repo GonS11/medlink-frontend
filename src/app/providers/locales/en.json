@@ -1,22 +1,28 @@
 {
   "app": {
     "name": "MedLink",
-    "taglineLogin": "Continue your care journey",
-    "taglineRegister": "Start caring smarter today"
+    "tagline": {
+      "login": "Continue your care journey",
+      "register": "Start caring smarter today"
+    }
   },
   "common": {
+    "errorOccurred": "An error occurred",
     "loading": "Loading...",
     "save": "Save",
     "cancel": "Cancel",
     "delete": "Delete",
     "edit": "Edit",
     "create": "Create",
+    "collapse": "Collapse",
+    "expand": "Expand",
     "update": "Update",
     "confirm": "Confirm",
     "search": "Search",
     "filter": "Filter",
     "reset": "Reset",
     "submit": "Submit",
+    "view": "View",
     "back": "Back",
     "next": "Next",
     "previous": "Previous",
@@ -30,15 +36,52 @@
     "status": "Status",
     "active": "Active",
     "inactive": "Inactive",
-    "all": "All"
+    "all": "All",
+    "entity": {
+      "create": "Create {entity} successfully",
+      "update": "Update {entity} successfully",
+      "delete": "{entity} deleted successfully",
+      "description": "{entity} description",
+      "notFound": "{entity} not found",
+      "noData": "No {entity} found",
+      "details": "{entity} details",
+      "failFetch": "Failed to fetch {entity}",
+      "failCreate": "Failed to create {entity}",
+      "failUpdate": "Failed to update {entity}",
+      "failDelete": "Failed to delete {entity}"
+    },
+    "table": {
+      "showing": "Showing",
+      "of": "of",
+      "page": "page"
+    }
+  },
+  "fields": {
+    "id": "ID",
+    "name": "Name",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "language": "Language",
+    "secondLastName": "Second Last Name",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm password",
+    "phone": "Phone",
+    "mobile": "Mobile Phone",
+    "role": "Role",
+    "preferredLanguage": "Preferred Language",
+    "emailVerified": "Email Verified",
+    "lastLogin": "Last Login",
+    "createdAt": "Created At",
+    "updatedAt": "Updated At",
+    "status": "Status",
+    "isActive": "Account Status"
   },
   "auth": {
     "login": "Login",
     "logout": "Logout",
     "register": "Register",
-    "email": "Email",
     "emailPlaceholder": "Enter your email",
-    "password": "Password",
     "passwordPlaceholder": "Enter your password",
     "confirmPassword": "Confirm Password",
     "forgotPassword": "Forgot Password?",
@@ -57,43 +100,79 @@
     "security": "Security",
     "securityDescription": "Set up your unique password for your account."
   },
-  "user": {
-    "personalInfo": "Personal Information",
-    "personalInfoDescription": "Enter your full legal name details.",
-    "contactInfo": "Contact Information",
-    "contactInfoDescription": "Provide details to help us contact you.",
-    "selectRole": "Select Role",
-    "profile": "Profile",
-    "settings": "Settings",
-    "firstName": "First Name",
-    "lastName": "Last Name",
-    "secondLastName": "Second Last Name",
-    "phone": "Phone",
-    "mobilePhone": "Mobile Phone",
-    "role": "Role",
-    "preferredLanguage": "Preferred Language",
-    "emailVerified": "Email Verified",
-    "lastLogin": "Last Login",
-    "createdAt": "Created At",
-    "updatedAt": "Updated At",
-    "changePassword": "Change Password",
-    "currentPassword": "Current Password",
-    "newPassword": "New Password",
-    "passwordChanged": "Password changed successfully",
-    "updateProfile": "Update Profile",
-    "profileUpdated": "Profile updated successfully",
-    "lockAccount": "Lock Account",
-    "unlockAccount": "Unlock Account",
-    "changePasswordTitle": "Change Password",
-    "changePasswordSubtitle": "Enter and confirm your new password.",
-    "changePasswordButton": "Change Password",
-    "newPasswordPlaceholder": "Enter new password",
-    "confirmNewPassword": "Confirm New Password",
-    "confirmNewPasswordPlaceholder": "Re-enter new password",
-    "passwordRequirements": "Password Requirements",
-    "passwordChangeSuccess": "Password changed successfully!",
-    "passwordsMatch": "Passwords match",
-    "passwordsDontMatch": "Passwords don't match"
+  "languages": {
+    "EN": "English",
+    "ES": "Spanish"
+  },
+  "entities": {
+    "user": {
+      "name": "User",
+      "plural": "Users",
+      "view": "View User",
+      "create": "Create User",
+      "edit": "Edit User",
+      "delete": "Delete User",
+      "details": "User Details",
+      "notFound": "User not found",
+      "noUsers": "No users found",
+      "manage": "Manage system users",
+      "management": "User Management",
+      "managementDescription": "Manage and monitor system users",
+      "deleteConfirm": "Are you sure you want to delete {name}?",
+      "locked": "Locked",
+      "personalInfo": "Personal Information",
+      "personalInfoDescription": "Enter your full legal name details.",
+      "contactInfo": "Contact Information",
+      "contactInfoDescription": "Provide details to help us contact you.",
+      "accountInfo": "Account Info",
+      "rolePermissions": "Role & Permissions",
+      "preferences": "Preferences",
+      "accountActive": "Active account",
+      "selectRole": "Select Role",
+      "profile": "Profile",
+      "settings": "Settings",
+      "updateProfile": "Update Profile",
+      "profileUpdated": "Profile updated successfully",
+      "fetchFailed": "Failed to fetch current user",
+      "lock": {
+        "action": "Lock Account",
+        "duration": "Lock Duration (minutes)",
+        "durationPlaceholder": "Enter duration in minutes",
+        "reason": "Lock Reason",
+        "reasonPlaceholder": "Enter the reason for locking this account",
+        "indefiniteNote": "Leave empty for indefinite lock",
+        "time": "Account locked for {duration} minutes",
+        "indefinitely": "Account locked indefinitely",
+        "success": "Account locked successfully",
+        "failed": "Failed to lock account"
+      },
+      "unlock": "Unlock Account",
+      "unlockConfirm": "Are you sure you want to unlock this account?",
+      "password": {
+        "change": "Change Password",
+        "current": "Current Password",
+        "new": "New Password",
+        "confirm": "Confirm New Password",
+        "placeholder": "Enter new password",
+        "confirmPlaceholder": "Re-enter new password",
+        "requirements": "Password Requirements",
+        "success": "Password changed successfully",
+        "failed": "Failed to change password",
+        "title": "Change Password",
+        "subtitle": "Enter and confirm your new password."
+      }
+    }
+  },
+  "dashboard": {
+    "welcomeBack": "Welcome back",
+    "quickActions": "Quick actions",
+    "adminPanel": "Admin panel",
+    "totalUsers": "Total users",
+    "healthCenters": "Health centers",
+    "departments": "Departments",
+    "specialties": "Specialties",
+    "recentActivity": "Recent activity",
+    "noRecentActivity": "No recent activity"
   },
   "roles": {
     "ADMIN": "Administrator",
@@ -108,46 +187,166 @@
     "SOCIAL_WORKER": "Social Worker"
   },
   "nav": {
-    "dashboard": "Dashboard",
-    "users": "Users",
-    "profile": "Profile",
-    "settings": "Settings"
+    "openMenu": "Open menu",
+    "items": {
+      "dashboard": "Dashboard",
+      "users": "Users",
+      "profile": "My Profile",
+      "settings": "Settings",
+      "healthCenters": "Health Centers",
+      "departments": "Departments",
+      "specialties": "Specialties",
+      "appointments": "Appointments",
+      "medicalRecords": "Medical Records",
+      "prescriptions": "Prescriptions",
+      "vaccinations": "Vaccinations",
+      "shifts": "Shifts",
+      "laboratory": "Laboratory",
+      "radiology": "Radiology",
+      "reports": "Reports"
+    },
+    "medical": "Medical Module",
+    "administration": "Administration",
+    "account": "Account"
   },
   "validation": {
-    "emailRequired": "Email is required",
-    "emailInvalid": "Email must be valid",
-    "passwordRequired": "Password is required",
-    "newPasswordRequired": "New password is required",
-    "passwordMinLength": "Password must be at least {min} characters long",
-    "passwordLowercase": "Must contain at least one lowercase letter",
-    "passwordUppercase": "Must contain at least one uppercase letter",
-    "passwordNumber": "Must contain at least one number",
-    "phoneMaxLength": "Phone must not exceed {max} characters",
-    "phoneInvalid": "Phone must be a valid phone number",
-    "firstNameRequired": "First name is required",
-    "lastNameRequired": "Last name is required",
-    "nameMaxLength": "Must not exceed {max} characters",
-    "confirmPasswordRequired": "Confirm password is required",
-    "passwordsMustMatch": "Passwords must match",
-    "passwordsMatch": "Passwords match ✓",
-    "passwordsDontMatch": "Passwords don't match",
-    "roleRequired": "Role is required",
+    "thisFieldRequired": "This field is required",
+    "invalidValue": "Invalid value",
+    "required": "{field} is required",
+    "invalid": "{field} must be valid",
+    "minLength": "{field} must be at least {min} characters long",
+    "maxLength": "{field} must not exceed {max} characters",
+    "password": {
+      "lowercase": "Must contain at least one lowercase letter",
+      "uppercase": "Must contain at least one uppercase letter",
+      "number": "Must contain at least one number",
+      "match": "Passwords match ✓",
+      "mismatch": "Passwords don't match"
+    },
     "minDuration": "Duration must be at least 1 minute",
     "reasonMax": "Reason must not exceed 500 characters",
     "validationFailed": "Validation failed",
     "unexpectedError": "An unexpected error occurred"
   },
-  "icon": {
+  "permissions": {
+    "dashboard": {
+      "view": "View dashboard",
+      "analytics": "View analytics"
+    },
+    "users": {
+      "view": "View users",
+      "create": "Create users",
+      "edit": "Edit users",
+      "delete": "Delete users",
+      "lock": "Lock users"
+    },
+    "appointments": {
+      "view": "View appointments",
+      "create": "Create appointments",
+      "edit": "Edit appointments",
+      "delete": "Delete appointments",
+      "viewAll": "View all appointments",
+      "viewOwn": "View own appointments"
+    },
+    "medicalRecords": {
+      "view": "View medical records",
+      "create": "Create records",
+      "edit": "Edit records",
+      "delete": "Delete records",
+      "viewAll": "View all records",
+      "viewOwn": "View own record"
+    },
+    "prescriptions": {
+      "view": "View prescriptions",
+      "create": "Create prescriptions",
+      "edit": "Edit prescriptions",
+      "delete": "Delete prescriptions",
+      "dispense": "Dispense medications"
+    },
+    "vaccinations": {
+      "view": "View vaccinations",
+      "create": "Register vaccine",
+      "edit": "Edit record",
+      "delete": "Delete record"
+    },
+    "shifts": {
+      "view": "View shifts",
+      "create": "Create shifts",
+      "edit": "Edit shifts",
+      "delete": "Delete shifts",
+      "viewAll": "View all shifts",
+      "viewOwn": "View own shifts"
+    },
+    "healthCenters": {
+      "view": "View health centers",
+      "create": "Create centers",
+      "edit": "Edit centers",
+      "delete": "Delete centers"
+    },
+    "departments": {
+      "view": "View departments",
+      "create": "Create departments",
+      "edit": "Edit departments",
+      "delete": "Delete departments"
+    },
+    "specialties": {
+      "view": "View specialties",
+      "create": "Create specialties",
+      "edit": "Edit specialties",
+      "delete": "Delete specialties"
+    },
+    "lab": {
+      "view": "View lab results",
+      "create": "Create orders",
+      "edit": "Edit results",
+      "processResults": "Process results"
+    },
+    "radiology": {
+      "view": "View radiology studies",
+      "create": "Create orders",
+      "edit": "Edit studies",
+      "processResults": "Process results"
+    },
+    "reports": {
+      "view": "View reports",
+      "create": "Create reports",
+      "export": "Export reports"
+    },
+    "settings": {
+      "view": "View settings",
+      "edit": "Edit settings"
+    },
+    "profile": {
+      "view": "View profile",
+      "edit": "Edit profile"
+    }
+  },
+  "errors": {
+    "permissions": {
+      "noAccess": "You don't have permission to access this page",
+      "noPermission": "You don't have the necessary permission to perform this action",
+      "insufficientRole": "Your role does not have sufficient privileges",
+      "unauthorized": "Unauthorized"
+    }
+  },
+  "icons": {
+    "back": "Back icon",
+    "delete": "Delete icon",
+    "edit": "Edit icon",
     "check": "Check icon",
     "clearButton": "Clear button icon",
     "chevronDown": "Down arrow icon",
     "arrowLeft": "Left arrow icon",
+    "arrowRight": "Right arrow icon",
+    "menu": "Menu icon",
     "email": "Email icon",
     "logo": "Logo icon",
+    "logout": "Logout icon",
     "mobilePhone": "Mobile phone icon",
     "submit": "Submit icon",
     "spinner": "Spinner icon",
     "user": "User icon",
+    "usersPage": "Users page icon",
     "seePassword": "See password icon",
     "hidePassword": "Hide password icon",
     "phone": "Phone icon",

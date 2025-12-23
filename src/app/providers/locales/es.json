@@ -1,7 +1,10 @@
 {
   "app": {
     "name": "MedLink",
-    "tagline": "Sistema de Gestión Médica"
+    "tagline": {
+      "login": "Continúa tu camino de cuidados",
+      "register": "Comienza a cuidar de forma inteligente hoy"
+    }
   },
   "common": {
     "loading": "Cargando...",
@@ -16,7 +19,8 @@
     "filter": "Filtrar",
     "reset": "Restablecer",
     "submit": "Enviar",
-    "back": "Atrás",
+    "view": "Ver",
+    "back": "Volver",
     "next": "Siguiente",
     "previous": "Anterior",
     "close": "Cerrar",
@@ -29,62 +33,166 @@
     "status": "Estado",
     "active": "Activo",
     "inactive": "Inactivo",
-    "all": "Todos"
+    "all": "Todos",
+    "entity": {
+      "create": "Crear {entity}",
+      "update": "Actualizar {entity}",
+      "description": "Descripción de {entity}",
+      "notFound": "{entity} no encontrado/a",
+      "noData": "No se encontraron {entity}",
+      "details": "Detalles de {entity}"
+    },
+    "table": {
+      "showing": "Mostrando",
+      "of": "de",
+      "page": "página"
+    }
+  },
+  "fields": {
+    "name": "nombre",
+    "firstName": "Nombre",
+    "lastName": "Primer Apellido",
+    "language": "Idioma",
+    "secondLastName": "Segundo Apellido",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "confirmPassword": "Confirmar contraseña",
+    "phone": "Teléfono",
+    "mobile": "Teléfono móvil",
+    "role": "Rol",
+    "preferredLanguage": "Idioma preferido",
+    "emailVerified": "Correo verificado",
+    "lastLogin": "Último inicio de sesión",
+    "createdAt": "Fecha de creación",
+    "updatedAt": "Fecha de actualización",
+    "status": "Estado"
   },
   "auth": {
-    "login": "Iniciar Sesión",
-    "logout": "Cerrar Sesión",
+    "login": "Iniciar sesión",
+    "logout": "Cerrar sesión",
     "register": "Registrarse",
-    "email": "Correo Electrónico",
-    "password": "Contraseña",
-    "confirmPassword": "Confirmar Contraseña",
-    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "emailPlaceholder": "Introduce tu correo electrónico",
+    "passwordPlaceholder": "Introduce tu contraseña",
+    "confirmPassword": "Confirmar contraseña",
+    "forgotPassword": "¿Has olvidado tu contraseña?",
     "rememberMe": "Recordarme",
     "noAccount": "¿No tienes una cuenta?",
     "hasAccount": "¿Ya tienes una cuenta?",
-    "loginSuccess": "¡Inicio de sesión exitoso!",
-    "logoutSuccess": "Sesión cerrada exitosamente",
-    "registerSuccess": "¡Registro exitoso! Por favor inicia sesión.",
-    "invalidCredentials": "Correo o contraseña inválidos",
+    "loginSuccess": "¡Inicio de sesión correcto!",
+    "logoutSuccess": "Sesión cerrada correctamente",
+    "registerSuccess": "¡Registro correcto! Por favor, inicia sesión.",
+    "invalidCredentials": "Correo electrónico o contraseña incorrectos",
     "accountLocked": "Tu cuenta ha sido bloqueada",
-    "loginTitle": "Bienvenido de Nuevo",
+    "loginTitle": "Bienvenido de nuevo",
     "loginSubtitle": "Inicia sesión en tu cuenta para continuar",
-    "registerTitle": "Crear Cuenta",
-    "registerSubtitle": "Completa tus datos para comenzar"
+    "registerTitle": "Crear cuenta",
+    "registerSubtitle": "Completa tus datos para comenzar",
+    "security": "Seguridad",
+    "securityDescription": "Configura una contraseña única para tu cuenta."
   },
-  "user": {
-    "profile": "Perfil",
-    "settings": "Configuración",
-    "firstName": "Nombre",
-    "lastName": "Apellido",
-    "secondLastName": "Segundo Apellido",
-    "phone": "Teléfono",
-    "mobilePhone": "Teléfono Móvil",
-    "role": "Rol",
-    "preferredLanguage": "Idioma Preferido",
-    "emailVerified": "Email Verificado",
-    "lastLogin": "Último Acceso",
-    "createdAt": "Creado El",
-    "updatedAt": "Actualizado El",
-    "changePassword": "Cambiar Contraseña",
-    "currentPassword": "Contraseña Actual",
-    "newPassword": "Nueva Contraseña",
-    "passwordChanged": "Contraseña cambiada exitosamente",
-    "updateProfile": "Actualizar Perfil",
-    "profileUpdated": "Perfil actualizado exitosamente",
-    "lockAccount": "Bloquear Cuenta",
-    "unlockAccount": "Desbloquear Cuenta"
+  "entities": {
+    "user": {
+      "name": "Usuario",
+      "plural": "Usuarios",
+      "manage": "Gestionar usuarios del sistema",
+      "personalInfo": "Información personal",
+      "personalInfoDescription": "Introduce tus datos de nombre legal completo.",
+      "contactInfo": "Información de contacto",
+      "contactInfoDescription": "Proporciona detalles para que podamos contactarte.",
+      "accountInfo": "Información de la cuenta",
+      "preferences": "Preferencias",
+      "accountActive": "Cuenta activa",
+      "selectRole": "Seleccionar rol",
+      "profile": "Perfil",
+      "settings": "Configuración",
+      "updateProfile": "Actualizar perfil",
+      "profileUpdated": "Perfil actualizado correctamente",
+      "lock": {
+        "action": "Bloquear cuenta",
+        "duration": "Duración del bloqueo (min)",
+        "reason": "Motivo del bloqueo",
+        "reasonPlaceholder": "Escribe el motivo del bloqueo",
+        "indefiniteNote": "Deja vacío para un bloqueo indefinido"
+      },
+      "unlock": "Desbloquear cuenta",
+      "password": {
+        "change": "Cambiar contraseña",
+        "current": "Contraseña actual",
+        "new": "Nueva contraseña",
+        "confirm": "Confirmar nueva contraseña",
+        "placeholder": "Introduce la nueva contraseña",
+        "confirmPlaceholder": "Repite la nueva contraseña",
+        "requirements": "Requisitos de la contraseña",
+        "success": "¡Contraseña cambiada correctamente!",
+        "title": "Cambiar contraseña",
+        "subtitle": "Introduce y confirma tu nueva contraseña."
+      }
+    }
+  },
+  "dashboard": {
+    "welcomeBack": "Bienvenido de nuevo",
+    "quickActions": "Acciones rápidas",
+    "adminPanel": "Panel de administración",
+    "totalUsers": "Total de usuarios",
+    "healthCenters": "Centros de salud",
+    "departments": "Departamentos",
+    "specialties": "Especialidades"
   },
   "roles": {
-    "ADMIN": "Administrador",
-    "DOCTOR": "Doctor",
+    "ADMIN": "Administrador/a",
+    "DOCTOR": "Médico/a",
     "NURSE": "Enfermero/a",
-    "PATIENT": "Paciente"
+    "RECEPTIONIST": "Recepcionista",
+    "PATIENT": "Paciente",
+    "PHARMACIST": "Farmacéutico/a",
+    "TECHNICIAN": "Técnico/a",
+    "LABORATORY_STAFF": "Personal de laboratorio",
+    "RADIOLOGIST": "Radiólogo/a",
+    "SOCIAL_WORKER": "Trabajador/a social"
   },
   "nav": {
-    "dashboard": "Panel",
-    "users": "Usuarios",
-    "profile": "Perfil",
-    "settings": "Configuración"
+    "items": {
+      "dashboard": "Panel de control",
+      "users": "Usuarios",
+      "profile": "Perfil",
+      "settings": "Configuración",
+      "healthCenters": "Centros de salud",
+      "departments": "Departamentos",
+      "specialties": "Especialidades"
+    }
+  },
+  "validation": {
+    "required": "El campo {field} es obligatorio",
+    "invalid": "El campo {field} debe ser válido",
+    "minLength": "El campo {field} debe tener al menos {min} caracteres",
+    "maxLength": "El campo {field} no debe exceder los {max} caracteres",
+    "password": {
+      "lowercase": "Debe contener al menos una letra minúscula",
+      "uppercase": "Debe contener al menos una letra mayúscula",
+      "number": "Debe contener al menos un número",
+      "match": "Las contraseñas coinciden ✓",
+      "mismatch": "Las contraseñas no coinciden"
+    },
+    "minDuration": "La duración debe ser de al menos 1 minuto",
+    "reasonMax": "El motivo no debe exceder los 500 caracteres",
+    "validationFailed": "La validación ha fallado",
+    "unexpectedError": "Ha ocurrido un error inesperado"
+  },
+  "icons": {
+    "check": "Icono de check",
+    "clearButton": "Icono de botón limpiar",
+    "chevronDown": "Icono de flecha hacia abajo",
+    "arrowLeft": "Icono de flecha hacia la izquierda",
+    "email": "Icono de correo",
+    "logo": "Icono de logo",
+    "mobilePhone": "Icono de teléfono móvil",
+    "submit": "Icono de enviar",
+    "spinner": "Icono de carga",
+    "user": "Icono de usuario",
+    "usersPage": "Icono de página de usuarios",
+    "seePassword": "Icono de ver contraseña",
+    "hidePassword": "Icono de ocultar contraseña",
+    "phone": "Icono de teléfono",
+    "x": "Icono de cerrar"
   }
 }
