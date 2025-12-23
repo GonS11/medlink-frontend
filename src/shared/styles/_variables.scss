@@ -1,62 +1,62 @@
 :root {
   // --- Colores de Marca y Confianza (Más limpios y vibrantes) ---
-  --color-primary: #1E88E5; /* Azul de Confianza (Salud) */
-  --color-primary-dark: #1565C0;
+  --color-primary: #1565C0;
+  --color-primary-dark: #0D47A1;
   --color-primary-light: #42A5F5;
   --color-primary-hover: #1976D2;
 
-  --color-secondary: #00BFA5; /* Teal de Bienestar (Acción/Data) */
-  --color-secondary-dark: #00897B;
-  --color-secondary-light: #1DE9B6;
+  --color-secondary: #00796B; // Teal más oscuro para cumplir contraste
+  --color-secondary-dark: #004D40;
+  --color-secondary-light: #4DB6AC;
 
-  --color-accent: #5E35B1; /* Púrpura/Índigo para Highlights */
-  --color-accent-dark: #4527A0;
+  --color-accent: #4527A0;
+  --color-accent-dark: #311B92;
 
-  // --- Colores de Estado ---
-  --color-success: #4CAF50;
-  --color-warning: #FFC107;
-  --color-error: #E53935; /* Rojo más limpio */
-  --color-info: #2196F3;
+  // --- Colores de Estado (Saturación profesional) ---
+  --color-success: #2E7D32; // Verde bosque (Accesible)
+  --color-warning: #ED6C02; // Naranja quemado (Mejor contraste que el amarillo)
+  --color-error: #D32F2F; // Rojo médico estándar
+  --color-info: #0288D1;
 
-  // --- Colores Neutros (Aclarados para Flat Design) ---
-  --color-antracita: #212121;
+  // --- Colores Neutros (Escala técnica) ---
+  --color-antracita: #1A1C1E;
   --color-white: #FFFFFF;
-  --color-gray-50: #FAFAFA;
-  --color-gray-100: #F5F5F5;
-  --color-gray-200: #EEEEEE;
-  --color-gray-300: #E0E0E0;
-  --color-gray-400: #BDBDBD;
-  --color-gray-500: #9E9E9E;
-  --color-gray-600: #757575;
-  --color-gray-700: #616161;
-  --color-gray-800: #424242;
-  --color-gray-900: #212121;
+  --color-gray-50: #F8F9FA;
+  --color-gray-100: #F1F3F5;
+  --color-gray-200: #E9ECEF;
+  --color-gray-300: #DEE2E6;
+  --color-gray-400: #CED4DA;
+  --color-gray-500: #ADB5BD;
+  --color-gray-600: #868E96;
+  --color-gray-700: #495057;
+  --color-gray-800: #343A40;
+  --color-gray-900: #212529;
 
-  // --- Textos (Modo Claro) ---
-  --text-primary: #212121;
-  --text-secondary: #757575;
-  --text-muted: #BDBDBD;
-  --text-disabled: #E0E0E0;
+  // --- Textos (Modo Claro - Optimizados para lectura) ---
+  --text-primary: #1A1C1E; // Casi negro para menos fatiga
+  --text-secondary: #585F66; // Gris oscuro que cumple ratio AA
+  --text-muted: #70777E;
+  --text-disabled: #ADB5BD;
   --text-link: var(--color-primary);
   --text-inverse: var(--color-white);
 
-  // --- Fondos (Modo Claro) ---
+  // --- Fondos ---
   --bg-primary: #FFFFFF;
-  --bg-secondary: #F5F5F5;
-  --bg-tertiary: #FAFAFA;
-  --bg-hover: #F0F0F0;
-  --bg-active: #E0E0E0;
-  --bg-disabled: #FAFAFA;
-  --bg-overlay: rgba(0, 0, 0, 0.4);
+  --bg-secondary: #F1F3F5;
+  --bg-tertiary: #F8F9FA;
+  --bg-hover: #E9ECEF;
+  --bg-active: #DEE2E6;
+  --bg-disabled: #F1F3F5;
+  --bg-overlay: rgba(26, 28, 30, 0.4);
 
   // --- Bordes ---
-  --border-color: #E0E0E0;
-  --border-light: #F5F5F5;
-  --border-dark: #BDBDBD;
+  --border-color: #DEE2E6;
+  --border-light: #F1F3F5;
+  --border-dark: #CED4DA;
   --border-focus: var(--color-primary);
 
-  // --- Sombras (Más sutiles para Flat Design) ---
-  --shadow-color-sm: rgba(0, 0, 0, 0.05);
+  // --- Sombras (Más suaves y realistas) ---
+  --shadow-color-sm: rgba(0, 0, 0, 0.04);
   --shadow-color-md: rgba(0, 0, 0, 0.08);
   --shadow-color-lg: rgba(0, 0, 0, 0.12);
   --shadow-sm: 0 1px 3px 0 var(--shadow-color-sm);
@@ -110,27 +110,25 @@
 
 // Modo Oscuro - Colores ajustados para el nuevo esquema
 .dark-mode {
-  --text-primary: #FAFAFA;
-  --text-secondary: #BDBDBD;
-  --text-muted: #757575;
-  --text-disabled: #424242;
-  --text-link: var(--color-primary-light);
-  --text-inverse: #212121;
-  --bg-primary: #212121;
-  --bg-secondary: #121212;
-  --bg-tertiary: #333333;
-  --bg-hover: #333333;
-  --bg-active: #424242;
-  --bg-disabled: #333333;
-  --bg-overlay: rgba(0, 0, 0, 0.7);
-  --border-color: #333333;
-  --border-light: #212121;
-  --border-dark: #424242;
-  --shadow-color-sm: rgba(0, 0, 0, 0.2);
-  --shadow-color-md: rgba(0, 0, 0, 0.3);
-  --shadow-color-lg: rgba(0, 0, 0, 0.4);
-  --input-bg: #212121;
-  --input-border: #424242;
+  --text-primary: #F1F3F5;
+  --text-secondary: #ADB5BD;
+  --text-muted: #868E96;
+  --text-disabled: #495057;
+  --text-link: #64B5F6; // Azul más claro para contraste en negro
+  --text-inverse: #1A1C1E;
+
+  --bg-primary: #1A1C1E;
+  --bg-secondary: #111214;
+  --bg-tertiary: #25292E;
+  --bg-hover: #2D3238;
+  --bg-active: #3E444B;
+
+  --border-color: #2D3238;
+  --border-light: #1A1C1E;
+  --border-dark: #495057;
+
+  --input-bg: #1A1C1E;
+  --input-border: #3E444B;
   --input-focus-border: var(--color-primary-light);
   --input-disabled-bg: #333333;
   --input-placeholder: #757575;

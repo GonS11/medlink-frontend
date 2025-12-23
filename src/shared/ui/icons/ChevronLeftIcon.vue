@@ -12,11 +12,10 @@ defineProps<{
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      d="M14.5 17L9.5 12L14.5 7"
+      d="M15 6L9 12L15 18"
       stroke="currentColor"
-      stroke-width="2"
+      stroke-width="1.5"
       stroke-linecap="round"
-      stroke-linejoin="round"
-    />
+      stroke-linejoin="round"/>
   </svg>
 </template>

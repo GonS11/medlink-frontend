@@ -14,7 +14,7 @@ defineProps<{
     <path
       d="M5 7.5L10 12.5L15 7.5"
       stroke="currentColor"
-      stroke-width="2"
+      stroke-width="1.5"
       stroke-linecap="round"
       stroke-linejoin="round"
     />
