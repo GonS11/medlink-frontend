@@ -11,28 +11,16 @@ const props = withDefaults(defineProps<FormFieldProps>(), {
 const isGroup = computed(() => props.columns !== undefined)
 const isSection = computed(() => props.legend !== undefined)
 
-const fieldClasses = computed(() => {
-  if (isSection.value) {
-    return [
-      'form-field',
-      'form-field--section',
-      `form-field--${props.variant}`,
-    ]
+const fieldClasses = computed(() => [
+  'form-field',
+  {
+    'form-field--section': isSection.value,
+    'form-field--group': isGroup.value,
+    [`form-field--variant-${props.variant}`]: isSection.value,
+    [`form-field--gap-${props.gap}`]: true,
+    'form-field--responsive': props.responsive
   }
-
-  if (isGroup.value) {
-    return [
-      'form-field',
-      'form-field--group',
-      `form-field--gap-${props.gap}`,
-      {
-        'form-field--responsive': props.responsive,
-      },
-    ]
-  }
-
-  return ['form-field', `form-field--gap-${props.gap}`]
-})
+])
 
 const groupStyles = computed(() => {
   if (!isGroup.value) return {}
@@ -44,16 +32,12 @@ const groupStyles = computed(() => {
   <fieldset v-if="isSection" :class="fieldClasses">
     <legend class="form-field__legend">{{ legend }}</legend>
     <p v-if="description" class="form-field__description">{{ description }}</p>
-    <div class="form-field__content">
+    <div class="form-field__grid">
       <slot/>
     </div>
   </fieldset>
 
-  <div v-else-if="isGroup" :class="fieldClasses" :style="groupStyles">
-    <slot/>
-  </div>
-
-  <div v-else :class="fieldClasses">
+  <div v-else :class="fieldClasses" :style="groupStyles">
     <slot/>
   </div>
 </template>

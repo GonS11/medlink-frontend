@@ -1,46 +1,37 @@
-@use '@shared/styles/variables' as *;
+@use '@/shared/styles/_variables' as *;
 
 .form-row {
   display: grid;
   width: 100%;
+  align-items: start;
 
-  &-columns-1 {
-    grid-template-columns: 1fr;
+  @for $i from 1 through 4 {
+    &--cols-#{$i} {
+      grid-template-columns: repeat(#{$i}, 1fr);
+    }
   }
 
-  &-columns-2 {
-    grid-template-columns: 1fr 1fr;
+  &--cols-auto {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   }
 
-  &-columns-3 {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  &-columns-4 {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  &-columns-auto {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  }
-
-  &-gap-sm {
+  &--gap-sm {
     gap: $spacing-sm;
   }
 
-  &-gap-md {
+  &--gap-md {
     gap: $spacing-md;
   }
 
-  &-gap-lg {
+  &--gap-lg {
     gap: $spacing-lg;
   }
 
-  &-gap-xl {
+  &--gap-xl {
     gap: $spacing-xl;
   }
 
-  &-responsive {
+  &--responsive {
     @media (max-width: $breakpoint-md) {
       grid-template-columns: 1fr;
     }

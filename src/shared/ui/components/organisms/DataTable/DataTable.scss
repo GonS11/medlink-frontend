@@ -1,0 +1,155 @@
+@use '@/shared/styles/_variables' as *;
+
+.data-table {
+  width: 100%;
+  background: var(--card-bg);
+  border-radius: $radius-lg;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+
+  &__state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-3xl;
+    gap: $spacing-lg;
+    color: var(--text-secondary);
+
+    &--loading {
+      .data-table__spinner {
+        width: 40px;
+        height: 40px;
+        border: 3px solid var(--border-light);
+        border-top-color: var(--color-primary);
+        border-radius: $radius-full;
+        animation: data-table-spin 0.8s linear infinite;
+      }
+    }
+  }
+
+  &__container {
+    overflow-x: auto;
+    width: 100%;
+  }
+
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+
+    &--striped {
+      .data-table__row:nth-child(even) {
+        background-color: var(--bg-tertiary);
+      }
+    }
+
+    &--hoverable {
+      .data-table__body .data-table__row:hover {
+        background-color: var(--table-row-hover);
+      }
+    }
+  }
+
+  &__cell {
+    padding: $spacing-md;
+    border-bottom: 1px solid var(--border-color);
+    font-size: $font-size-sm;
+    color: var(--text-primary);
+    white-space: nowrap;
+
+    &--header {
+      background: var(--table-header-bg);
+      color: var(--text-secondary);
+      font-weight: $font-weight-semibold;
+      text-transform: uppercase;
+      font-size: $font-size-xs;
+      letter-spacing: 0.05em;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    &--sortable {
+      cursor: pointer;
+      user-select: none;
+
+      &:hover {
+        color: var(--color-primary);
+      }
+    }
+
+    &--sorted {
+      color: var(--color-primary);
+      background: var(--bg-hover);
+    }
+
+    &--checkbox {
+      width: 48px;
+      text-align: center;
+    }
+
+    &--actions {
+      text-align: right;
+      width: 1%; // Ajuste al contenido
+    }
+  }
+
+  &__row {
+    transition: background-color var(--transition-fast);
+
+    &--clickable {
+      cursor: pointer;
+    }
+
+    &--selected {
+      background-color: var(--badge-info-bg) !important;
+    }
+  }
+
+  &__pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $spacing-md $spacing-lg;
+    background: var(--bg-primary);
+    border-top: 1px solid var(--border-color);
+    border-bottom-left-radius: $radius-lg;
+    border-bottom-right-radius: $radius-lg;
+
+    @media (max-width: $breakpoint-md) {
+      flex-direction: column;
+      gap: $spacing-md;
+    }
+  }
+
+  &__pagination-info {
+    font-size: $font-size-sm;
+    color: var(--text-secondary);
+  }
+
+  &__selection-info {
+    margin-left: $spacing-sm;
+    color: var(--color-primary);
+    font-weight: $font-weight-medium;
+  }
+
+  &__pagination-controls {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+  }
+
+  &__page-indicator {
+    font-size: $font-size-sm;
+    color: var(--text-primary);
+    min-width: 100px;
+    text-align: center;
+  }
+}
+
+@keyframes data-table-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

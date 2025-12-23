@@ -1,121 +1,89 @@
-@use '@shared/styles/variables' as *;
+@use '@/shared/styles/_variables' as *;
 
 .form {
   width: 100%;
-  padding: $spacing-lg;
 
   &--centered {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    min-height: calc(100vh - #{$header-height});
   }
 
-  &--sm {
+  &--size-sm {
     max-width: 400px;
     margin: 0 auto;
   }
 
-  &--md {
-    max-width: 480px;
+  &--size-md {
+    max-width: 520px;
     margin: 0 auto;
   }
 
-  &--lg {
-    max-width: 700px;
+  &--size-lg {
+    max-width: 760px;
     margin: 0 auto;
   }
 
-  &--xl {
-    max-width: 900px;
+  &--size-xl {
+    max-width: 1000px;
     margin: 0 auto;
   }
 
-  &--default {
-    .form__container {
-      background-color: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: $radius-lg;
-      box-shadow: none;
-    }
+  &--variant-default .form__container {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
   }
 
-  &--shadow {
-    .form__container {
-      background-color: var(--card-bg);
-      border: 1px solid var(--border-light);
-      border-radius: $radius-lg;
-      box-shadow: var(--card-shadow);
-    }
+  &--variant-shadow .form__container {
+    background-color: var(--card-bg);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-light);
   }
 
-  &--borderless {
-    .form__container {
-      background-color: var(--card-bg);
-      border: none;
-      border-radius: $radius-lg;
-      box-shadow: none;
-    }
+  &--variant-elevated .form__container {
+    background-color: var(--card-bg);
+    box-shadow: var(--shadow-lg);
   }
 
-  &--elevated {
-    .form__container {
-      background-color: var(--card-bg);
-      border: none;
-      border-radius: $radius-lg;
-      box-shadow: var(--shadow-lg);
-    }
-  }
-
-  &--outlined {
-    .form__container {
-      background-color: var(--card-bg);
-      border: 2px solid var(--border-color);
-      border-radius: $radius-lg;
-      box-shadow: none;
-    }
+  &--variant-outlined .form__container {
+    background-color: transparent;
+    border: 2px solid var(--border-color);
   }
 
   &__container {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: $spacing-xl;
-    padding: $spacing-lg;
-    transition: box-shadow 0.2s, border-color 0.2s;
+    gap: $spacing-sm;
+    padding: $spacing-xl;
+    border-radius: $radius-lg;
+    transition: all var(--transition-base);
+
+    @media (max-width: $breakpoint-sm) {
+      padding: $spacing-lg;
+    }
   }
 
   &__header {
-    text-align: center;
+    text-align: left;
+    border-left: 4px solid var(--color-primary);
+    padding-left: $spacing-md;
   }
 
   &__title {
-    font-size: $font-size-3xl;
+    font-family: $font-family-heading;
+    font-size: $font-size-2xl;
     font-weight: $font-weight-bold;
-    margin: 0 0 $spacing-sm 0;
-    background: linear-gradient(
-        135deg,
-        var(--color-primary) 0%,
-        var(--color-primary-dark) 100%
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    line-height: 1.2;
-
-    @media (max-width: $breakpoint-sm) {
-      font-size: $font-size-2xl;
-    }
+    margin: 0;
+    color: var(--text-primary);
+    line-height: $line-height-tight;
   }
 
   &__subtitle {
-    font-size: $font-size-base;
+    margin-top: $spacing-xs;
+    font-size: $font-size-sm;
     color: var(--text-secondary);
-    margin: 0;
-    line-height: 1.5;
-
-    @media (max-width: $breakpoint-sm) {
-      font-size: $font-size-sm;
-    }
   }
 
   &__body {
@@ -125,17 +93,21 @@
   }
 
   &__footer {
-    text-align: center;
     padding-top: $spacing-lg;
     border-top: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+
     font-size: $font-size-sm;
     color: var(--text-secondary);
+    text-align: center;
 
     :deep(a) {
       color: var(--color-primary);
-      font-weight: $font-weight-semibold;
       text-decoration: none;
-      transition: color 0.2s;
+      font-weight: $font-weight-medium;
+      transition: color var(--transition-fast);
 
       &:hover {
         color: var(--color-primary-dark);
@@ -143,14 +115,17 @@
       }
 
       &:focus-visible {
-        outline: 2px solid var(--border-focus);
-        outline-offset: 2px;
-        border-radius: $radius-sm;
+        outline: 2px solid var(--color-primary-light);
+        outline-offset: 4px;
+        border-radius: $radius-xs;
       }
+    }
 
-      &:active {
-        color: var(--color-primary-dark);
-      }
+    &__actions {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-sm;
     }
   }
 }

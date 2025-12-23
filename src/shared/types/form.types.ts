@@ -20,7 +20,7 @@ export type ErrorRecord<T> = Partial<Record<keyof T, string | undefined>>
 export type FormRecord<T> = Record<keyof T, any>
 
 // ============================================================================
-// FORM COMPONENTS (Molecules)
+// FORM COMPONENTS (Organisms & Molecules)
 // ============================================================================
 
 export interface FormProps {
@@ -38,6 +38,12 @@ export interface FormFieldProps {
   legend?: string
   description?: string
   variant?: 'default' | 'bordered' | 'filled'
+}
+
+export interface FormRowProps {
+  columns?: number
+  gap?: 'sm' | 'md' | 'lg'
+  responsive?: boolean
 }
 
 // ============================================================================

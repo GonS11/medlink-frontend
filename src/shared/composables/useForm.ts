@@ -61,10 +61,10 @@ export function useForm<T extends Record<string, any>>(
           (errors as ErrorRecord<T>)[field] = fieldError.message
           return false
         }
-        (errors as ErrorRecord<T>)[field] = t?.('validation.validationFailed') ?? 'Validation failed'
+        (errors as ErrorRecord<T>)[field] = t?.('validation.validationFailed')
         return false
       }
-      (errors as ErrorRecord<T>)[field] = t?.('validation.unexpectedError') ?? 'An unexpected error occurred'
+      (errors as ErrorRecord<T>)[field] = t?.('validation.unexpectedError')
       return false
     }
   }

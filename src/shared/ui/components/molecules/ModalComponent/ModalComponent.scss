@@ -1,0 +1,113 @@
+@use '@/shared/styles/_variables' as *;
+
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: $z-modal;
+  padding: $spacing-md;
+  background-color: var(--modal-overlay);
+  backdrop-filter: blur(4px);
+
+  &__container {
+    background-color: var(--modal-bg);
+    border-radius: $radius-lg;
+    box-shadow: var(--shadow-xl);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-height: 90vh;
+    overflow: hidden; // Para que el scroll se controle en el body
+    position: relative;
+
+    // Modificadores de tamaño
+    &--sm {
+      max-width: 440px;
+    }
+
+    &--md {
+      max-width: 640px;
+    }
+
+    &--lg {
+      max-width: 900px;
+    }
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $spacing-lg $spacing-xl;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--bg-primary);
+  }
+
+  &__title {
+    margin: 0;
+    font-family: $font-family-heading;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    color: var(--text-primary);
+    line-height: $line-height-tight;
+  }
+
+  &__close-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: transparent;
+    border-radius: $radius-md;
+    color: var(--text-secondary);
+    font-size: $font-size-xl;
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+
+    &:hover {
+      background-color: var(--bg-hover);
+      color: var(--text-primary);
+    }
+  }
+
+  &__body {
+    padding: $spacing-xl;
+    overflow-y: auto;
+    flex: 1;
+    font-size: $font-size-base;
+    color: var(--text-primary);
+    line-height: $line-height-normal;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: $spacing-md;
+    padding: $spacing-lg $spacing-xl;
+    border-top: 1px solid var(--border-color);
+    background-color: var(--bg-tertiary);
+  }
+}
+
+// Transiciones
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: opacity var(--transition-base);
+
+  .modal__container {
+    transition: transform var(--transition-base), opacity var(--transition-base);
+  }
+}
+
+.modal-fade-enter-from,
+.modal-fade-leave-to {
+  opacity: 0;
+
+  .modal__container {
+    transform: translateY(20px) scale(0.98);
+  }
+}

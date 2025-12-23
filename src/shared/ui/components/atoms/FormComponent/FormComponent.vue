@@ -8,17 +8,13 @@ const props = withDefaults(defineProps<FormProps>(), {
   centered: true,
 })
 
-const emit = defineEmits<{
-  submit: []
-}>()
+const emit = defineEmits<{ submit: [] }>()
 
 const formClasses = computed(() => [
   'form',
-  `form--${props.variant}`,
-  `form--${props.maxWidth}`,
-  {
-    'form--centered': props.centered,
-  },
+  `form--variant-${props.variant}`,
+  `form--size-${props.maxWidth}`,
+  {'form--centered': props.centered},
 ])
 
 const handleSubmit = (event: Event) => {
@@ -30,20 +26,24 @@ const handleSubmit = (event: Event) => {
 <template>
   <div :class="formClasses">
     <div class="form__container">
-      <div v-if="title || subtitle || $slots.header" class="form__header">
+      <header v-if="title || subtitle || $slots.header" class="form__header">
         <slot name="header">
           <h1 v-if="title" class="form__title">{{ title }}</h1>
           <p v-if="subtitle" class="form__subtitle">{{ subtitle }}</p>
         </slot>
-      </div>
+      </header>
 
-      <form class="form__body" @submit="handleSubmit">
-        <slot/>
+      <form class="form__body-container" @submit="handleSubmit">
+
+        <div class="form__body">
+          <slot/>
+        </div>
+
+        <footer v-if="$slots.footer" class="form__footer">
+          <slot name="footer"/>
+        </footer>
+
       </form>
-
-      <div v-if="$slots.footer" class="form__footer">
-        <slot name="footer"/>
-      </div>
     </div>
   </div>
 </template>

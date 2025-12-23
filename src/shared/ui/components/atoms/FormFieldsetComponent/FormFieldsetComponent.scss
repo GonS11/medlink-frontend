@@ -1,64 +1,71 @@
-@use '@shared/styles/variables' as *;
+@use '@/shared/styles/_variables' as *;
 
 .form-fieldset {
   border: none;
   padding: 0;
   margin: 0;
   min-width: 0;
-
-  &-default {
-    .form-fieldset-content {
-      display: flex;
-      flex-direction: column;
-      gap: $spacing-lg;
-    }
-  }
-
-  &-bordered {
-    border: 2px solid var(--border-color);
-    border-radius: $radius-lg;
-    padding: $spacing-lg;
-
-    .form-fieldset-content {
-      display: flex;
-      flex-direction: column;
-      gap: $spacing-lg;
-    }
-  }
-
-  &-filled {
-    background-color: var(--bg-secondary);
-    border-radius: $radius-lg;
-    padding: $spacing-lg;
-
-    .form-fieldset-content {
-      display: flex;
-      flex-direction: column;
-      gap: $spacing-lg;
-    }
-  }
-}
-
-.form-fieldset-header {
-  margin-bottom: $spacing-lg;
-}
-
-.form-fieldset-legend {
-  font-size: $font-size-lg;
-  font-weight: $font-weight-bold;
-  color: var(--text-primary);
-  margin-bottom: $spacing-xs;
-  padding: 0;
-}
-
-.form-fieldset-description {
-  font-size: $font-size-sm;
-  color: var(--text-secondary);
-  margin: 0;
-  line-height: 1.5;
-}
-
-.form-fieldset-content {
   display: flex;
   flex-direction: column;
+  gap: $spacing-lg;
+
+  &--variant-bordered {
+    padding: $spacing-lg;
+    border: 1px solid var(--border-color);
+    border-radius: $radius-lg;
+    background-color: var(--bg-primary);
+  }
+
+  &--variant-filled {
+    padding: $spacing-lg;
+    background-color: var(--bg-tertiary);
+    border-radius: $radius-lg;
+    border: 1px solid transparent;
+  }
+
+
+  &__header {
+    margin-bottom: $spacing-sm;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+  }
+
+  &__legend {
+    font-family: $font-family-heading;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    color: var(--text-primary);
+    padding: 0;
+    float: left;
+    width: 100%;
+    line-height: $line-height-tight;
+  }
+
+  &__description {
+    font-size: $font-size-sm;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: $line-height-normal;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+    width: 100%;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    margin-block: $spacing-lg;
+
+    &--variant-bordered,
+    &--variant-filled {
+      padding: $spacing-md;
+    }
+
+    &__legend {
+      font-size: $font-size-base;
+    }
+  }
 }

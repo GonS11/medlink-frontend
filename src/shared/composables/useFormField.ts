@@ -1,5 +1,6 @@
-import {ref, computed, watch} from 'vue'
+import {ref, computed, watch, onBeforeUnmount} from 'vue' // ✅ Añadir onBeforeUnmount
 import {UseFormFieldOptions} from "@shared/types/form.types.ts";
+import {useI18n} from "vue-i18n";
 
 export function useFormField<T>(options: UseFormFieldOptions<T>) {
   const {
@@ -10,6 +11,8 @@ export function useFormField<T>(options: UseFormFieldOptions<T>) {
     required = false
   } = options
 
+  const {t} = useI18n()
+
   // Estado
   const value = ref<T>(initialValue) as any
   const error = ref<string>('')
@@ -18,6 +21,14 @@ export function useFormField<T>(options: UseFormFieldOptions<T>) {
   const isValidating = ref(false)
 
   let debounceTimer: ReturnType<typeof setTimeout> | null = null
+
+  // ✅ CLEANUP del timer en unmount
+  onBeforeUnmount(() => {
+    if (debounceTimer) {
+      clearTimeout(debounceTimer)
+      debounceTimer = null
+    }
+  })
 
   // Computed
   const isValid = computed(() => !error.value)
@@ -31,19 +42,16 @@ export function useFormField<T>(options: UseFormFieldOptions<T>) {
 
   // Validación
   const validate = async (): Promise<boolean> => {
-    // Validación de required
     if (required && isEmpty.value) {
-      error.value = 'Este campo es requerido'
+      error.value = t('validation.thisFieldRequired')
       return false
     }
 
-    // Si está vacío y no es requerido, es válido
     if (isEmpty.value && !required) {
       error.value = ''
       return true
     }
 
-    // Validación con Zod
     if (!validator) return true
 
     isValidating.value = true
@@ -57,7 +65,7 @@ export function useFormField<T>(options: UseFormFieldOptions<T>) {
       if (err.errors && err.errors.length > 0) {
         error.value = err.errors[0].message
       } else {
-        error.value = 'Valor inválido'
+        error.value = t('validation.invalidValue')
       }
       return false
     } finally {
@@ -100,8 +108,10 @@ export function useFormField<T>(options: UseFormFieldOptions<T>) {
     error.value = ''
     isDirty.value = false
     isTouched.value = false
+    // ✅ Limpiar timer en reset
     if (debounceTimer) {
       clearTimeout(debounceTimer)
+      debounceTimer = null
     }
   }
 
@@ -128,20 +138,15 @@ export function useFormField<T>(options: UseFormFieldOptions<T>) {
   }
 
   return {
-    // Estado
     value,
     error,
     isDirty,
     isTouched,
     isValidating,
-
-    // Computed
     isValid,
     isInvalid,
     isEmpty,
     hasError,
-
-    // Métodos
     validate,
     handleBlur,
     handleChange,
@@ -152,7 +157,4 @@ export function useFormField<T>(options: UseFormFieldOptions<T>) {
   }
 }
 
-/**
- * Tipo de retorno para uso en componentes
- */
 export type FormField<T> = ReturnType<typeof useFormField<T>>
