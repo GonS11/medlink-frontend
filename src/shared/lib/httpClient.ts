@@ -1,8 +1,9 @@
 import axios, {AxiosInstance, AxiosError, InternalAxiosRequestConfig} from 'axios'
 import type {ApiResponse} from '@shared/types/api.types'
-import {APP_CONFIG, STORAGE_KEYS, ROUTES} from '@shared/constants/app.constants'
+import {APP_CONFIG, STORAGE_KEYS} from '@shared/constants/app.constants'
 import {storage} from '@shared/utils/storage.utils'
 import {ref} from 'vue'
+import {ROUTES} from "@shared/constants/routes.constants.ts";
 
 const PUBLIC_API_PATHS = [
   '/auth/login',

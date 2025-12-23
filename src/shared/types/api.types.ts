@@ -80,12 +80,3 @@ export type AsyncState<T> = {
   error: Error | null
 }
 
-export interface AsyncActionOptions {
-  successMessage?: string
-  errorMessage?: string
-  showSuccessNotification?: boolean
-  showErrorNotification?: boolean
-  onSuccess?: () => void | Promise<void>
-  onError?: (error: any) => void
-}
-

@@ -7,7 +7,11 @@ export const storage = {
   get<T>(key: string): T | null {
     try {
       const item = localStorage.getItem(key)
-      return item ? safeJsonParse<T>(item, null as T) : null
+      if (!item) {
+        return null
+      }
+      const parsed = safeJsonParse<T>(item, null as T)
+      return parsed !== null ? parsed : (item as T)
     } catch {
       return null
     }
@@ -15,7 +19,11 @@ export const storage = {
 
   set<T>(key: string, value: T): void {
     try {
-      localStorage.setItem(key, JSON.stringify(value))
+      if (typeof value === 'string') {
+        localStorage.setItem(key, value)
+      } else {
+        localStorage.setItem(key, JSON.stringify(value))
+      }
     } catch (error) {
       console.error('Error saving to localStorage:', error)
     }
