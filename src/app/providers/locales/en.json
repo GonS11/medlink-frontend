@@ -8,6 +8,8 @@
   },
   "common": {
     "errorOccurred": "An error occurred",
+    "lightTheme": "Light theme activated",
+    "darkTheme": "Dark theme activated",
     "loading": "Loading...",
     "save": "Save",
     "cancel": "Cancel",
@@ -37,6 +39,7 @@
     "active": "Active",
     "inactive": "Inactive",
     "all": "All",
+    "noDataFound": "No data found",
     "entity": {
       "create": "Create {entity} successfully",
       "update": "Update {entity} successfully",
@@ -173,6 +176,20 @@
     "specialties": "Specialties",
     "recentActivity": "Recent activity",
     "noRecentActivity": "No recent activity"
+  },
+  "fileUpload": {
+    "cta": "Click to upload",
+    "subtext": "or drag and drop here",
+    "maxSize": "Max. {size}MB",
+    "selectFile": "Select file",
+    "selectFiles": "Select files",
+    "removeFile": "Remove file",
+    "errors": {
+      "singleFile": "You can only upload one file at a time.",
+      "maxFiles": "You can only upload a maximum of {max} files.",
+      "fileSize": "The file {name} exceeds the limit of {size}MB.",
+      "fileType": "Format not allowed: {name}."
+    }
   },
   "roles": {
     "ADMIN": "Administrator",
@@ -331,6 +348,7 @@
   },
   "icons": {
     "back": "Back icon",
+    "error": "Error icon",
     "delete": "Delete icon",
     "edit": "Edit icon",
     "check": "Check icon",
@@ -342,6 +360,13 @@
     "email": "Email icon",
     "logo": "Logo icon",
     "logout": "Logout icon",
+    "lightTheme": "Light theme icon",
+    "darkTheme": "Dark theme icon",
+    "removeFile": "Remove file icon",
+    "genericFile": "Generic file icon",
+    "uploadFile": "Upload file icon",
+    "cloudUpload": "Cloud upload icon",
+    "minus": "Minus icon",
     "mobilePhone": "Mobile phone icon",
     "submit": "Submit icon",
     "spinner": "Spinner icon",
