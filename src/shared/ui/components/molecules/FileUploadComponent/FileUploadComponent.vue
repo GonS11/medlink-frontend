@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import {ref, computed} from 'vue'
 import {useI18n} from 'vue-i18n'
-import {FileUploadProps} from "@shared/types/reports.types"
 import ButtonComponent from '@shared/ui/components/atoms/ButtonComponent/ButtonComponent.vue'
 import UploadIcon from '@shared/ui/icons/UploadIcon.vue'
 import FileGenericIcon from '@shared/ui/icons/FileGenericIcon.vue'
 import RemoveIcon from '@shared/ui/icons/RemoveIcon.vue'
+import {FileUploadProps} from "@shared/types/component.molecules.types.ts";
 import CloudUploadIcon from "@shared/ui/icons/CloudUploadIcon.vue";
 
 const {t} = useI18n()

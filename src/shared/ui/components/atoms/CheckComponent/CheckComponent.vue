@@ -2,15 +2,7 @@
 import {computed} from 'vue'
 import MinusIcon from "@shared/ui/icons/MinusIcon.vue";
 import CheckIcon from "@shared/ui/icons/CheckIcon.vue";
-
-interface CheckProps {
-  modelValue?: boolean
-  indeterminate?: boolean
-  disabled?: boolean
-  size?: 'sm' | 'md' | 'lg'
-  label?: string
-  error?: boolean
-}
+import {CheckProps} from "@shared/types/component.atoms.types.ts";
 
 const props = withDefaults(defineProps<CheckProps>(), {
   modelValue: false,

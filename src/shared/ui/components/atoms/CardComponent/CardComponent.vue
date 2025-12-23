@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {computed, useSlots} from 'vue'
 import SpinnerIcon from "@shared/ui/icons/SpinnerIcon.vue"
-import {CardProps} from "@shared/types/component.atom.types.ts"
+import {CardProps} from "@shared/types/component.atoms.types.ts"
 
 const props = withDefaults(defineProps<CardProps>(), {
   variant: 'default',

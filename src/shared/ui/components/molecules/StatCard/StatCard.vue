@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import {StatCardProps} from "@shared/types/general.types.ts"
 import SkeletonLoader from "@shared/ui/components/atoms/SkeletonLoader/SkeletonLoader.vue"
+import {StatCardProps} from "@shared/types/component.molecules.types.ts";
 
 defineProps<StatCardProps>()
 </script>

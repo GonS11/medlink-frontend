@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import SkeletonLoader from '@shared/ui/components/atoms/SkeletonLoader/SkeletonLoader.vue'
-import {DataFieldProps} from "@shared/types/component.atom.types.ts";
-
+import {DataFieldProps} from "@shared/types/component.molecules.types.ts";
 
 withDefaults(defineProps<DataFieldProps>(), {
   loading: false,

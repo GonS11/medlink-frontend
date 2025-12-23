@@ -1,8 +1,5 @@
 <script setup lang="ts">
-export interface DetailSectionProps {
-  title: string
-  variant?: 'default' | 'alert'
-}
+import {DetailSectionProps} from "@shared/types/component.molecules.types.ts";
 
 withDefaults(defineProps<DetailSectionProps>(), {
   variant: 'default'

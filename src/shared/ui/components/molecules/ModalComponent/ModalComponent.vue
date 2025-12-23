@@ -2,17 +2,8 @@
 import {watch, onUnmounted} from 'vue'
 import ButtonComponent from '@shared/ui/components/atoms/ButtonComponent/ButtonComponent.vue'
 import XIcon from "@shared/ui/icons/XIcon.vue"
+import {ModalProps} from "@shared/types/component.molecules.types.ts";
 
-interface ModalProps {
-  show: boolean
-  title?: string
-  variant?: 'primary' | 'danger' | 'accent'
-  size?: 'sm' | 'md' | 'lg' | 'xl'
-  showFooter?: boolean
-  showClose?: boolean
-  closeOnBackdrop?: boolean
-  loading?: boolean
-}
 
 const props = withDefaults(defineProps<ModalProps>(), {
   variant: 'primary',
@@ -92,14 +83,14 @@ const handleBackdrop = () => {
                 @click="closeModal"
                 :disabled="loading"
               >
-                {{$t('common.cancel')}}
+                {{ $t('common.cancel') }}
               </ButtonComponent>
               <ButtonComponent
                 :variant="variant === 'primary' ? 'primary' : variant"
                 @click="emit('confirm')"
                 :loading="loading"
               >
-                {{$t('common.confirm')}}
+                {{ $t('common.confirm') }}
               </ButtonComponent>
             </slot>
           </footer>

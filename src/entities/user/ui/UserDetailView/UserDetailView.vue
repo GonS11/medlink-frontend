@@ -6,7 +6,7 @@ import {useUserStatus} from '@entities/user/model/composables/useUserStatus'
 import BadgeComponent from '@shared/ui/components/atoms/BadgeComponent/BadgeComponent.vue'
 import DetailSection from '@shared/ui/components/molecules/DetailSection/DetailSection.vue'
 import SkeletonLoader from '@shared/ui/components/atoms/SkeletonLoader/SkeletonLoader.vue'
-import DataField from '@shared/ui/components/atoms/DataFieldComponent/DataFieldComponent.vue'
+import DataField from '@shared/ui/components/molecules/DataFieldComponent/DataFieldComponent.vue'
 import UserAvatar from '../UserAvatar/UserAvatar.vue'
 
 const props = defineProps<UserDetailViewProps>()

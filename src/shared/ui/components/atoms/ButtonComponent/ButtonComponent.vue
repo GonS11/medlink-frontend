@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {computed, useSlots} from 'vue'
 import SpinnerIcon from "@shared/ui/icons/SpinnerIcon.vue"
-import {ButtonProps} from "@shared/types/general.types.ts";
+import {ButtonProps} from "@shared/types/component.atoms.types.ts";
 
 const props = withDefaults(defineProps<ButtonProps>(), {
   type: 'button',

@@ -1,3 +1,5 @@
+import {Component} from "vue";
+
 export interface AuthBrandingProps {
   variant?: 'login' | 'register'
 }
@@ -10,6 +12,19 @@ export interface BadgeProps {
   size?: BadgeSize
 }
 
+export interface ButtonProps {
+  type?: 'button' | 'submit' | 'reset'
+  variant?: 'primary' | 'secondary' | 'danger' | 'accent' | 'ghost' | 'outline'
+  size?: 'sm' | 'md' | 'lg'
+  disabled?: boolean
+  loading?: boolean
+  fullWidth?: boolean
+  icon?: Component
+  iconOnly?: boolean
+  iconPosition?: 'left' | 'right'
+  rounded?: boolean
+}
+
 export interface CardProps {
   title?: string
   subtitle?: string
@@ -20,12 +35,16 @@ export interface CardProps {
   loading?: boolean
 }
 
-export interface DataFieldProps {
-  label: string
-  value?: string | number | boolean | null
-  loading?: boolean
-  fallback?: string
+export interface CheckProps {
+  modelValue?: boolean
+  indeterminate?: boolean
+  disabled?: boolean
+  size?: 'sm' | 'md' | 'lg'
+  label?: string
+  error?: boolean
 }
+
+
 
 export interface SkeletonProps {
   width?: string

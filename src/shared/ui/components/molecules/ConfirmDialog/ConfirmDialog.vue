@@ -2,16 +2,8 @@
 import {computed} from 'vue'
 import ButtonComponent from '@shared/ui/components/atoms/ButtonComponent/ButtonComponent.vue'
 import ModalComponent from "@shared/ui/components/molecules/ModalComponent/ModalComponent.vue"
+import {ConfirmDialogProps} from "@shared/types/component.molecules.types.ts";
 
-interface ConfirmDialogProps {
-  show: boolean
-  title?: string
-  message?: string
-  confirmText?: string
-  cancelText?: string
-  variant?: 'primary' | 'danger' | 'warning' | 'info'
-  loading?: boolean
-}
 
 const props = withDefaults(defineProps<ConfirmDialogProps>(), {
   title: 'Confirmar acción',

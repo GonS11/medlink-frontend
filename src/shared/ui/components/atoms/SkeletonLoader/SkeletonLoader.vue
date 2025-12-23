@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {SkeletonProps} from "@shared/types/component.atom.types.ts";
+import {SkeletonProps} from "@shared/types/component.atoms.types.ts";
 
 withDefaults(defineProps<SkeletonProps>(), {
   width: '100%',

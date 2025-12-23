@@ -1,14 +1,12 @@
 <script setup lang="ts">
 defineProps<{
   label: string;
-  modelValue: boolean;
 }>();
 </script>
 
 <template>
   <svg
     :aria-label="label"
-    v-show="modelValue"
     class="checkbox-icon"
     viewBox="0 0 16 16"
     fill="none"

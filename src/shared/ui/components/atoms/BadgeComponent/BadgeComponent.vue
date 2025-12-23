@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {BadgeProps} from "@shared/types/component.atom.types.ts";
+import {BadgeProps} from "@shared/types/component.atoms.types.ts";
 
 withDefaults(defineProps<BadgeProps>(), {
   variant: 'primary',

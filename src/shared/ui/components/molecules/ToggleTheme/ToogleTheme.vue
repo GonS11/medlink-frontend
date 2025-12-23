@@ -4,7 +4,6 @@ import ButtonComponent from "@shared/ui/components/atoms/ButtonComponent/ButtonC
 import SunIcon from "@shared/ui/icons/SunIcon.vue";
 import MoonIcon from "@shared/ui/icons/MoonIcon.vue";
 
-
 const isDark = ref(false)
 
 const toggle = () => {
