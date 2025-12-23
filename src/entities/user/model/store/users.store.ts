@@ -1,6 +1,6 @@
 import {defineStore} from 'pinia'
 import {ref, computed} from 'vue'
-import type {UserResponse} from '../user.types'
+import type {UserResponse} from '../types/user.types'
 import type {PageResponse} from '@shared/types/api.types'
 
 export const useUserStore = defineStore('user', () => {

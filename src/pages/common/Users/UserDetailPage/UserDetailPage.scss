@@ -1,0 +1,34 @@
+@use '@/shared/styles/_variables' as *;
+
+.user-detail-page {
+  // Estado local para "No encontrado"
+  // Idealmente esto se movería a un componente <EmptyState> genérico en el futuro
+  &__empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-3xl;
+    text-align: center;
+    background-color: var(--bg-surface);
+    border-radius: $radius-lg;
+    border: 1px dashed var(--border-color);
+  }
+
+  &__icon {
+    font-size: 3rem;
+    margin-bottom: $spacing-md;
+  }
+
+  &__title {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    color: var(--text-primary);
+    margin: 0 0 $spacing-sm;
+  }
+
+  &__description {
+    color: var(--text-secondary);
+    margin-bottom: $spacing-lg;
+  }
+}

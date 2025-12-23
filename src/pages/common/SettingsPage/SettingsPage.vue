@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import {computed} from 'vue'
 import {useI18n} from 'vue-i18n'
-import {setLanguage} from '@app/providers/i18n.ts'
-import ButtonComponent from "@shared/ui/components/atoms/ButtonComponent/ButtonComponent.vue"
-import CardComponent from "@shared/ui/components/atoms/CardComponent/CardComponent.vue"
-import {useRouter} from "vue-router"
-import ChangePasswordForm from "@features/user/ui/forms/ChangePasswordForm/ChangePasswordForm.vue"
+import {setLanguage} from '@app/providers/i18n'
+import {useRouter} from 'vue-router'
 
-const {locale} = useI18n()
+import ButtonComponent from '@shared/ui/components/atoms/ButtonComponent/ButtonComponent.vue'
+import CardComponent from '@shared/ui/components/atoms/CardComponent/CardComponent.vue'
+import ChangePasswordForm from '@features/password/ui/ChangePasswordForm/ChangePasswordForm.vue'
+
+const {locale, t} = useI18n()
 const router = useRouter()
 
 const languages = [
@@ -16,47 +17,51 @@ const languages = [
 ]
 
 const currentLanguage = computed(() => locale.value)
-
-const changeLanguage = (langCode: string) => {
-  setLanguage(langCode)
-}
+const changeLanguage = (langCode: string) => setLanguage(langCode)
 </script>
 
 <template>
-  <div class="settings-page">
-    <div class="settings-header">
-      <h1>{{ $t('user.settings') }}</h1>
-      <ButtonComponent variant="ghost" @click="router.back()">
-        ← {{ $t('common.back') }}
+  <main class="settings-page">
+    <header class="settings-page__header">
+      <div class="settings-page__header-content">
+        <h1 class="settings-page__title">{{ t('entities.user.settings') }}</h1>
+      </div>
+      <ButtonComponent variant="ghost" size="sm" @click="router.back()">
+        ← {{ t('common.back') }}
       </ButtonComponent>
-    </div>
+    </header>
 
-    <div class="settings-grid">
-      <CardComponent variant="borderless" padding="lg">
+    <div class="settings-page__grid">
+      <CardComponent class="settings-page__card" variant="shadow" padding="xl">
         <template #header>
-          <h3>{{ $t('user.changePassword') }}</h3>
+          <h3 class="settings-page__section-title">{{ t('entities.user.password.change') }}</h3>
         </template>
-        <ChangePasswordForm/>
+        <div class="settings-page__section-content">
+          <ChangePasswordForm/>
+        </div>
       </CardComponent>
 
-      <CardComponent variant="shadow" padding="lg">
+      <CardComponent class="settings-page__card" variant="shadow" padding="xl">
         <template #header>
-          <h3>{{ $t('user.preferredLanguage') }}</h3>
+          <h3 class="settings-page__section-title">{{ t('fields.language') }}</h3>
         </template>
-
-        <div class="language-selector">
-          <ButtonComponent
-            v-for="lang in languages"
-            :key="lang.code"
-            :variant="currentLanguage === lang.code ? 'primary' : 'outline'"
-            @click="changeLanguage(lang.code)"
-          >
-            {{ lang.name }}
-          </ButtonComponent>
+        <div class="settings-page__section-content">
+          <p class="settings-page__description">{{ t('settings.languageDescription') }}</p>
+          <div class="settings-page__languages">
+            <ButtonComponent
+              v-for="lang in languages"
+              :key="lang.code"
+              :variant="currentLanguage === lang.code ? 'primary' : 'outline'"
+              class="settings-page__lang-btn"
+              @click="changeLanguage(lang.code)"
+            >
+              {{ lang.name }}
+            </ButtonComponent>
+          </div>
         </div>
       </CardComponent>
     </div>
-  </div>
+  </main>
 </template>
 
 <style scoped lang="scss" src="./SettingsPage.scss"></style>

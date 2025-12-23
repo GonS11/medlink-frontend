@@ -1,0 +1,66 @@
+@use '@/shared/styles/_variables' as *;
+
+.users-table {
+  &__user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__user-name {
+    font-weight: $font-weight-semibold;
+    color: var(--text-primary);
+    font-size: $font-size-sm;
+  }
+
+  &__user-id {
+    font-size: $font-size-xs;
+    color: var(--text-muted);
+  }
+
+  &__text {
+    &--primary {
+      color: var(--text-primary);
+      font-size: $font-size-sm;
+    }
+
+    &--secondary {
+      color: var(--text-secondary);
+      font-size: $font-size-xs;
+    }
+  }
+
+  &__status-group {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    flex-wrap: wrap;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: $spacing-xs;
+  }
+
+  &__action-btn {
+    opacity: 0.7;
+    transition: all var(--transition-fast);
+
+    &:hover {
+      opacity: 1;
+      background-color: var(--bg-hover);
+      transform: translateY(-1px);
+    }
+
+    &--danger {
+      color: var(--color-error);
+
+      &:hover {
+        background-color: var(--badge-error-bg);
+        color: var(--badge-error-text);
+      }
+    }
+  }
+}

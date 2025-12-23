@@ -1,0 +1,18 @@
+@use '@/shared/styles/_variables' as *;
+
+.user-form {
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: $spacing-md;
+    width: 100%;
+
+    @media (max-width: $breakpoint-sm) {
+      flex-direction: column-reverse;
+
+      > * {
+        width: 100%;
+      }
+    }
+  }
+}

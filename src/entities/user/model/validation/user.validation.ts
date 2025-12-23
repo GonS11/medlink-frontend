@@ -1,32 +1,43 @@
 import {z} from 'zod';
-import {Languages} from '@shared/types/api.types';
+import {Languages, UserRoleArray} from '@shared/types/api.types';
 import {createCommonValidations, TranslationFunction} from '@shared/validation/common.validation';
 
 export const createUserSchemas = (t: TranslationFunction) => {
   const v = createCommonValidations(t);
 
-  const updateUserSchema = z.object({
-    firstName: v.optionalName,
-    lastName: v.optionalName,
+  const baseProfile = {
+    firstName: v.name,
+    lastName: v.name,
     secondLastName: v.optionalName,
-    phone: v.phone,
-    mobilePhone: v.phone,
+    phone: v.phone.optional().or(z.literal('')),
+    mobilePhone: v.phone.optional().or(z.literal('')),
     preferredLanguage: z.enum(Languages).optional(),
+  };
+
+  const createUserSchema = z.object({
+    ...baseProfile,
+    email: v.email,
+    password: v.password,
+    role: z.enum(UserRoleArray),
+  });
+
+  const updateUserSchema = z.object({
+    ...baseProfile,
     isActive: z.boolean().optional(),
   });
 
   const passwordValidation = z.string()
-    .min(8, t('validation.passwordMinLength', {min:8}))
-    .regex(/^(?=.*[a-z])/, t('validation.passwordLowercase'))
-    .regex(/^(?=.*[A-Z])/, t('validation.passwordUppercase'))
-    .regex(/^(?=.*\d)/, t('validation.passwordNumber'));
+    .min(8, t('validation.minLength', {field: t('fields.password'), min: 8}))
+    .regex(/^(?=.*[a-z])/, t('validation.password.lowercase'))
+    .regex(/^(?=.*[A-Z])/, t('validation.password.uppercase'))
+    .regex(/^(?=.*\d)/, t('validation.password.number'));
 
   const changePasswordSchema = z.object({
     newPassword: passwordValidation,
-    confirmNewPassword: z.string().min(1, t('validation.confirmPasswordRequired')),
+    confirmNewPassword: z.string().min(1, t('validation.required', {field: t('fields.confirmPassword')})),
   })
     .refine((data) => data.newPassword === data.confirmNewPassword, {
-      message: t('validation.passwordsMustMatch'),
+      message: t('validation.password.match'),
       path: ['confirmNewPassword'], // Asigna el error al campo de confirmación
     });
 
@@ -37,12 +48,14 @@ export const createUserSchemas = (t: TranslationFunction) => {
 
 
   return {
+    createUserSchema,
     updateUserSchema,
     lockAccountSchema,
     changePasswordSchema
   };
 };
 
+export type CreateUserFormData = z.infer<ReturnType<typeof createUserSchemas>['createUserSchema']>;
 export type UpdateUserFormData = z.infer<ReturnType<typeof createUserSchemas>['updateUserSchema']>;
 export type LockAccountFormData = z.infer<ReturnType<typeof createUserSchemas>['lockAccountSchema']>;
 export type ChangePasswordFormData = z.infer<ReturnType<typeof createUserSchemas>['changePasswordSchema']>;

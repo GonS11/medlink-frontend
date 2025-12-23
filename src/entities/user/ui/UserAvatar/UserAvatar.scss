@@ -1,0 +1,44 @@
+@use '@/shared/styles/_variables' as *;
+
+.user-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $radius-full;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  flex-shrink: 0;
+  user-select: none;
+
+  &__initials {
+    color: var(--color-white);
+    font-weight: $font-weight-bold;
+    font-family: $font-family-heading;
+  }
+
+  &--sm {
+    width: 32px;
+    height: 32px;
+
+    .user-avatar__initials {
+      font-size: $font-size-xs;
+    }
+  }
+
+  &--md {
+    width: 48px;
+    height: 48px;
+
+    .user-avatar__initials {
+      font-size: $font-size-base;
+    }
+  }
+
+  &--lg {
+    width: 80px;
+    height: 80px;
+
+    .user-avatar__initials {
+      font-size: $font-size-3xl;
+    }
+  }
+}

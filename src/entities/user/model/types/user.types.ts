@@ -20,6 +20,7 @@ export interface UserResponse {
   createdAt: string
   updatedAt: string
   isAccountLocked?: boolean
+  lockReason?: string
 }
 
 export interface UpdateUserRequest {

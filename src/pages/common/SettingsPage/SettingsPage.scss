@@ -1,34 +1,65 @@
-@use 'variables' as *;
+@use '@/shared/styles/_variables' as *;
 
 .settings-page {
-  padding: $spacing-2xl;
-  max-width: 1200px;
+  padding: $spacing-lg;
+  max-width: $container-xl;
   margin: 0 auto;
-}
 
-.settings-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: $spacing-2xl;
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $spacing-2xl;
+  }
 
-  h1 {
+  &__title {
+    font-family: $font-family-heading;
     font-size: $font-size-3xl;
+    font-weight: $font-weight-bold;
+    color: var(--text-primary);
     margin: 0;
   }
-}
 
-.settings-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: $spacing-xl;
-
-  @media (max-width: $breakpoint-sm) {
-    grid-template-columns: 1fr;
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: $spacing-2xl;
+    align-items: start;
   }
-}
 
-.language-selector {
-  display: flex;
-  gap: $spacing-md;
+  &__section-title {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    color: var(--color-primary);
+    margin: 0;
+  }
+
+  &__description {
+    color: var(--text-secondary);
+    font-size: $font-size-sm;
+    margin-bottom: $spacing-lg;
+  }
+
+  &__languages {
+    display: flex;
+    gap: $spacing-md;
+    flex-wrap: wrap;
+  }
+
+  &__lang-btn {
+    flex: 1;
+    min-width: 140px;
+    justify-content: center;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    &__grid {
+      grid-template-columns: 1fr;
+      gap: $spacing-lg;
+    }
+
+    &__title {
+      font-size: $font-size-2xl;
+    }
+  }
 }

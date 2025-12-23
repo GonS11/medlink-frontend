@@ -1,114 +1,109 @@
 <script setup lang="ts">
 import {computed} from 'vue'
-import {useRouter} from 'vue-router'
-import {useAuthStore} from '@entities/auth/model/store/auth.store.ts'
-import {useAuth} from '@features/auth/model/composables/useAuth.ts'
-import CardComponent from "@shared/ui/components/atoms/CardComponent/CardComponent.vue";
-import ButtonComponent from "@shared/ui/components/atoms/ButtonComponent/ButtonComponent.vue";
-import {useRole} from "@shared/composables/useUserRole.ts";
+import {useI18n} from 'vue-i18n'
+import {useAuthStore} from '@entities/auth/model/store/auth.store'
+import {useRole} from '@shared/composables/useUserRole'
 
-const router = useRouter()
+// Components
+import CardComponent from '@shared/ui/components/atoms/CardComponent/CardComponent.vue'
+import StatCard from '@shared/ui/components/atoms/StatCard/StatCard.vue'
+import BadgeComponent from '@shared/ui/components/atoms/BadgeComponent/BadgeComponent.vue' // <--- Importado
+
+// Icons
+import UsersIcon from '@shared/ui/icons/UsersIcon.vue'
+import HealthCareCenterIcon from '@shared/ui/icons/HealthCareCenterIcon.vue'
+import DepartmentIcon from '@shared/ui/icons/DepartmentIcon.vue'
+import MedicalSimbolIcon from '@shared/ui/icons/MedicalSimbolIcon.vue'
+
 const authStore = useAuthStore()
-const {logout} = useAuth()
 const {isAdmin} = useRole()
+const {t} = useI18n()
 
 const currentUser = computed(() => authStore.user)
 
-const handleLogout = () => {
-  logout()
-}
+const adminStats = computed(() => [
+  {label: t('dashboard.totalUsers'), value: '-', icon: UsersIcon},
+  {label: t('dashboard.healthCenters'), value: '-', icon: HealthCareCenterIcon},
+  {label: t('dashboard.departments'), value: '-', icon: DepartmentIcon},
+  {label: t('dashboard.specialties'), value: '-', icon: MedicalSimbolIcon},
+])
 </script>
 
 <template>
-  <div class="dashboard-page">
-    <div class="dashboard-header">
-      <h1>{{ $t('nav.dashboard') }}</h1>
-      <p class="welcome-message">
-        Welcome back, <strong>{{ currentUser?.firstName }}</strong>!
+  <div class="dashboard">
+    <header class="dashboard__header">
+      <h1 class="dashboard__title">{{ $t('nav.items.dashboard') }}</h1>
+      <p class="dashboard__subtitle">
+        {{ $t('dashboard.welcomeBack') }},
+        <strong class="dashboard__username">{{ currentUser?.firstName }}</strong>!
       </p>
-    </div>
+    </header>
 
-    <div class="dashboard-grid">
-      <CardComponent variant="shadow" padding="lg">
-        <template #header>
-          <h3>User Information</h3>
-        </template>
+    <div class="dashboard__grid">
+      <CardComponent
+        :title="$t('entities.user.profile')"
+        variant="shadow"
+        padding="lg"
+        class="dashboard__card"
+      >
         <div class="user-info">
-          <p><strong>Email:</strong> {{ currentUser?.email }}</p>
-          <p><strong>Role:</strong> {{ $t(`roles.${currentUser?.role}`) }}</p>
-          <p><strong>Status:</strong> {{ currentUser?.isActive ? 'Active' : 'Inactive' }}</p>
+          <div class="user-info__row">
+            <span class="user-info__label">{{ $t('fields.email') }}:</span>
+            <span class="user-info__value">{{ currentUser?.email }}</span>
+          </div>
+
+          <div class="user-info__row">
+            <span class="user-info__label">{{ $t('fields.role') }}:</span>
+            <span class="user-info__value">{{ $t(`roles.${currentUser?.role}`) }}</span>
+          </div>
+
+          <div class="user-info__row">
+            <span class="user-info__label">{{ $t('common.status') }}:</span>
+
+            <BadgeComponent
+              :variant="currentUser?.isActive ? 'success' : 'error'"
+              size="sm"
+            >
+              {{ currentUser?.isActive ? $t('common.active') : $t('common.inactive') }}
+            </BadgeComponent>
+
+          </div>
         </div>
       </CardComponent>
 
-      <CardComponent variant="shadow" padding="lg">
-        <template #header>
-          <h3>Quick Actions</h3>
-        </template>
-        <div class="quick-actions">
-          <ButtonComponent variant="primary" @click="router.push('/profile')">
-            {{ $t('nav.profile') }}
-          </ButtonComponent>
-          <ButtonComponent variant="secondary" @click="router.push('/settings')">
-            {{ $t('nav.settings') }}
-          </ButtonComponent>
-
-          <ButtonComponent v-if="isAdmin" variant="outline" @click="router.push('/users')">
-            {{ $t('nav.users') }}
-          </ButtonComponent>
-
-          <ButtonComponent variant="ghost" @click="handleLogout">
-            {{ $t('auth.logout') }}
-          </ButtonComponent>
+      <CardComponent
+        :title="$t('dashboard.recentActivity')"
+        variant="shadow"
+        padding="lg"
+        class="dashboard__card"
+      >
+        <div class="recent-activity">
+          <p class="recent-activity__placeholder">
+            {{ $t('dashboard.noRecentActivity') }}
+          </p>
         </div>
       </CardComponent>
     </div>
+
+    <section v-if="isAdmin" class="dashboard__section">
+      <h2 class="dashboard__section-title">{{ $t('dashboard.adminPanel') }}</h2>
+
+      <div class="dashboard__stats-grid">
+        <CardComponent
+          v-for="stat in adminStats"
+          :key="stat.label"
+          variant="borderless"
+          padding="none"
+        >
+          <StatCard
+            :label="stat.label"
+            :value="stat.value"
+            :icon="stat.icon"
+          />
+        </CardComponent>
+      </div>
+    </section>
   </div>
 </template>
 
-
-<style scoped lang="scss">
-@use '@/shared/styles/_variables' as *;
-
-
-.dashboard-page {
-  padding: $spacing-2xl;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.dashboard-header {
-  margin-bottom: $spacing-2xl;
-
-  h1 {
-    font-size: $font-size-4xl;
-    margin-bottom: $spacing-sm;
-  }
-
-  .welcome-message {
-    font-size: $font-size-lg;
-    color: var(--text-secondary);
-  }
-}
-
-.dashboard-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: $spacing-xl;
-}
-
-.user-info {
-  display: flex;
-  flex-direction: column;
-  gap: $spacing-md;
-
-  p {
-    margin: 0;
-  }
-}
-
-.quick-actions {
-  display: flex;
-  flex-direction: column;
-  gap: $spacing-md;
-}
-</style>
+<style scoped lang="scss" src="./DashboardPage.scss"></style>
