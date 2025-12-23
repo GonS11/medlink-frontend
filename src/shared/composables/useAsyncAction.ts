@@ -1,20 +1,13 @@
-// ✅ CORRECTO - useAsyncAction.ts
 import {ref} from 'vue'
 import {useNotification} from '@shared/lib/notification'
-
-interface AsyncActionOptions {
-  successMessage?: string
-  errorMessage?: string
-  showSuccessNotification?: boolean
-  showErrorNotification?: boolean
-  onSuccess?: () => void | Promise<void>
-  onError?: (error: any) => void
-}
+import {useI18n} from "vue-i18n";
+import {AsyncActionOptions} from "@shared/types/composables.types.ts";
 
 export function useAsyncAction() {
   const loading = ref(false)
   const error = ref<string | null>(null)
   const notification = useNotification()
+  const {t} = useI18n()
 
   const execute = async <T>(
     action: () => Promise<T>,
@@ -45,7 +38,7 @@ export function useAsyncAction() {
 
       return result
     } catch (err: any) {
-      const message = err.response?.data?.message || errorMessage || 'An error occurred'
+      const message = err.response?.data?.message || errorMessage || t('common.errorOcurred')
       error.value = message
 
       if (showErrorNotification) {

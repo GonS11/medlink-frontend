@@ -1,11 +1,11 @@
-import httpClient from '@shared/lib/httpClient.ts'
+import httpClient from '@shared/lib/httpClient'
 import type {ApiResponse} from '@shared/types/api.types'
 import type {
   LoginRequest,
   RegisterRequest,
   AuthResponse,
   RegisterResponse,
-} from '../model/auth.types'
+} from '../model/types/auth.types.ts'
 
 /**
  * Login user
