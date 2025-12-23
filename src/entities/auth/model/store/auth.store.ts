@@ -1,6 +1,6 @@
 import {defineStore} from 'pinia'
 import {ref, computed} from 'vue'
-import type {UserInfo} from '@entities/user/model/user.types'
+import type {UserInfo} from '@entities/user/model/types/user.types'
 import {STORAGE_KEYS} from '@shared/constants/app.constants'
 import {storage} from '@shared/utils/storage.utils'
 
@@ -9,10 +9,7 @@ export const useAuthStore = defineStore('auth', () => {
   const accessToken = ref<string | null>(storage.get<string>(STORAGE_KEYS.ACCESS_TOKEN))
   const error = ref<string | null>(null)
 
-  const isAuthenticated = computed(() => {
-    return !!accessToken.value && !!user.value
-  })
-
+  const isAuthenticated = computed(() => !!accessToken.value && !!user.value)
   const currentUser = computed(() => user.value)
   const userRole = computed(() => user.value?.role)
 
@@ -34,6 +31,7 @@ export const useAuthStore = defineStore('auth', () => {
   function clearAuth() {
     user.value = null
     accessToken.value = null
+    error.value = null
     storage.remove(STORAGE_KEYS.ACCESS_TOKEN)
     storage.remove(STORAGE_KEYS.REFRESH_TOKEN)
     storage.remove(STORAGE_KEYS.USER)
@@ -50,11 +48,17 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   return {
+    // State
     user,
-    isAuthenticated,
+    accessToken,
     error,
+
+    // Computed
+    isAuthenticated,
     currentUser,
     userRole,
+
+    // Actions
     setUser,
     setTokens,
     clearAuth,

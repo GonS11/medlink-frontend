@@ -1,5 +1,5 @@
 import {ref} from 'vue'
-import {RememberMeProps} from "@features/auth/model/auth.types.ts";
+import {RememberMeProps} from "@features/auth/model/types/auth.feature.types.ts";
 
 const REMEMBER_ME_KEY = 'rememberMe'
 const EXPIRY_DAYS = 30

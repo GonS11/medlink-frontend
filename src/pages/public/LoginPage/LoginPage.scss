@@ -1,55 +1,74 @@
-@use '@shared/styles/variables' as *;
+@use '@/shared/styles/_variables' as *;
 
-.login-page {
+.auth-page {
   min-height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: $spacing-xl;
-  background: linear-gradient(
-      135deg,
-      var(--bg-secondary) 0%,
-      rgba(var(--color-primary), 0.05) 50%,
-      var(--bg-tertiary) 100%
-  );
+  background-color: var(--bg-primary);
 
   &__container {
+    display: flex;
     width: 100%;
-    max-width: 1200px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: $spacing-3xl;
-    align-items: center;
+    min-height: 100vh;
 
-    @media (max-width: $breakpoint-md) {
-      grid-template-columns: 1fr;
-      gap: $spacing-2xl;
+    @media (max-width: $breakpoint-lg) {
+      flex-direction: column;
     }
   }
 
   &__branding {
+    flex: 1;
     display: flex;
+    align-items: center;
     justify-content: center;
+    background-color: var(--color-primary-dark);
+    // Gradiente sutil para profundidad médica
+    background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
+    padding: $spacing-2xl;
+    position: relative;
+    overflow: hidden;
 
-    @media (max-width: $breakpoint-md) {
-      display: none;
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0.1;
+      background-image: radial-gradient(circle at 2px 2px, var(--color-white) 1px, transparent 0);
+      background-size: 32px 32px;
+    }
+
+    @media (max-width: $breakpoint-lg) {
+      flex: none;
+      padding: $spacing-xl;
     }
   }
 
-  &__form {
+  &__content {
+    flex: 1.2;
     display: flex;
+    align-items: center;
     justify-content: center;
-    animation: fadeInRight 0.6s ease-out;
+    padding: $spacing-xl;
+    background-color: var(--bg-secondary);
+
+    @media (max-width: $breakpoint-sm) {
+      padding: $spacing-md;
+    }
+  }
+
+  &__form-wrapper {
+    width: 100%;
+    max-width: 480px;
+    animation: auth-slide-up 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
 }
 
-@keyframes fadeInRight {
+@keyframes auth-slide-up {
   from {
     opacity: 0;
-    transform: translateX(30px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
   }
 }

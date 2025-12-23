@@ -7,25 +7,25 @@ export const createAuthSchemas = (t: TranslationFunction) => {
 
   const loginSchema = z.object({
     email: validation.email,
-    password: z.string().min(1, t('validation.passwordRequired')),
+    password: z.string().min(1, t('validation.required',{field:t('fields.password')})),
   });
 
   const registerSchema = z.object({
     email: validation.email,
     password: validation.password,
-    confirmPassword: z.string().min(1, t('validation.confirmPasswordRequired')),
+    confirmPassword: z.string().min(1, t('validation.required',{field:t('fields.confirmPassword')})),
     firstName: validation.name,
     lastName: validation.name,
     secondLastName: validation.optionalName,
     phone: validation.phone,
     mobilePhone: validation.phone,
     role: z.enum(UserRoleArray, {
-      message: t('validation.roleRequired'),
+      message: t('validation.required',{field:t('fields.role')}),
     }),
     preferredLanguage: z.enum(Languages).optional(),
   })
     .refine((data) => data.password === data.confirmPassword, {
-      message: t('validation.passwordsMustMatch'),
+      message: t('validation.password.match'),
       path: ['confirmPassword'],
     });
 

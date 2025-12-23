@@ -1,20 +1,33 @@
 <script setup lang="ts">
-import LoginForm from '@features/auth/ui/forms/LoginForm/LoginForm.vue'
-import AuthPageBranding from "@features/auth/ui/components/atoms/AuthPageBranding.vue";
+import {useAuth} from '@features/auth/model/composables/useAuth'
+import LoginForm from '@features/auth/ui/LoginForm/LoginForm.vue'
+import AuthPageBranding from "@shared/ui/components/atoms/AuthPageBranding/AuthPageBranding.vue"
+import type {LoginRequest} from '@entities/auth/model/types/auth.types'
+
+const {login, loading} = useAuth()
+
+const handleLogin = async (credentials: LoginRequest) => {
+  await login(credentials)
+}
 </script>
 
 <template>
-  <div class="login-page">
-    <div class="login-page__container">
-      <div class="login-page__branding">
+  <main class="auth-page auth-page--login">
+    <div class="auth-page__container">
+      <section class="auth-page__branding">
         <AuthPageBranding variant="login"/>
-      </div>
+      </section>
 
-      <div class="login-page__form">
-        <LoginForm/>
-      </div>
+      <section class="auth-page__content">
+        <div class="auth-page__form-wrapper">
+          <LoginForm
+            :loading="loading"
+            @submit="handleLogin"
+          />
+        </div>
+      </section>
     </div>
-  </div>
+  </main>
 </template>
 
-<style scoped lang="scss" src="LoginPage.scss"></style>
+<style scoped lang="scss" src="./LoginPage.scss"></style>
