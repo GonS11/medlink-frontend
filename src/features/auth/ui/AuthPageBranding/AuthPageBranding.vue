@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import LogoIcon from "@shared/ui/icons/LogoIcon.vue"
+import {AuthBrandingProps} from "@shared/types/component.atom.types.ts";
 
-interface AuthBrandingProps {
-  variant?: 'login' | 'register'
-}
 
 withDefaults(defineProps<AuthBrandingProps>(), {
   variant: 'login'

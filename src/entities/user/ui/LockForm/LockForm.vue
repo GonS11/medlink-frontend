@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import {reactive} from 'vue'
+import {LockFormData} from "@entities/user/model/types/user.ui.types.ts"
 import FormComponent from '@shared/ui/components/atoms/FormComponent/FormComponent.vue'
-import FormFieldsetComponent from '@shared/ui/components/atoms/FormFieldsetComponent/FormFieldsetComponent.vue'
-import FormRowComponent from '@shared/ui/components/atoms/FormRowComponent/FormRowComponent.vue'
+import FormSection from '@shared/ui/components/atoms/FormSection/FormSection.vue'
+import FormLayout from '@shared/ui/components/atoms/FormLayout/FormLayout.vue'
 import InputComponent from '@shared/ui/components/atoms/InputComponent/InputComponent.vue'
 import TextAreaComponent from '@shared/ui/components/atoms/TextAreaComponent/TextAreaComponent.vue'
 import ButtonComponent from '@shared/ui/components/atoms/ButtonComponent/ButtonComponent.vue'
-import {LockFormData} from "@entities/user/model/types/user.ui.types.ts";
-
 
 interface Props {
   loading?: boolean
@@ -21,7 +20,6 @@ const emit = defineEmits<{
   submit: [data: LockFormData]
   cancel: []
 }>()
-
 
 const form = reactive({
   duration: 30,
@@ -41,14 +39,15 @@ const handleSubmit = () => {
     variant="elevated"
     max-width="sm"
     :centered="false"
+    :loading="props.loading"
     @submit="handleSubmit"
     class="lock-form"
   >
-    <FormFieldsetComponent
+    <FormSection
       :description="$t('entities.user.lock.warningMessage')"
       variant="filled"
     >
-      <FormRowComponent :columns="1">
+      <FormLayout gap="lg">
         <div class="lock-form__duration-wrapper">
           <InputComponent
             v-model="form.duration"
@@ -69,8 +68,8 @@ const handleSubmit = () => {
           :rows="3"
           resize="none"
         />
-      </FormRowComponent>
-    </FormFieldsetComponent>
+      </FormLayout>
+    </FormSection>
 
     <template #footer>
       <div class="lock-form__actions">

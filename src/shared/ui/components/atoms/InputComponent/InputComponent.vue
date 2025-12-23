@@ -56,14 +56,13 @@ const showClearButton = computed(() => {
 
 const handleInput = (event: Event) => {
   const target = event.target as HTMLInputElement
-  hasInteracted.value = true // ✅ Marcar como interactuado
+  hasInteracted.value = true
   emit('update:modelValue', target.value)
 }
 
 const handleBlur = (event: FocusEvent) => {
   isFocused.value = false
 
-  // ✅ Solo emitir blur si el usuario ha interactuado con el campo
   if (hasInteracted.value || props.modelValue) {
     emit('blur', event)
   }

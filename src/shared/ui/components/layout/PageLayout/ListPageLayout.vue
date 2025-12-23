@@ -25,7 +25,7 @@ defineEmits<{
           class="page-layout__action-btn"
           @click="$emit('create')"
         >
-          <span class="page-layout__btn-icon">+</span> {{ $t(createLabel) }}
+          {{ $t(createLabel) }}
         </ButtonComponent>
       </template>
     </PageHeader>
@@ -36,4 +36,4 @@ defineEmits<{
   </div>
 </template>
 
-<style scoped lang="scss" src="PageLayout.scss"></style>
+<style scoped lang="scss" src="./PageLayout.scss"></style>

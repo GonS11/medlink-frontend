@@ -10,12 +10,10 @@ import ModalComponent from "@shared/ui/components/molecules/ModalComponent/Modal
 
 const management = useUserManagement()
 
-// --- Lifecycle ---
 onMounted(() => {
   management.initialize()
 })
 
-// --- Action Handler ---
 const handleTableAction = (action: UserTableAction) => {
   const handlers = {
     view: management.handleView,
@@ -43,7 +41,7 @@ const handleTableAction = (action: UserTableAction) => {
         class="user-management__create-btn"
         @click="management.handleCreate"
       >
-        ➕ {{ $t('entities.user.create') }}
+        {{ $t('entities.user.create') }}
       </ButtonComponent>
     </header>
 

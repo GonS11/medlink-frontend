@@ -3,7 +3,6 @@ import {computed, useSlots} from 'vue'
 import SpinnerIcon from "@shared/ui/icons/SpinnerIcon.vue"
 import {CardProps} from "@shared/types/component.atom.types.ts"
 
-// Definimos valores por defecto
 const props = withDefaults(defineProps<CardProps>(), {
   variant: 'default',
   padding: 'md',
@@ -18,7 +17,6 @@ const emit = defineEmits<{
 
 const slots = useSlots()
 
-// Clases del contenedor principal
 const cardClasses = computed(() => [
   'card',
   `card--${props.variant}`,
@@ -31,13 +29,11 @@ const cardClasses = computed(() => [
   },
 ])
 
-// Clases del cuerpo (padding)
 const bodyClasses = computed(() => [
   'card__body',
   `card__body--padding-${props.padding}`,
 ])
 
-// Lógica para determinar si mostrar el header wrapper
 const hasHeader = computed(() => {
   return !!(props.title || props.subtitle || slots.header || slots.actions)
 })

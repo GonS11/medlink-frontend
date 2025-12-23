@@ -1,40 +1,35 @@
 <script setup lang="ts">
 import {ref, onMounted} from 'vue'
-import ToggleThemeIcon from "@shared/ui/icons/ToggleThemeIcon.vue";
-import ButtonComponent from "@shared/ui/components/atoms/ButtonComponent/ButtonComponent.vue";
+import ButtonComponent from "@shared/ui/components/atoms/ButtonComponent/ButtonComponent.vue"
+import SunIcon from "@shared/ui/icons/SunIcon.vue";
+import MoonIcon from "@shared/ui/icons/MoonIcon.vue";
+
 
 const isDark = ref(false)
 
-// Obtener tema guardado del localStorage
-onMounted(() => {
-  const savedTheme = localStorage.getItem('theme')
-  isDark.value = savedTheme === 'dark'
-  applyTheme()
-})
-
-// Aplicar el tema al HTML
-const applyTheme = () => {
-  if (isDark.value) {
-    document.documentElement.classList.add('dark-mode')
-  } else {
-    document.documentElement.classList.remove('dark-mode')
-  }
-}
-
-// Toggle entre temas
-const toggleTheme = () => {
+const toggle = () => {
   isDark.value = !isDark.value
+  document.documentElement.classList.toggle('dark-mode', isDark.value)
   localStorage.setItem('theme', isDark.value ? 'dark' : 'light')
-  applyTheme()
 }
+
+onMounted(() => {
+  isDark.value = localStorage.getItem('theme') === 'dark'
+  if (isDark.value) document.documentElement.classList.add('dark-mode')
+})
 </script>
 
 <template>
   <ButtonComponent
-    @click="toggleTheme"
-    :aria-label="isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'"
+    variant="ghost"
+    size="sm"
+    :icon-only="true"
+    @click="toggle"
+    :aria-label="isDark ? $t('common.lightTheme') : $t('common.lightTheme')"
   >
-    <ToggleThemeIcon label="" :isDark="isDark"/>
+    <template #icon>
+      <SunIcon :label="$t('icons.lightTheme')" v-if="isDark"/>
+      <MoonIcon :label="$t('icons.darkTheme')" v-else/>
+    </template>
   </ButtonComponent>
 </template>
-

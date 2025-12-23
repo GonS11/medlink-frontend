@@ -1,11 +1,5 @@
 <script setup lang="ts">
-export interface SkeletonProps {
-  width?: string
-  height?: string
-  count?: number
-  circle?: boolean
-  spacing?: string
-}
+import {SkeletonProps} from "@shared/types/component.atom.types.ts";
 
 withDefaults(defineProps<SkeletonProps>(), {
   width: '100%',

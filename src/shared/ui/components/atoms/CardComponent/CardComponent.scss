@@ -1,21 +1,16 @@
 @use '@shared/styles/variables' as *;
 
 .card {
-  --card-bg-local: var(--card-bg, #ffffff);
-  --card-border-color-local: var(--card-border, #e2e8f0);
-
   position: relative;
   display: flex;
   flex-direction: column;
-  background-color: var(--card-bg-local);
+  background-color: var(--card-bg);
   border-radius: $radius-lg;
   overflow: hidden;
   transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
 
-  // --- Variants ---
-
   &--default {
-    border: 1px solid var(--card-border-color-local);
+    border: 1px solid var(--card-border);
   }
 
   &--borderless {
@@ -24,7 +19,7 @@
   }
 
   &--shadow {
-    border: 1px solid transparent; // Previene saltos de tamaño
+    border: 1px solid transparent;
     box-shadow: var(--shadow-md);
   }
 
@@ -34,10 +29,8 @@
   }
 
   &--outlined {
-    border: 2px solid var(--border-color); // Borde más grueso
+    border: 2px solid var(--border-color);
   }
-
-  // --- States ---
 
   &--hoverable {
     &:hover {
@@ -69,22 +62,20 @@
     user-select: none;
   }
 
-  // --- Elements ---
-
   &__header {
     display: flex;
-    align-items: center; // Alineación vertical centrada
+    align-items: center;
     justify-content: space-between;
     gap: $spacing-md;
     padding: $spacing-md $spacing-lg;
     border-bottom: 1px solid var(--border-color-light);
     background-color: var(--bg-surface);
-    min-height: 3.5rem; // Altura mínima consistente
+    min-height: 3.5rem;
   }
 
   &__header-content {
     flex: 1;
-    min-width: 0; // Permite el truncado de texto si fuera necesario
+    min-width: 0;
     display: flex;
     flex-direction: column;
   }
@@ -111,9 +102,8 @@
   }
 
   &__body {
-    flex: 1; // Ocupa el espacio restante si la card tiene altura fija
+    flex: 1;
 
-    // Modificadores de Padding usando BEM
     &--padding-none {
       padding: 0;
     }
@@ -143,13 +133,13 @@
 
   &__loader {
     position: absolute;
-    inset: 0; // top/right/bottom/left: 0
+    inset: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(1px);
     z-index: 10;
-    border-radius: inherit; // Hereda el radio del padre
+    border-radius: inherit;
   }
 }

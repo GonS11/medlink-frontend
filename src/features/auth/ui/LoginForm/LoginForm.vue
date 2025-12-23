@@ -2,7 +2,7 @@
 import {useLoginForm} from '@features/auth/model/composables/useLoginForm'
 import type {LoginRequest} from '@entities/auth/model/types/auth.types'
 import FormComponent from '@shared/ui/components/atoms/FormComponent/FormComponent.vue'
-import FormFieldComponent from '@shared/ui/components/atoms/FormFieldComponent/FormFieldComponent.vue'
+import FormLayout from '@shared/ui/components/atoms/FormLayout/FormLayout.vue'
 import InputComponent from '@shared/ui/components/atoms/InputComponent/InputComponent.vue'
 import CheckboxComponent from '@shared/ui/components/atoms/CheckBoxComponent/CheckboxComponent.vue'
 import ButtonComponent from '@shared/ui/components/atoms/ButtonComponent/ButtonComponent.vue'
@@ -32,9 +32,10 @@ const {form, errors, rememberMe, handleSubmit, handleInput, handleBlur} = useLog
     :title="$t('auth.loginTitle')"
     :subtitle="$t('auth.loginSubtitle')"
     max-width="md"
+    :loading="loading"
     @submit="handleSubmit"
   >
-    <FormFieldComponent>
+    <FormLayout gap="lg">
       <InputComponent
         :model-value="form.email"
         type="email"
@@ -50,9 +51,7 @@ const {form, errors, rememberMe, handleSubmit, handleInput, handleBlur} = useLog
           <EmailIcon :label="$t('icons.email')"/>
         </template>
       </InputComponent>
-    </FormFieldComponent>
 
-    <FormFieldComponent>
       <InputComponent
         :model-value="form.password"
         type="password"
@@ -64,16 +63,14 @@ const {form, errors, rememberMe, handleSubmit, handleInput, handleBlur} = useLog
         @update:model-value="handleInput('password', $event)"
         @blur="handleBlur('password')"
       />
-    </FormFieldComponent>
 
-    <FormFieldComponent>
       <CheckboxComponent
         :model-value="rememberMe"
         :label="$t('auth.rememberMe')"
         size="sm"
         @update:model-value="rememberMe = $event"
       />
-    </FormFieldComponent>
+    </FormLayout>
 
     <template #footer>
       <div class="form__actions">
@@ -101,3 +98,5 @@ const {form, errors, rememberMe, handleSubmit, handleInput, handleBlur} = useLog
     </template>
   </FormComponent>
 </template>
+
+<style scoped lang="scss" src="./LoginForm.scss"></style>

@@ -55,7 +55,7 @@ defineEmits<{
     </PageHeader>
 
     <main class="detail-layout__content">
-      <CardComponent variant="shadow" padding="xl" :loading="loading">
+      <CardComponent variant="shadow" padding="lg" :loading="loading">
         <slot/>
       </CardComponent>
     </main>

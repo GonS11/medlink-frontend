@@ -8,13 +8,11 @@ import {useModal} from '@shared/composables/useModal'
 import {useConfirm} from '@shared/composables/useConfirm'
 import {ROUTES} from "@shared/constants/routes.constants.ts"
 import type {UserResponse} from '@entities/user/model/types/user.types'
-
-// Components
 import DetailPageLayout from '@shared/ui/components/layout/PageLayout/DetailPageLayout.vue'
 import UserDetailView from '@entities/user/ui/UserDetailView/UserDetailView.vue'
 import UserForm from '@entities/user/ui/UserForm/UserForm.vue'
 import ModalComponent from "@shared/ui/components/molecules/ModalComponent/ModalComponent.vue"
-import ButtonComponent from '@shared/ui/components/atoms/ButtonComponent/ButtonComponent.vue' // Para el estado de error
+import ButtonComponent from '@shared/ui/components/atoms/ButtonComponent/ButtonComponent.vue'
 
 const {t} = useI18n()
 const route = useRoute()
@@ -28,18 +26,15 @@ const permissions = useUserPermissions()
 const user = ref<UserResponse | null>(null)
 const userId = Number(route.params.id)
 
-// Computed
 const canEdit = computed(() => user.value && permissions.canEditUser(user.value.role))
 const canDelete = computed(() => user.value && permissions.canDeleteUser(user.value.role))
 const userNotFound = computed(() => !loading.value && !user.value)
 
-// Lifecycle
 onMounted(async () => {
   const result = await fetchById(userId)
   if (result) user.value = result
 })
 
-// Handlers
 const handleEdit = () => {
   if (canEdit.value) editModal.open()
 }

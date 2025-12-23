@@ -1,57 +1,79 @@
 <script setup lang="ts">
-import {useConfirmStore} from '@shared/composables/useConfirm'
-import {storeToRefs} from 'pinia'
+import {computed} from 'vue'
 import ButtonComponent from '@shared/ui/components/atoms/ButtonComponent/ButtonComponent.vue'
-import ModalComponent from "@shared/ui/components/molecules/ModalComponent/ModalComponent.vue";
+import ModalComponent from "@shared/ui/components/molecules/ModalComponent/ModalComponent.vue"
 
-const store = useConfirmStore()
-const {showConfirm, confirmOptions} = storeToRefs(store)
+interface ConfirmDialogProps {
+  show: boolean
+  title?: string
+  message?: string
+  confirmText?: string
+  cancelText?: string
+  variant?: 'primary' | 'danger' | 'warning' | 'info'
+  loading?: boolean
+}
+
+const props = withDefaults(defineProps<ConfirmDialogProps>(), {
+  title: 'Confirmar acción',
+  confirmText: 'Confirmar',
+  cancelText: 'Cancelar',
+  variant: 'primary',
+  loading: false
+})
+
+const emit = defineEmits<{
+  'update:show': [value: boolean]
+  confirm: []
+  cancel: []
+}>()
+
+const isOpen = computed({
+  get: () => props.show,
+  set: (value) => emit('update:show', value)
+})
 
 const handleConfirm = () => {
-  store.resolve(true)
+  emit('confirm')
 }
 
 const handleCancel = () => {
-  store.resolve(false)
+  emit('cancel')
+  emit('update:show', false)
 }
 </script>
 
 <template>
   <ModalComponent
-    :show="showConfirm"
-    :title="confirmOptions?.title"
-    :variant="confirmOptions?.variant"
+    v-model:show="isOpen"
+    :title="title"
     size="sm"
-    @update:show="showConfirm = $event"
-    @cancel="handleCancel"
+    :show-footer="false"
     class="confirm-dialog"
   >
-    <template #body>
-      <div class="confirm-dialog__content">
-        <p class="confirm-dialog__message">{{ confirmOptions?.message }}</p>
-      </div>
-    </template>
+    <div class="confirm-dialog__content">
+      <p class="confirm-dialog__message">{{ message }}</p>
+    </div>
 
     <template #footer>
-      <ButtonComponent
-        variant="ghost"
-        @click="handleCancel"
-      >
-        {{ confirmOptions?.cancelText }}
-      </ButtonComponent>
-      <ButtonComponent
-        :variant="confirmOptions?.variant || 'primary'"
-        @click="handleConfirm"
-      >
-        {{ confirmOptions?.confirmText }}
-      </ButtonComponent>
+      <div class="confirm-dialog__actions">
+        <ButtonComponent
+          variant="ghost"
+          @click="handleCancel"
+          :disabled="loading"
+        >
+          {{ cancelText }}
+        </ButtonComponent>
+
+        <ButtonComponent
+          :variant="'primary'"
+          @click="handleConfirm"
+          :loading="loading"
+        >
+          {{ confirmText }}
+        </ButtonComponent>
+      </div>
     </template>
   </ModalComponent>
 </template>
 
-<style scoped lang="scss">
-.confirm-message {
-  color: var(--color-text-secondary);
-  line-height: 1.5;
-}
-</style>
+<style scoped lang="scss" src="./ConfirmDialog.scss"></style>

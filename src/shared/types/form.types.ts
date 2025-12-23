@@ -31,6 +31,12 @@ export interface FormProps {
   centered?: boolean
 }
 
+export interface FormFieldsetProps {
+  legend?: string
+  description?: string
+  variant?: 'default' | 'bordered' | 'filled'
+}
+
 export interface FormFieldProps {
   gap?: 'sm' | 'md' | 'lg'
   columns?: number

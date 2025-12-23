@@ -5,16 +5,16 @@ import {useUserManagement} from '@features/user/model/composables/useUserManagem
 import ListPageLayout from '@shared/ui/components/layout/PageLayout/ListPageLayout.vue'
 import UsersTable from '@features/user/ui/UsersTable/UsersTable.vue'
 import UserForm from '@entities/user/ui/UserForm/UserForm.vue'
-import LockForm, {LockFormData} from '@entities/user/ui/LockForm/LockForm.vue' // Importamos el nuevo
+import LockForm from '@entities/user/ui/LockForm/LockForm.vue'
 import ModalComponent from "@shared/ui/components/molecules/ModalComponent/ModalComponent.vue"
 import type {UserTableAction} from '@features/user/model/types/user.feature.types'
+import type {SortConfig} from '@shared/types/table.types'
 import {ROUTES} from '@shared/constants/routes.constants'
-import {UserResponse} from "@entities/user/model/types/user.types.ts";
+import {UserResponse} from "@entities/user/model/types/user.types.ts"
+import {LockFormData} from "@entities/user/model/types/user.ui.types.ts";
 
 const management = useUserManagement()
 const router = useRouter()
-
-// NOTA: Hemos eliminado las refs lockDuration y lockReason, ya no hacen falta aquí.
 
 onMounted(() => {
   management.initialize()
@@ -28,7 +28,6 @@ const handleTableAction = (action: UserTableAction) => {
     edit: management.handleEdit,
     delete: management.handleDelete,
     lock: (user: UserResponse) => {
-      // Ya no necesitamos resetear variables locales aquí
       management.handleLock(user)
     },
     unlock: management.handleUnlock,
@@ -36,12 +35,15 @@ const handleTableAction = (action: UserTableAction) => {
   handlers[action.type](action.user)
 }
 
-// Ahora recibimos los datos directamente del evento submit del LockForm
 const handleLockConfirm = async (data: LockFormData) => {
   await management.handleSubmitLock({
     durationMinutes: data.durationMinutes,
     reason: data.reason,
   })
+}
+
+const handleSort = (config: SortConfig) => {
+  management.handleSort(config)
 }
 </script>
 
@@ -60,6 +62,7 @@ const handleLockConfirm = async (data: LockFormData) => {
       :pagination="management.pagination.value"
       @action="handleTableAction"
       @page-change="management.handlePageChange"
+      @sort="handleSort"
     />
 
     <ModalComponent

@@ -3,13 +3,10 @@ import {computed} from 'vue'
 import {useI18n} from 'vue-i18n'
 import {useAuthStore} from '@entities/auth/model/store/auth.store'
 import {useRole} from '@shared/composables/useUserRole'
-
-// Components
 import CardComponent from '@shared/ui/components/atoms/CardComponent/CardComponent.vue'
-import StatCard from '@shared/ui/components/atoms/StatCard/StatCard.vue'
-import BadgeComponent from '@shared/ui/components/atoms/BadgeComponent/BadgeComponent.vue' // <--- Importado
-
-// Icons
+import StatCard from '@shared/ui/components/molecules/StatCard/StatCard.vue'
+import BadgeComponent from '@shared/ui/components/atoms/BadgeComponent/BadgeComponent.vue'
+import DataFieldComponent from '@shared/ui/components/atoms/DataFieldComponent/DataFieldComponent.vue'
 import UsersIcon from '@shared/ui/icons/UsersIcon.vue'
 import HealthCareCenterIcon from '@shared/ui/icons/HealthCareCenterIcon.vue'
 import DepartmentIcon from '@shared/ui/icons/DepartmentIcon.vue'
@@ -46,28 +43,27 @@ const adminStats = computed(() => [
         padding="lg"
         class="dashboard__card"
       >
-        <div class="user-info">
-          <div class="user-info__row">
-            <span class="user-info__label">{{ $t('fields.email') }}:</span>
-            <span class="user-info__value">{{ currentUser?.email }}</span>
-          </div>
+        <div class="dashboard__profile-info">
 
-          <div class="user-info__row">
-            <span class="user-info__label">{{ $t('fields.role') }}:</span>
-            <span class="user-info__value">{{ $t(`roles.${currentUser?.role}`) }}</span>
-          </div>
+          <DataFieldComponent
+            :label="$t('fields.email')"
+            :value="currentUser?.email"
+          />
 
-          <div class="user-info__row">
-            <span class="user-info__label">{{ $t('common.status') }}:</span>
+          <DataFieldComponent
+            :label="$t('fields.role')"
+            :value="$t(`roles.${currentUser?.role}`)"
+          />
 
+          <DataFieldComponent :label="$t('common.status')">
             <BadgeComponent
               :variant="currentUser?.isActive ? 'success' : 'error'"
               size="sm"
             >
               {{ currentUser?.isActive ? $t('common.active') : $t('common.inactive') }}
             </BadgeComponent>
+          </DataFieldComponent>
 
-          </div>
         </div>
       </CardComponent>
 

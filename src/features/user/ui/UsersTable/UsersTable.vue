@@ -10,9 +10,10 @@ import type {
   UserTableEmits,
   UserTableActionType
 } from '@features/user/model/types/user.feature.types'
-import {USER_ROLE_VARIANTS} from "@entities/user/model/config/useUserConfig.ts";
-import EditIcon from "@shared/ui/icons/EditIcon.vue";
-import DeleteIcon from "@shared/ui/icons/DeleteIcon.vue";
+import {USER_ROLE_VARIANTS} from "@entities/user/model/config/useUserConfig.ts"
+import EditIcon from "@shared/ui/icons/EditIcon.vue"
+import DeleteIcon from "@shared/ui/icons/DeleteIcon.vue"
+import type {SortConfig} from '@shared/types/table.types'
 
 withDefaults(defineProps<UserTableProps>(), {
   loading: false,
@@ -48,6 +49,10 @@ const handleAction = (type: UserTableActionType, user: UserResponse, event: Even
 const handlePageChange = (page: number) => {
   emit('page-change', page)
 }
+
+const handleSort = (config: SortConfig) => {
+  emit('sort', config)
+}
 </script>
 
 <template>
@@ -58,8 +63,10 @@ const handlePageChange = (page: number) => {
     :loading="loading"
     :pagination="pagination"
     :empty-message="$t('entities.user.noUsers')"
+    row-clickable
     @row-click="handleRowClick"
     @page-change="handlePageChange"
+    @sort="handleSort"
   >
     <template #cell-fullName="{ row }">
       <div class="users-table__user-info">

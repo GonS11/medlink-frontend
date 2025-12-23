@@ -1,18 +1,19 @@
 @use '@/shared/styles/_variables' as *;
 
-.form-row {
+.form-layout {
   display: grid;
   width: 100%;
-  align-items: start;
 
-  @for $i from 1 through 4 {
-    &--cols-#{$i} {
-      grid-template-columns: repeat(#{$i}, 1fr);
-    }
+  &--align-start {
+    align-items: start;
   }
 
-  &--cols-auto {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  &--align-center {
+    align-items: center;
+  }
+
+  &--align-end {
+    align-items: end;
   }
 
   &--gap-sm {
@@ -33,7 +34,8 @@
 
   &--responsive {
     @media (max-width: $breakpoint-md) {
-      grid-template-columns: 1fr;
+      grid-template-columns: 1fr !important;
+      gap: $spacing-md !important;
     }
   }
 }

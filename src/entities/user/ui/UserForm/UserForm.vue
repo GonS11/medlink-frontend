@@ -2,14 +2,15 @@
 import {useI18n} from 'vue-i18n'
 import {useUserForm} from '@entities/user/model/composables/useUserForm'
 import {UserRoleArray} from '@shared/types/api.types'
+import type {UserFormProps} from '@entities/user/model/types/user.ui.types'
+
 import FormComponent from '@shared/ui/components/atoms/FormComponent/FormComponent.vue'
-import FormFieldsetComponent from '@shared/ui/components/atoms/FormFieldsetComponent/FormFieldsetComponent.vue'
-import FormRowComponent from '@shared/ui/components/atoms/FormRowComponent/FormRowComponent.vue'
+import FormSection from '@shared/ui/components/atoms/FormSection/FormSection.vue'
+import FormLayout from '@shared/ui/components/atoms/FormLayout/FormLayout.vue'
 import InputComponent from '@shared/ui/components/atoms/InputComponent/InputComponent.vue'
 import SelectComponent from '@shared/ui/components/atoms/SelectComponent/SelectComponent.vue'
 import CheckboxComponent from '@shared/ui/components/atoms/CheckBoxComponent/CheckboxComponent.vue'
 import ButtonComponent from '@shared/ui/components/atoms/ButtonComponent/ButtonComponent.vue'
-import type {UserFormProps} from '@entities/user/model/types/user.ui.types'
 
 const props = defineProps<UserFormProps>()
 const emit = defineEmits<{
@@ -41,14 +42,14 @@ const languageOptions = [
 <template>
   <FormComponent
     :title="mode === 'create' ? $t('entities.user.create') : $t('entities.user.edit')"
-    variant="elevated"
+    variant="borderless"
     max-width="lg"
+    :loading="props.loading"
     @submit="handleSubmit"
     class="user-form"
   >
-    <!-- Información Personal -->
-    <FormFieldsetComponent :legend="$t('entities.user.personalInfo')" variant="bordered">
-      <FormRowComponent :columns="2">
+    <FormSection :title="$t('entities.user.personalInfo')" variant="bordered">
+      <FormLayout :columns="2">
         <InputComponent
           :model-value="form.firstName"
           :label="$t('fields.firstName')"
@@ -65,12 +66,11 @@ const languageOptions = [
           @update:model-value="handleInput('lastName', $event)"
           @blur="handleBlur('lastName')"
         />
-      </FormRowComponent>
-    </FormFieldsetComponent>
+      </FormLayout>
+    </FormSection>
 
-    <!-- Información de Contacto -->
-    <FormFieldsetComponent :legend="$t('entities.user.contactInfo')" variant="bordered">
-      <FormRowComponent :columns="1">
+    <FormSection :title="$t('entities.user.contactInfo')" variant="bordered">
+      <FormLayout>
         <InputComponent
           :model-value="form.email"
           :label="$t('fields.email')"
@@ -80,8 +80,9 @@ const languageOptions = [
           @update:model-value="handleInput('email', $event)"
           @blur="handleBlur('email')"
         />
-      </FormRowComponent>
-      <FormRowComponent :columns="2">
+      </FormLayout>
+
+      <FormLayout :columns="2">
         <InputComponent
           :model-value="form.phone"
           :label="$t('fields.phone')"
@@ -97,12 +98,11 @@ const languageOptions = [
           :options="languageOptions"
           @update:model-value="handleInput('preferredLanguage', $event)"
         />
-      </FormRowComponent>
-    </FormFieldsetComponent>
+      </FormLayout>
+    </FormSection>
 
-    <!-- Rol y Permisos -->
-    <FormFieldsetComponent :legend="$t('entities.user.rolePermissions')" variant="bordered">
-      <FormRowComponent :columns="1">
+    <FormSection :title="$t('entities.user.rolePermissions')" variant="bordered">
+      <FormLayout gap="lg">
         <SelectComponent
           :model-value="form.role"
           :label="$t('fields.role')"
@@ -111,15 +111,14 @@ const languageOptions = [
           required
           @update:model-value="handleInput('role', $event)"
         />
-      </FormRowComponent>
-      <FormRowComponent :columns="1">
+
         <CheckboxComponent
           :model-value="form.isActive"
           :label="$t('fields.isActive')"
           @update:model-value="handleInput('isActive', $event)"
         />
-      </FormRowComponent>
-    </FormFieldsetComponent>
+      </FormLayout>
+    </FormSection>
 
     <template #footer>
       <div class="user-form__actions">

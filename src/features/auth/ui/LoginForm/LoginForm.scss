@@ -1,0 +1,17 @@
+@use '@/shared/styles/_variables' as *;
+
+.login-form__redirect {
+  text-align: center;
+  font-size: $font-size-sm;
+  color: var(--text-secondary);
+
+  a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: $font-weight-medium;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

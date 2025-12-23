@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {useAuth} from '@features/auth/model/composables/useAuth'
 import LoginForm from '@features/auth/ui/LoginForm/LoginForm.vue'
-import AuthPageBranding from "@shared/ui/components/atoms/AuthPageBranding/AuthPageBranding.vue"
+import AuthPageBranding from "@features/auth/ui/AuthPageBranding/AuthPageBranding.vue"
 import type {LoginRequest} from '@entities/auth/model/types/auth.types'
 
 const {login, loading} = useAuth()

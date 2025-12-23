@@ -9,6 +9,7 @@ import {useConfirm} from '@shared/composables/useConfirm'
 import type {UserResponse} from '@entities/user/model/types/user.types'
 import type {RegisterRequest} from '@entities/auth/model/types/auth.types'
 import type {PaginationParams} from '@shared/types/api.types'
+import type {SortConfig} from "@shared/types/table.types.ts"
 
 export function useUserManagement() {
   const {t} = useI18n()
@@ -27,6 +28,9 @@ export function useUserManagement() {
   // --- Estado Local ---
   const selectedUser = ref<UserResponse | null>(null)
 
+  // ✅ AGREGAR: Estado de sorting
+  const sortConfig = ref<SortConfig | null>(null)
+
   // --- Computed Permissions ---
   const canCreate = computed(() => permissions.canCreateUsers.value)
   const canEdit = computed(() => permissions.canEditUsers.value)
@@ -35,10 +39,18 @@ export function useUserManagement() {
 
   // --- Helper para refetch ---
   const refetchCurrentPage = async () => {
-    await crud.fetchAll({
+    const params: PaginationParams = {
       page: crud.pagination.value?.number ?? 0,
       size: crud.currentPageSize.value
-    } as PaginationParams)
+    }
+
+    // ✅ AGREGAR: Incluir sorting si existe
+    if (sortConfig.value) {
+      params.sortBy = sortConfig.value.key
+      params.direction = sortConfig.value.order === 'asc' ? 'ASC' : 'DESC'
+    }
+
+    await crud.fetchAll(params)
   }
 
   // --- Handlers ---
@@ -109,7 +121,6 @@ export function useUserManagement() {
 
     if (confirmed) {
       const result = await admin.unlockUser(user.id)
-      // ✅ Refetch después de unlock
       if (result) {
         await refetchCurrentPage()
       }
@@ -138,7 +149,6 @@ export function useUserManagement() {
     const result = await crud.create(data)
     if (result) {
       createModal.close()
-      // ✅ Refetch después de crear
       await refetchCurrentPage()
     }
   }
@@ -157,7 +167,6 @@ export function useUserManagement() {
     const result = await crud.update(selectedUser.value.id, data)
     if (result) {
       editModal.close()
-      // useEntityCrud ya actualiza en store, no necesita refetch
     }
   }
 
@@ -175,17 +184,39 @@ export function useUserManagement() {
     const result = await admin.lockUser(selectedUser.value.id, data)
     if (result) {
       lockModal.close()
-      // ✅ Refetch después de lock
       await refetchCurrentPage()
     }
   }
 
   // --- Pagination ---
   const handlePageChange = async (page: number) => {
-    await crud.fetchAll({
+    const params: PaginationParams = {
       page,
       size: crud.currentPageSize.value
-    } as PaginationParams)
+    }
+
+    // ✅ AGREGAR: Incluir sorting si existe
+    if (sortConfig.value) {
+      params.sortBy = sortConfig.value.key
+      params.direction = sortConfig.value.order === 'asc' ? 'ASC' : 'DESC'
+    }
+
+    await crud.fetchAll(params)
+  }
+
+  // ✅ CORREGIR: Handler de sorting
+  const handleSort = async (config: SortConfig) => {
+    sortConfig.value = config
+
+    // Reset a primera página con sorting aplicado
+    const params: PaginationParams = {
+      page: 0,
+      size: crud.currentPageSize.value,
+      sortBy: config.key,
+      direction: config.order === 'asc' ? 'ASC' : 'DESC'
+    }
+
+    await crud.fetchAll(params)
   }
 
   // --- Initial Load ---
@@ -228,6 +259,7 @@ export function useUserManagement() {
     handleSubmitEdit,
     handleSubmitLock,
     handlePageChange,
+    handleSort,
 
     // Lifecycle
     initialize,

@@ -2,8 +2,8 @@
 import {useAuth} from "@features/auth/model/composables/useAuth"
 import {useRegisterForm} from "@features/auth/model/composables/useRegisterForm"
 import FormComponent from "@shared/ui/components/atoms/FormComponent/FormComponent.vue"
-import FormFieldsetComponent from "@shared/ui/components/atoms/FormFieldsetComponent/FormFieldsetComponent.vue"
-import FormRowComponent from "@shared/ui/components/atoms/FormRowComponent/FormRowComponent.vue"
+import FormSection from "@shared/ui/components/atoms/FormSection/FormSection.vue"
+import FormLayout from "@shared/ui/components/atoms/FormLayout/FormLayout.vue"
 import InputComponent from "@shared/ui/components/atoms/InputComponent/InputComponent.vue"
 import SelectComponent from "@shared/ui/components/atoms/SelectComponent/SelectComponent.vue"
 import ButtonComponent from "@shared/ui/components/atoms/ButtonComponent/ButtonComponent.vue"
@@ -24,10 +24,11 @@ const {form, errors, roleOptions, languageOptions, handleSubmit, handleInput, va
     :title="$t('auth.registerTitle')"
     :subtitle="$t('auth.registerSubtitle')"
     max-width="lg"
+    :loading="loading"
     @submit="handleSubmit"
   >
-    <FormFieldsetComponent :legend="$t('entities.user.personalInfo')" variant="bordered">
-      <FormRowComponent :columns="2">
+    <FormSection :title="$t('entities.user.personalInfo')" variant="bordered">
+      <FormLayout :columns="2">
         <InputComponent
           :model-value="form.firstName"
           :label="$t('fields.firstName')"
@@ -44,26 +45,32 @@ const {form, errors, roleOptions, languageOptions, handleSubmit, handleInput, va
           @update:model-value="handleInput('lastName', $event)"
           @blur="validateField('lastName')"
         />
-      </FormRowComponent>
-      <InputComponent
-        :model-value="form.secondLastName"
-        :label="$t('fields.secondLastName')"
-        :error="errors.secondLastName"
-        @update:model-value="handleInput('secondLastName', $event)"
-      />
-    </FormFieldsetComponent>
+      </FormLayout>
 
-    <FormFieldsetComponent :legend="$t('entities.user.contactInfo')" variant="bordered">
-      <InputComponent
-        :model-value="form.email"
-        type="email"
-        :label="$t('fields.email')"
-        :error="errors.email"
-        required
-        @update:model-value="handleInput('email', $event)"
-        @blur="validateField('email')"
-      />
-      <FormRowComponent :columns="2">
+      <FormLayout>
+        <InputComponent
+          :model-value="form.secondLastName"
+          :label="$t('fields.secondLastName')"
+          :error="errors.secondLastName"
+          @update:model-value="handleInput('secondLastName', $event)"
+        />
+      </FormLayout>
+    </FormSection>
+
+    <FormSection :title="$t('entities.user.contactInfo')" variant="bordered">
+      <FormLayout>
+        <InputComponent
+          :model-value="form.email"
+          type="email"
+          :label="$t('fields.email')"
+          :error="errors.email"
+          required
+          @update:model-value="handleInput('email', $event)"
+          @blur="validateField('email')"
+        />
+      </FormLayout>
+
+      <FormLayout :columns="2">
         <InputComponent
           :model-value="form.phone"
           type="tel"
@@ -80,11 +87,11 @@ const {form, errors, roleOptions, languageOptions, handleSubmit, handleInput, va
           @update:model-value="handleInput('mobilePhone', $event)"
           @blur="validateField('mobilePhone')"
         />
-      </FormRowComponent>
-    </FormFieldsetComponent>
+      </FormLayout>
+    </FormSection>
 
-    <FormFieldsetComponent :legend="$t('entities.user.settings')" variant="bordered">
-      <FormRowComponent :columns="2">
+    <FormSection :title="$t('entities.user.settings')" variant="bordered">
+      <FormLayout :columns="2">
         <SelectComponent
           :model-value="form.role"
           :options="roleOptions"
@@ -101,11 +108,11 @@ const {form, errors, roleOptions, languageOptions, handleSubmit, handleInput, va
           :error="errors.preferredLanguage"
           @update:model-value="handleInput('preferredLanguage', $event)"
         />
-      </FormRowComponent>
-    </FormFieldsetComponent>
+      </FormLayout>
+    </FormSection>
 
-    <FormFieldsetComponent :legend="$t('auth.security')" variant="bordered">
-      <FormRowComponent :columns="2">
+    <FormSection :title="$t('auth.security')" variant="bordered">
+      <FormLayout :columns="2">
         <InputComponent
           :model-value="form.password"
           type="password"
@@ -126,8 +133,8 @@ const {form, errors, roleOptions, languageOptions, handleSubmit, handleInput, va
           @update:model-value="handleInput('confirmPassword', $event)"
           @blur="validateField('confirmPassword')"
         />
-      </FormRowComponent>
-    </FormFieldsetComponent>
+      </FormLayout>
+    </FormSection>
 
     <template #footer>
       <div class="form__actions">
@@ -140,7 +147,7 @@ const {form, errors, roleOptions, languageOptions, handleSubmit, handleInput, va
           :disabled="loading"
         >
           <template #icon>
-            <SubmitIcon :label="$t('icons.submit')" />
+            <SubmitIcon :label="$t('icons.submit')"/>
           </template>
           {{ $t('auth.register') }}
         </ButtonComponent>
@@ -155,3 +162,5 @@ const {form, errors, roleOptions, languageOptions, handleSubmit, handleInput, va
     </template>
   </FormComponent>
 </template>
+
+<style scoped lang="scss" src="./RegisterForm.scss"></style>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import RegisterForm from '@features/auth/ui/RegisterForm/RegisterForm.vue'
-import AuthPageBranding from "@shared/ui/components/atoms/AuthPageBranding/AuthPageBranding.vue"
+import AuthPageBranding from "@features/auth/ui/AuthPageBranding/AuthPageBranding.vue"
 </script>
 
 <template>

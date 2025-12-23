@@ -1,56 +1,57 @@
 @use '@shared/styles/variables' as *;
 
-.file-upload-wrapper {
+.file-upload {
   display: flex;
   flex-direction: column;
   gap: $spacing-sm;
-}
 
-.file-upload-label {
-  font-size: $font-size-sm;
-  font-weight: $font-weight-medium;
-  color: var(--color-primary);
+  &__label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: var(--text-primary);
 
-  .required {
-    color: var(--color-error);
-  }
-}
-
-.file-input-hidden {
-  display: none;
-}
-
-.file-dropzone {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: $spacing-xl;
-  border: 2px dashed var(--border-color);
-  border-radius: $radius-lg;
-  background-color: var(--bg-primary);
-  cursor: pointer;
-  transition: all var(--transition-base);
-
-  &:hover:not(.file-dropzone-disabled) {
-    border-color: var(--color-primary);
-    background-color: var(--bg-secondary);
+    .required {
+      color: var(--color-error);
+    }
   }
 
-  &-dragging {
-    border-color: var(--color-primary);
-    background-color: rgba(var(--color-primary), 0.05);
+  &__input {
+    display: none;
   }
 
-  &-disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
+  &__dropzone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-xl;
+    border: 2px dashed var(--border-color);
+    border-radius: $radius-lg;
+    background-color: var(--bg-primary);
+    cursor: pointer;
+    transition: all var(--transition-base);
+
+    &:hover:not(&--disabled) {
+      border-color: var(--color-primary);
+      background-color: var(--bg-surface-secondary);
+    }
+
+    &--dragging {
+      border-color: var(--color-primary);
+      background-color: rgba(var(--color-primary), 0.05);
+    }
+
+    &--disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    &--error {
+      border-color: var(--color-error);
+    }
   }
 
-  &-error {
-    border-color: var(--color-error);
-  }
-
-  &-content {
+  &__content {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -58,18 +59,18 @@
     text-align: center;
   }
 
-  &-icon {
-    color: var(--text-secondary);
+  &__icon {
+    width: 48px;
+    height: 48px;
+    color: var(--text-muted);
   }
 
-  &-text {
-    margin: 0;
+  &__text {
     display: flex;
     flex-direction: column;
     gap: $spacing-xs;
 
     &-primary {
-      font-size: $font-size-base;
       font-weight: $font-weight-semibold;
       color: var(--color-primary);
     }
@@ -80,87 +81,74 @@
     }
   }
 
-  &-hint {
-    margin: 0;
+  &__hint {
     font-size: $font-size-xs;
     color: var(--text-muted);
-  }
-}
-
-.file-button {
-  display: inline-flex;
-  align-items: center;
-  gap: $spacing-sm;
-  padding: $spacing-md $spacing-lg;
-  font-family: $font-family-base;
-  font-size: $font-size-base;
-  font-weight: $font-weight-medium;
-  color: var(--color-primary);
-  background-color: var(--bg-primary);
-  border: 2px solid var(--color-primary);
-  border-radius: $radius-lg;
-  cursor: pointer;
-  transition: all var(--transition-base);
-
-  &:hover:not(:disabled) {
-    background-color: var(--color-primary);
-    color: white;
+    margin: 0;
   }
 
-  &:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
+  &__error {
+    font-size: $font-size-sm;
+    color: var(--color-error);
+    margin: 0;
   }
-}
 
-.file-list {
-  display: flex;
-  flex-direction: column;
-  gap: $spacing-sm;
+  &__help {
+    font-size: $font-size-sm;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  // File List
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
 }
 
 .file-item {
   display: flex;
   align-items: center;
   gap: $spacing-md;
-  padding: $spacing-md;
-  background-color: var(--bg-secondary);
+  padding: $spacing-sm $spacing-md;
+  background-color: var(--bg-surface);
   border: 1px solid var(--border-color);
   border-radius: $radius-md;
-  transition: all var(--transition-fast);
 
-  &:hover {
-    background-color: var(--bg-tertiary);
-  }
-
-  &-preview {
+  &__preview {
+    width: 40px;
+    height: 40px;
     flex-shrink: 0;
-    width: 48px;
-    height: 48px;
+    border-radius: $radius-sm;
+    overflow: hidden;
+    background-color: var(--bg-tertiary);
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--bg-primary);
-    border-radius: $radius-sm;
-    overflow: hidden;
   }
 
-  &-image {
+  &__img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
 
-  &-icon {
+  &__icon-fallback {
+    width: 24px;
+    height: 24px;
     color: var(--text-secondary);
   }
 
-  &-info {
+  &__info {
     flex: 1;
     min-width: 0;
   }
 
-  &-name {
+  &__name {
     margin: 0;
     font-size: $font-size-sm;
     font-weight: $font-weight-medium;
@@ -170,45 +158,32 @@
     text-overflow: ellipsis;
   }
 
-  &-size {
+  &__size {
     margin: 0;
     font-size: $font-size-xs;
     color: var(--text-secondary);
   }
 
-  &-remove {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: $spacing-xs;
-    background: none;
+  &__remove {
+    background: transparent;
     border: none;
-    color: var(--text-secondary);
     cursor: pointer;
-    border-radius: $radius-sm;
-    transition: all var(--transition-fast);
+    padding: $spacing-xs;
+    color: var(--text-muted);
+    transition: color 0.2s;
+    display: flex;
 
-    &:hover:not(:disabled) {
+    &:hover {
       color: var(--color-error);
-      background-color: rgba(var(--color-error), 0.1);
     }
 
-    &:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
+    &-icon {
+      width: 18px;
+      height: 18px;
     }
   }
 }
 
-.file-upload-error {
-  font-size: $font-size-sm;
-  color: var(--color-error);
-  margin: 0;
-}
-
-.file-upload-hint {
-  font-size: $font-size-sm;
-  color: var(--text-muted);
-  margin: 0;
-}
+<
+/
+style >

@@ -70,12 +70,10 @@
     padding-right: calc($spacing-md + 40px);
   }
 
-  // Hide default password reveal button in Edge/IE
   &::-ms-reveal {
     display: none;
   }
 
-  // Hide number input spinners
   &[type="number"] {
     -moz-appearance: textfield;
 
@@ -86,7 +84,6 @@
     }
   }
 
-  // Hide search input clear button
   &[type="search"] {
     &::-webkit-search-decoration,
     &::-webkit-search-cancel-button,

@@ -1,10 +1,22 @@
-import type {UserResponse} from "@entities/user/model/types/user.types"
-import type {PageResponse} from "@shared/types/api.types"
-import type {TableColumn} from "@shared/types/table.types"
+import type {UserResponse} from '@entities/user/model/types/user.types'
+import type {TableColumn, SortConfig} from '@shared/types/table.types'
+import type {PageResponse} from '@shared/types/api.types'
 
-/**
- * Props para UsersTable
- */
+// Tipos de acciones disponibles en la tabla
+export type UserTableActionType =
+  | 'view'
+  | 'edit'
+  | 'delete'
+  | 'lock'
+  | 'unlock'
+
+// Payload del evento action
+export interface UserTableAction {
+  type: UserTableActionType
+  user: UserResponse
+}
+
+// Props del componente UsersTable
 export interface UserTableProps {
   users: UserResponse[]
   columns: TableColumn[]
@@ -12,24 +24,9 @@ export interface UserTableProps {
   pagination?: PageResponse<UserResponse> | null
 }
 
-/**
- * Eventos que emite UsersTable
- */
+// Emits del componente UsersTable
 export interface UserTableEmits {
-  (e: 'row-click', user: UserResponse): void
+  (e: 'action', payload: UserTableAction): void
   (e: 'page-change', page: number): void
-  (e: 'action', action: UserTableAction): void
-}
-
-/**
- * Tipos de acciones disponibles en la tabla
- */
-export type UserTableActionType = 'view' | 'edit' | 'delete' | 'lock' | 'unlock'
-
-/**
- * Acción ejecutada desde la tabla
- */
-export interface UserTableAction {
-  type: UserTableActionType
-  user: UserResponse
+  (e: 'sort', config: SortConfig): void
 }

@@ -6,40 +6,51 @@
   border-radius: $radius-lg;
   border: 1px solid var(--border-color);
   margin-bottom: $spacing-lg;
+  transition: border-color 0.3s ease;
 
-  // Modificadores de variante clínica
+  // Variants
+  &--default {
+    border-color: var(--border-color);
+  }
+
   &--alert {
-    background-color: #FFF7ED; // Tinte naranja muy suave para alertas sanitarias
+    background-color: var(--bg-warning-light, #FFF7ED);
     border-color: var(--color-warning);
 
     .detail-section__title {
-      color: #9A3412;
+      color: var(--color-warning-dark, #9A3412);
+
+      &::before {
+        background-color: var(--color-warning);
+      }
     }
+  }
+
+  &__header {
+    margin-bottom: $spacing-lg;
   }
 
   &__title {
     font-family: $font-family-heading;
     font-size: $font-size-lg;
     font-weight: $font-weight-semibold;
-    color: var(--color-primary-dark);
-    margin: 0 0 $spacing-lg 0;
+    color: var(--text-primary);
+    margin: 0;
     display: flex;
     align-items: center;
 
-    // Línea decorativa lateral para énfasis clínico
     &::before {
       content: '';
       width: 4px;
       height: 1.25rem;
-      background-color: currentColor;
+      background-color: var(--color-primary);
       margin-right: $spacing-sm;
       border-radius: $radius-full;
     }
   }
 
-  &__grid {
+  &__body {
     display: grid;
-    // Layout responsivo: 1 columna en móvil, auto-fit en escritorio
     grid-template-columns: 1fr;
     gap: $spacing-lg;
 

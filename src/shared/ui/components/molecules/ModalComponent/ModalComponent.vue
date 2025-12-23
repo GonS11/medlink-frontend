@@ -1,27 +1,25 @@
 <script setup lang="ts">
-import {watch, onMounted, onUnmounted} from 'vue'
+import {watch, onUnmounted} from 'vue'
 import ButtonComponent from '@shared/ui/components/atoms/ButtonComponent/ButtonComponent.vue'
-import {useI18n} from "vue-i18n";
-import XIcon from "@shared/ui/icons/XIcon.vue";
+import XIcon from "@shared/ui/icons/XIcon.vue"
 
-interface Props {
+interface ModalProps {
   show: boolean
   title?: string
   variant?: 'primary' | 'danger' | 'accent'
-  size?: 'sm' | 'md' | 'lg'
+  size?: 'sm' | 'md' | 'lg' | 'xl'
   showFooter?: boolean
-  showCancel?: boolean
+  showClose?: boolean
+  closeOnBackdrop?: boolean
   loading?: boolean
 }
 
-const {t} = useI18n()
-
-const props = withDefaults(defineProps<Props>(), {
-  title: '',
+const props = withDefaults(defineProps<ModalProps>(), {
   variant: 'primary',
   size: 'md',
   showFooter: true,
-  showCancel: true,
+  showClose: true,
+  closeOnBackdrop: true,
   loading: false,
 })
 
@@ -36,61 +34,51 @@ const closeModal = () => {
   emit('cancel')
 }
 
-const handleConfirm = () => {
-  emit('confirm')
+const lockScroll = () => {
+  document.body.style.overflow = 'hidden'
 }
-
-const handleBackdropClick = (event: MouseEvent) => {
-  if ((event.target as HTMLElement).classList.contains('modal-overlay')) {
-    closeModal()
-  }
-}
-
-const handleEscapeKey = (event: KeyboardEvent) => {
-  if (event.key === 'Escape' && props.show) {
-    closeModal()
-  }
-}
-
-watch(() => props.show, (newValue) => {
-  if (newValue) {
-    document.body.style.overflow = 'hidden'
-  } else {
-    document.body.style.overflow = ''
-  }
-})
-
-onMounted(() => {
-  document.addEventListener('keydown', handleEscapeKey)
-})
-
-onUnmounted(() => {
-  document.removeEventListener('keydown', handleEscapeKey)
+const unlockScroll = () => {
   document.body.style.overflow = ''
+}
+
+watch(() => props.show, (isShow) => {
+  isShow ? lockScroll() : unlockScroll()
 })
+
+onUnmounted(() => unlockScroll())
+
+const handleBackdrop = () => {
+  if (props.closeOnBackdrop) closeModal()
+}
 </script>
 
 <template>
   <Teleport to="body">
     <Transition name="modal-fade">
-      <div v-if="show" class="modal" @click="handleBackdropClick" role="dialog" aria-modal="true">
-        <div
-          class="modal__container"
-          :class="[`modal__container--${size}`]"
-          @click.stop
-        >
+      <div
+        v-if="show"
+        class="modal"
+        role="dialog"
+        aria-modal="true"
+        @click.self="handleBackdrop"
+      >
+        <div :class="['modal__container', `modal__container--${size}`]">
           <header v-if="title || $slots.header" class="modal__header">
             <slot name="header">
               <h3 class="modal__title">{{ title }}</h3>
             </slot>
-            <button
-              class="modal__close-btn"
-              type="button"
+
+            <ButtonComponent
+              v-if="showClose"
+              :variant="'ghost'"
+              :size="'sm'"
+              :iconPosition="'right'"
+              class="modal__close"
               @click="closeModal"
-              :aria-label="$t('common.close')"
-            >
-              <XIcon :label="t('icons.X')"/>
-            </button>
+              :aria-label="$t('modal.close')"
+              :icon="XIcon"
+            />
+
           </header>
 
           <div class="modal__body">
@@ -100,20 +88,18 @@ onUnmounted(() => {
           <footer v-if="showFooter" class="modal__footer">
             <slot name="footer">
               <ButtonComponent
-                v-if="showCancel"
                 variant="ghost"
                 @click="closeModal"
                 :disabled="loading"
               >
-                {{ t('common.cancel') }}
+                {{$t('common.cancel')}}
               </ButtonComponent>
               <ButtonComponent
-                :variant="variant"
-                @click="handleConfirm"
-                :disabled="loading"
+                :variant="variant === 'primary' ? 'primary' : variant"
+                @click="emit('confirm')"
                 :loading="loading"
               >
-                {{ t('common.confirm') }}
+                {{$t('common.confirm')}}
               </ButtonComponent>
             </slot>
           </footer>

@@ -196,7 +196,6 @@
     .btn__icon svg {
       color: var(--text-secondary);
 
-      // ✅ CLAVE: Agregar stroke para iconos que lo usan
       path {
         stroke: var(--text-secondary);
       }

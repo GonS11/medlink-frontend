@@ -1,48 +1,53 @@
 <script setup lang="ts">
 import {computed} from 'vue'
-import {FormProps} from "@shared/types/form.types.ts"
+import SpinnerIcon from "@shared/ui/icons/SpinnerIcon.vue"
+import {FormProps} from "@shared/types/form.structure.types.ts"
 
 const props = withDefaults(defineProps<FormProps>(), {
   variant: 'elevated',
   maxWidth: 'md',
-  centered: true,
+  centered: false,
+  loading: false
 })
 
-const emit = defineEmits<{ submit: [] }>()
+const emit = defineEmits<{
+  submit: [event: Event]
+}>()
 
 const formClasses = computed(() => [
   'form',
   `form--variant-${props.variant}`,
-  `form--size-${props.maxWidth}`,
-  {'form--centered': props.centered},
+  `form--width-${props.maxWidth}`,
+  {
+    'form--centered': props.centered,
+    'form--loading': props.loading
+  }
 ])
 
 const handleSubmit = (event: Event) => {
-  event.preventDefault()
-  emit('submit')
+  if (props.loading) {
+    event.preventDefault()
+    return
+  }
+  emit('submit', event)
 }
 </script>
 
 <template>
   <div :class="formClasses">
-    <div class="form__container">
-      <header v-if="title || subtitle || $slots.header" class="form__header">
-        <slot name="header">
-          <h1 v-if="title" class="form__title">{{ title }}</h1>
-          <p v-if="subtitle" class="form__subtitle">{{ subtitle }}</p>
-        </slot>
-      </header>
+    <div class="form__wrapper">
+      <div v-if="loading" class="form__loader">
+        <SpinnerIcon :label="$t('icons.spinner')" class="form__loader-icon"/>
+      </div>
 
-      <form class="form__body-container" @submit="handleSubmit">
-
-        <div class="form__body">
+      <form class="form__body" @submit="handleSubmit">
+        <div class="form__content">
           <slot/>
         </div>
 
         <footer v-if="$slots.footer" class="form__footer">
           <slot name="footer"/>
         </footer>
-
       </form>
     </div>
   </div>

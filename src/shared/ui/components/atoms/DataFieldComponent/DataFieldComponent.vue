@@ -1,14 +1,9 @@
 <script setup lang="ts">
 import SkeletonLoader from '@shared/ui/components/atoms/SkeletonLoader/SkeletonLoader.vue'
+import {DataFieldProps} from "@shared/types/component.atom.types.ts";
 
-interface Props {
-  label: string
-  value?: string | number | boolean | null
-  loading?: boolean
-  fallback?: string // Qué mostrar si value es null/undefined (por defecto '-')
-}
 
-withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<DataFieldProps>(), {
   loading: false,
   fallback: '-',
   value: undefined
