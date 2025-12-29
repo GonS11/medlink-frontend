@@ -12,9 +12,20 @@ export interface BadgeProps {
   size?: BadgeSize
 }
 
+export type ButtonVariant =
+  'primary'
+  | 'secondary'
+  | 'danger'
+  | 'success'
+  | 'warning'
+  | 'info'
+  | 'accent'
+  | 'ghost'
+  | 'outline'
+
 export interface ButtonProps {
   type?: 'button' | 'submit' | 'reset'
-  variant?: 'primary' | 'secondary' | 'danger' | 'accent' | 'ghost' | 'outline'
+  variant?: ButtonVariant
   size?: 'sm' | 'md' | 'lg'
   disabled?: boolean
   loading?: boolean
@@ -43,7 +54,6 @@ export interface CheckProps {
   label?: string
   error?: boolean
 }
-
 
 
 export interface SkeletonProps {

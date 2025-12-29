@@ -39,7 +39,7 @@ const handleCancel = () => {
     v-model:show="isOpen"
     :title="title"
     size="sm"
-    :show-footer="false"
+    :show-footer="true"
     class="confirm-dialog"
   >
     <div class="confirm-dialog__content">
@@ -57,7 +57,7 @@ const handleCancel = () => {
         </ButtonComponent>
 
         <ButtonComponent
-          :variant="'primary'"
+          :variant="(variant as any)"
           @click="handleConfirm"
           :loading="loading"
         >

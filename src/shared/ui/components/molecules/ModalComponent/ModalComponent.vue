@@ -3,6 +3,7 @@ import {watch, onUnmounted} from 'vue'
 import ButtonComponent from '@shared/ui/components/atoms/ButtonComponent/ButtonComponent.vue'
 import XIcon from "@shared/ui/icons/XIcon.vue"
 import {ModalProps} from "@shared/types/component.molecules.types.ts";
+import {ButtonVariant} from "@shared/types/component.atoms.types.ts";
 
 
 const props = withDefaults(defineProps<ModalProps>(), {
@@ -85,8 +86,9 @@ const handleBackdrop = () => {
               >
                 {{ $t('common.cancel') }}
               </ButtonComponent>
+
               <ButtonComponent
-                :variant="variant === 'primary' ? 'primary' : variant"
+                :variant="(variant as ButtonVariant)"
                 @click="emit('confirm')"
                 :loading="loading"
               >

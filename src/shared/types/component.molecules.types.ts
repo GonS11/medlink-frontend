@@ -1,12 +1,25 @@
 import {Component} from "vue";
 
+export type ModalVariant = 'primary' | 'danger' | 'warning' | 'info' | 'success' | 'accent'
+
 export interface ConfirmDialogProps {
   show?: boolean
   title?: string
   message?: string
   confirmText?: string
   cancelText?: string
-  variant?: 'primary' | 'danger' | 'warning' | 'info'
+  variant?: ModalVariant
+  loading?: boolean
+}
+
+export interface ModalProps {
+  show: boolean
+  title?: string
+  variant?: ModalVariant
+  size?: 'sm' | 'md' | 'lg' | 'xl'
+  showFooter?: boolean
+  showClose?: boolean
+  closeOnBackdrop?: boolean
   loading?: boolean
 }
 
@@ -35,17 +48,6 @@ export interface FileUploadProps {
   maxFiles?: number
   showPreview?: boolean
   variant?: 'button' | 'dropzone'
-}
-
-export interface ModalProps {
-  show: boolean
-  title?: string
-  variant?: 'primary' | 'danger' | 'accent'
-  size?: 'sm' | 'md' | 'lg' | 'xl'
-  showFooter?: boolean
-  showClose?: boolean
-  closeOnBackdrop?: boolean
-  loading?: boolean
 }
 
 export interface StatCardProps {
