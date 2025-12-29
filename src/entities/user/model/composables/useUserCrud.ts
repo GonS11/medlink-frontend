@@ -16,8 +16,8 @@ export function useUserCrud() {
     pagination: pagination,
     setItems: store.setUsers,
     setPagination: store.setPagination,
-    updateItem: store.updateUserInList,
-    removeItem: store.removeUserFromList,
+    updateItem: store.updateUser,
+    removeItem: store.removeUser,
   }
 
   const entityService = {

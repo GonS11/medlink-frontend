@@ -8,8 +8,14 @@ export const useUserStore = defineStore('user', () => {
   const users = ref<UserResponse[]>([])
   const currentUserProfile = ref<UserResponse | null>(null)
   const pagination = ref<PageResponse<UserResponse> | null>(null)
-
   const totalUsers = computed(() => pagination.value?.totalElements ?? 0)
+
+  async function getAllUsers(page = 0, size = 10) {
+    const response = await userService.getAllUsers({page, size})
+    users.value = response.content
+    pagination.value = response
+  }
+
 
   function setUsers(data: UserResponse[]) {
     users.value = data
@@ -23,22 +29,15 @@ export const useUserStore = defineStore('user', () => {
     pagination.value = data
   }
 
-  function updateUserInList(updatedUser: UserResponse) {
+  function updateUser(updatedUser: UserResponse) {
     const index = users.value.findIndex(user => user.id === updatedUser.id)
     if (index !== -1) {
       users.value[index] = updatedUser
     }
   }
 
-  function removeUserFromList(userId: number) {
+  function removeUser(userId: number) {
     users.value = users.value.filter(user => user.id !== userId)
-  }
-
-  async function getAllUsers(page = 0, size = 10) {
-    const response = await userService.getAllUsers({page, size})
-
-    users.value = response.content
-    pagination.value = response
   }
 
   return {
@@ -49,8 +48,8 @@ export const useUserStore = defineStore('user', () => {
     setUsers,
     setCurrentUserProfile,
     setPagination,
-    updateUserInList,
-    removeUserFromList,
+    updateUser,
+    removeUser,
     getAllUsers
   }
 })

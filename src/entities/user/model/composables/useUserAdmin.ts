@@ -11,7 +11,6 @@ export function useUserAdmin() {
     return execute(
       async () => {
         await adminService.lockAccount(id, data || {})
-        // ✅ NO hace refetch aquí, lo delega a quien lo llama
       },
       {
         successMessage: data?.durationMinutes
@@ -26,7 +25,6 @@ export function useUserAdmin() {
     return execute(
       async () => {
         await adminService.unlockAccount(id)
-        // ✅ NO hace refetch aquí
       },
       {
         successMessage: t('entities.user.unlock.success'),
