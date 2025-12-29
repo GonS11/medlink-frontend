@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {computed} from 'vue'
+import {computed, onMounted} from 'vue'
 import {useI18n} from 'vue-i18n'
 import {useAuthStore} from '@entities/auth/model/store/auth.store'
 import {useRole} from '@shared/composables/useUserRole'
@@ -11,15 +11,29 @@ import UsersIcon from '@shared/ui/icons/UsersIcon.vue'
 import HealthCareCenterIcon from '@shared/ui/icons/HealthCareCenterIcon.vue'
 import DepartmentIcon from '@shared/ui/icons/DepartmentIcon.vue'
 import MedicalSimbolIcon from '@shared/ui/icons/MedicalSimbolIcon.vue'
+import {useUserStore} from "@entities/user/model/store/users.store.ts";
 
 const authStore = useAuthStore()
 const {isAdmin} = useRole()
+const userStore = useUserStore()
 const {t} = useI18n()
 
 const currentUser = computed(() => authStore.user)
 
+onMounted(async () => {
+  if (isAdmin.value) {
+    // IMPORTANTE: Tu store necesita una acción para llamar a la API.
+    // Si no la tienes, revisa el punto "Falta en el Store" más abajo.
+    await userStore.getAllUsers()
+  }
+})
+
 const adminStats = computed(() => [
-  {label: t('dashboard.totalUsers'), value: '-', icon: UsersIcon},
+  {
+    label: t('dashboard.totalUsers'),
+    value: userStore.totalUsers,
+    icon: UsersIcon
+  },
   {label: t('dashboard.healthCenters'), value: '-', icon: HealthCareCenterIcon},
   {label: t('dashboard.departments'), value: '-', icon: DepartmentIcon},
   {label: t('dashboard.specialties'), value: '-', icon: MedicalSimbolIcon},

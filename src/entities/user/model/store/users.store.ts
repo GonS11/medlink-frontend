@@ -2,6 +2,7 @@ import {defineStore} from 'pinia'
 import {ref, computed} from 'vue'
 import type {UserResponse} from '../types/user.types'
 import type {PageResponse} from '@shared/types/api.types'
+import * as userService from '@entities/user/api/user.service.ts'
 
 export const useUserStore = defineStore('user', () => {
   const users = ref<UserResponse[]>([])
@@ -33,6 +34,20 @@ export const useUserStore = defineStore('user', () => {
     users.value = users.value.filter(user => user.id !== userId)
   }
 
+  // ✅ Acción asíncrona para cargar usuarios
+  async function getAllUsers(page = 0, size = 10) {
+    try {
+      // Usamos el servicio importado.
+      // Nota: Pasamos params como objeto { page, size }
+      const response = await userService.getAllUsers({page, size})
+
+      users.value = response.content
+      pagination.value = response
+    } catch (error) {
+      console.error('Error fetching users:', error)
+    }
+  }
+
   return {
     users,
     currentUserProfile,
@@ -43,5 +58,6 @@ export const useUserStore = defineStore('user', () => {
     setPagination,
     updateUserInList,
     removeUserFromList,
+    getAllUsers
   }
 })

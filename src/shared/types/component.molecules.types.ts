@@ -1,7 +1,7 @@
 import {Component} from "vue";
 
 export interface ConfirmDialogProps {
-  show: boolean
+  show?: boolean
   title?: string
   message?: string
   confirmText?: string

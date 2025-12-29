@@ -7,8 +7,8 @@ defineProps<StatCardProps>()
 
 <template>
   <article class="stat-card">
-    <div class="stat-card__icon-wrapper">
-      <component :is="icon" class="stat-card__icon"/>
+    <div class="stat-card__icon">
+      <component :is="icon"/>
     </div>
 
     <div class="stat-card__content">

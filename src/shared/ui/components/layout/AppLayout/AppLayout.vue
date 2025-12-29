@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import {ref} from 'vue'
 import {useI18n} from 'vue-i18n'
+import {storeToRefs} from "pinia"
 import Sidebar from '@shared/ui/components/layout/Sidebar/Sidebar.vue'
 import ButtonComponent from '@shared/ui/components/atoms/ButtonComponent/ButtonComponent.vue'
 import ConfirmDialog from '@shared/ui/components/molecules/ConfirmDialog/ConfirmDialog.vue'
-import MenuIcon from "@shared/ui/icons/MenuIcon.vue";
+import MenuIcon from "@shared/ui/icons/MenuIcon.vue"
+import {useConfirmStore} from "@shared/composables/useConfirm"
 
 const {t} = useI18n()
 const sidebarCollapsed = ref(false)
@@ -18,6 +20,17 @@ const toggleMobileSidebar = () => {
 }
 const closeMobileSidebar = () => {
   mobileSidebarOpen.value = false
+}
+
+const confirmStore = useConfirmStore()
+const {showConfirm, confirmOptions} = storeToRefs(confirmStore)
+
+const handleConfirm = () => {
+  confirmStore.resolve(true)
+}
+
+const handleCancel = () => {
+  confirmStore.resolve(false)
 }
 </script>
 
@@ -44,7 +57,7 @@ const closeMobileSidebar = () => {
           @click="toggleMobileSidebar"
           :title="t('nav.openMenu')"
         >
-          <MenuIcon :label="$t('icons.menu')" />
+          <MenuIcon :label="$t('icons.menu')"/>
         </ButtonComponent>
         <h1 class="app-layout__mobile-title">{{ t('app.name') }}</h1>
       </header>
@@ -58,9 +71,18 @@ const closeMobileSidebar = () => {
       </section>
     </main>
 
-    <ConfirmDialog/>
+    <ConfirmDialog
+      :show="showConfirm"
+      :title="confirmOptions?.title"
+      :message="confirmOptions?.message"
+      :confirm-text="confirmOptions?.confirmText"
+      :cancel-text="confirmOptions?.cancelText"
+      :variant="confirmOptions?.variant"
+      @confirm="handleConfirm"
+      @cancel="handleCancel"
+      @update:show="(val) => { if(!val) handleCancel() }"
+    />
   </div>
 </template>
-
 
 <style scoped lang="scss" src="./AppLayout.scss"></style>
