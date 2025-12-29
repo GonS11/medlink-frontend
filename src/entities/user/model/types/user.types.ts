@@ -1,4 +1,4 @@
-import type {Languages, UserRoleType} from '@shared/types/api.types'
+import {Languages, UserRoleType} from "@shared/types/enums.types.ts";
 
 export interface UserResponse {
   id: number
@@ -17,10 +17,10 @@ export interface UserResponse {
   lockedUntil?: string
   preferredLanguage: Languages
   lastLogin?: string
-  createdAt: string
-  updatedAt: string
   isAccountLocked?: boolean
   lockReason?: string
+  createdAt: string
+  updatedAt: string
 }
 
 export interface UpdateUserRequest {

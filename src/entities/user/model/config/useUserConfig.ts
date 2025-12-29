@@ -1,4 +1,4 @@
-import type {UserRoleType} from '@shared/types/api.types'
+import type {UserRoleType} from '@shared/types/enums.types'
 
 export type RoleVariant = 'primary' | 'secondary' | 'success' | 'error' | 'warning' | 'accent'
 

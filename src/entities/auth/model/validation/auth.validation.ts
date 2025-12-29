@@ -1,6 +1,6 @@
 import {z} from 'zod';
-import {Languages, UserRoleArray} from '@shared/types/api.types';
 import {createCommonValidations, TranslationFunction} from '@shared/validation/common.validation';
+import {Languages, UserRoleArray} from "@shared/types/enums.types.ts";
 
 export const createAuthSchemas = (t: TranslationFunction) => {
   const validation = createCommonValidations(t);

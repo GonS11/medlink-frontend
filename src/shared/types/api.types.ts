@@ -49,28 +49,6 @@ export interface PageResponse<T> {
   empty: boolean
 }
 
-export const UserRoleObject = {
-  ADMIN: 'ADMIN',
-  DOCTOR: 'DOCTOR',
-  NURSE: 'NURSE',
-  RECEPTIONIST: 'RECEPTIONIST',
-  PATIENT: 'PATIENT',
-  PHARMACIST: 'PHARMACIST',
-  TECHNICIAN: 'TECHNICIAN',
-  LABORATORY_STAFF: 'LABORATORY_STAFF',
-  RADIOLOGIST: 'RADIOLOGIST',
-  SOCIAL_WORKER: 'SOCIAL_WORKER',
-} as const;
-
-export const UserRoleArray = Object.values(UserRoleObject) as unknown as [string, ...string[]];
-
-export type UserRoleType = typeof UserRoleObject[keyof typeof UserRoleObject];
-
-export enum Languages {
-  EN = 'EN',
-  ES = 'ES',
-}
-
 // Utility types
 export type Nullable<T> = T | null
 export type Optional<T> = T | undefined

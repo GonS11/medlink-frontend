@@ -14,7 +14,7 @@
  * Para usar permisos, importa directamente de permissions.config.ts
  */
 
-import type {UserRoleType} from '@shared/types/api.types'
+import type {UserRoleType} from '@shared/types/enums.types'
 import type {Permission as ConfigPermission} from '@shared/config/permissions.config'
 
 /**

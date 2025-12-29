@@ -34,18 +34,11 @@ export const useUserStore = defineStore('user', () => {
     users.value = users.value.filter(user => user.id !== userId)
   }
 
-  // ✅ Acción asíncrona para cargar usuarios
   async function getAllUsers(page = 0, size = 10) {
-    try {
-      // Usamos el servicio importado.
-      // Nota: Pasamos params como objeto { page, size }
-      const response = await userService.getAllUsers({page, size})
+    const response = await userService.getAllUsers({page, size})
 
-      users.value = response.content
-      pagination.value = response
-    } catch (error) {
-      console.error('Error fetching users:', error)
-    }
+    users.value = response.content
+    pagination.value = response
   }
 
   return {

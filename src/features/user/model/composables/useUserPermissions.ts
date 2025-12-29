@@ -1,7 +1,7 @@
 import {computed} from 'vue'
 import {usePermissions} from '@shared/composables/usePermissions'
 import {useRole} from '@shared/composables/useUserRole'
-import type {UserRoleType} from '@shared/types/api.types'
+import type {UserRoleType} from '@shared/types/enums.types'
 
 export function useUserPermissions() {
   const {can} = usePermissions()

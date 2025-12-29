@@ -1,6 +1,6 @@
 import {computed} from 'vue';
-import {UserRoleType} from '@shared/types/api.types';
 import {useAuthStore} from "@entities/auth/model/store/auth.store.ts";
+import {UserRoleType} from "@shared/types/enums.types.ts";
 
 export function useRole() {
   const authStore = useAuthStore();

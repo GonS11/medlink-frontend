@@ -1,7 +1,7 @@
 import type {Directive, DirectiveBinding} from 'vue'
 import {useAuthStore} from '@entities/auth/model/store/auth.store'
-import type {UserRoleType} from '@shared/types/api.types'
 import {ROLE_PERMISSIONS, type Permission} from '@shared/config/permissions.config'
+import {UserRoleType} from "@shared/types/enums.types.ts";
 
 /**
  * Directiva v-can

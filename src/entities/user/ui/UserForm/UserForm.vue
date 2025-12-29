@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import {useI18n} from 'vue-i18n'
 import {useUserForm} from '@entities/user/model/composables/useUserForm'
-import {UserRoleArray} from '@shared/types/api.types'
 import type {UserFormProps} from '@entities/user/model/types/user.ui.types'
-
 import FormComponent from '@shared/ui/components/atoms/FormComponent/FormComponent.vue'
 import FormSection from '@shared/ui/components/atoms/FormSection/FormSection.vue'
 import FormLayout from '@shared/ui/components/atoms/FormLayout/FormLayout.vue'
@@ -11,6 +9,7 @@ import InputComponent from '@shared/ui/components/atoms/InputComponent/InputComp
 import SelectComponent from '@shared/ui/components/atoms/SelectComponent/SelectComponent.vue'
 import CheckboxComponent from '@shared/ui/components/atoms/CheckBoxComponent/CheckboxComponent.vue'
 import ButtonComponent from '@shared/ui/components/atoms/ButtonComponent/ButtonComponent.vue'
+import {UserRoleArray} from "@shared/types/enums.types.ts";
 
 const props = defineProps<UserFormProps>()
 const emit = defineEmits<{

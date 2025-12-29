@@ -2,9 +2,9 @@ import {computed} from 'vue'
 import {useI18n} from 'vue-i18n'
 import {useForm} from '@shared/composables/useForm'
 import {createAuthSchemas, type RegisterFormData} from '@entities/auth/model/validation/auth.validation'
-import {UserRoleArray, Languages} from '@shared/types/api.types'
 import type {RegisterRequest} from '@entities/auth/model/types/auth.types'
 import {UseRegisterFormOptions} from "@features/auth/model/types/auth.feature.types.ts";
+import {Languages, UserRoleArray} from "@shared/types/enums.types.ts";
 
 export function useRegisterForm(options: UseRegisterFormOptions) {
   const {onSubmit} = options

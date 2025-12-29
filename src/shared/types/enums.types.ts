@@ -1,0 +1,43 @@
+export const UserRoleObject = {
+  ADMIN: 'ADMIN',
+  DOCTOR: 'DOCTOR',
+  NURSE: 'NURSE',
+  RECEPTIONIST: 'RECEPTIONIST',
+  PATIENT: 'PATIENT',
+  PHARMACIST: 'PHARMACIST',
+  TECHNICIAN: 'TECHNICIAN',
+  LABORATORY_STAFF: 'LABORATORY_STAFF',
+  RADIOLOGIST: 'RADIOLOGIST',
+  SOCIAL_WORKER: 'SOCIAL_WORKER',
+} as const;
+
+export const UserRoleArray = Object.values(UserRoleObject) as unknown as [string, ...string[]];
+
+export type UserRoleType = typeof UserRoleObject[keyof typeof UserRoleObject];
+
+export enum Languages {
+  EN = 'EN',
+  ES = 'ES',
+}
+
+export enum AutonomousCommunity {
+  ANDALUCIA = "ANDALUCIA",
+  ARAGON = "ARAGON",
+  ASTURIAS = "ASTURIAS",
+  BALEARES = "BALEARES",
+  CANARIAS = "CANARIAS",
+  CANTABRIA = "CANTABRIA",
+  CASTILLA_LA_MANCHA = "CASTILLA_LA_MANCHA",
+  CASTILLA_Y_LEON = "CASTILLA_Y_LEON",
+  CATALUNA = "CATALUNA",
+  COMUNIDAD_VALENCIANA = "COMUNIDAD_VALENCIANA",
+  EXTREMADURA = "EXTREMADURA",
+  GALICIA = "GALICIA",
+  MADRID = "MADRID",
+  MURCIA = "MURCIA",
+  NAVARRA = "NAVARRA",
+  PAIS_VASCO = "PAIS_VASCO",
+  LA_RIOJA = "LA_RIOJA",
+  CEUTA = "CEUTA",
+  MELILLA = "MELILLA"
+}
