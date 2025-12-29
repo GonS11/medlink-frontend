@@ -33,7 +33,7 @@ const {form, errors, rememberMe, handleSubmit, handleInput, handleBlur} = useLog
     :subtitle="$t('auth.loginSubtitle')"
     max-width="md"
     :loading="loading"
-    @submit="handleSubmit"
+    @submit.prevent="handleSubmit"
   >
     <FormLayout gap="lg">
       <InputComponent
