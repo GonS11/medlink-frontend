@@ -3,9 +3,8 @@ import {createPinia} from 'pinia'
 import Toast from 'vue-toastification'
 import 'vue-toastification/dist/index.css'
 import App from './app/App.vue'
-import router from '@app/providers/router/router'
-import {i18n} from './app/providers/i18n'
 import permissionDirectives from '@shared/directives/permission.directive'
+import {i18n, router} from "@/app";
 
 const app = createApp(App)
 

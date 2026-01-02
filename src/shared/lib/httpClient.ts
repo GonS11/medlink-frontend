@@ -1,10 +1,10 @@
 import axios, {AxiosInstance, AxiosError, InternalAxiosRequestConfig} from 'axios'
 import type {ApiResponse} from '@shared/types/api.types'
-import {APP_CONFIG, STORAGE_KEYS} from '@shared/constants/app.constants'
 import {storage} from '@shared/utils/storage.utils'
 import {ROUTES} from "@shared/constants/routes.constants"
-import {useUiStore} from '@shared/stores/ui.store'
+import {useUiStore} from '@app/stores/ui.store.ts'
 import {transformFromBackend, transformToBackend} from "@shared/lib/fields-transformers.ts";
+import {APP_CONFIG, STORAGE_KEYS} from "@/app";
 
 const PUBLIC_API_PATHS = [
   '/auth/login',
@@ -34,7 +34,6 @@ httpClient.interceptors.request.use(
       config.headers.Authorization = `Bearer ${token}`
     }
 
-    // ✅ Transformar TODOS los campos automáticamente
     if (config.data) {
       config.data = transformToBackend(config.data)
     }
@@ -57,7 +56,6 @@ httpClient.interceptors.response.use(
     const uiStore = useUiStore()
     uiStore.stopLoading()
 
-    // ✅ Transformar TODOS los campos automáticamente
     if (response.data?.data) {
       transformFromBackend(response.data.data)
     }

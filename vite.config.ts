@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [
     vue(),
     VueI18nPlugin({
-      include: [fileURLToPath(new URL('./src/app/providers/locales/**', import.meta.url))],
+      include: [fileURLToPath(new URL('./src/app/providers/i18n/locales/**', import.meta.url))], // ✅ ACTUALIZADO
     }),
   ],
   resolve: {

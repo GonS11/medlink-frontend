@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {computed} from 'vue'
 import {useI18n} from 'vue-i18n'
-import {getCurrentLanguageCode, setLanguage} from '@app/providers/i18n'
+import {getCurrentLanguageCode, setLanguage} from '@app/providers/i18n/i18n.ts'
 import {useRouter} from 'vue-router'
 
 import ButtonComponent from '@shared/ui/components/atoms/ButtonComponent/ButtonComponent.vue'

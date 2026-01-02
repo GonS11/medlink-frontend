@@ -1,9 +1,9 @@
 import {createI18n} from 'vue-i18n'
-import en from './locales/en.json'
-import es from './locales/es.json'
-import {LANGUAGE_CONFIG, STORAGE_KEYS} from '@shared/constants/app.constants'
-import {storage} from '@shared/utils/storage.utils'
-import {LanguageCode, type LanguageCodeType} from '@shared/types/enums.types'
+import en from '@app/providers/i18n/locales/en.json'
+import es from '@app/providers/i18n/locales/es.json'
+import {storage} from '@shared/utils/storage.utils.ts'
+import {LanguageCode, type LanguageCodeType} from '@shared/types/enums.types.ts'
+import {LANGUAGE_CONFIG, STORAGE_KEYS} from "@/app";
 
 // ========================================
 // MAPEO: LanguageCode ↔ i18n locale

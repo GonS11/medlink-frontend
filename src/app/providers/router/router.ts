@@ -179,7 +179,7 @@ const routes: RouteRecordRaw[] = [
   },
 ]
 
-const router = createRouter({
+export const router = createRouter({
   history: createWebHistory(),
   routes,
   scrollBehavior(_to, _from, savedPosition) {
@@ -194,7 +194,6 @@ router.beforeEach((to, _from, next) => {
   const authStore = useAuthStore()
   const isAuthenticated = authStore.isAuthenticated
 
-  // Usamos matched para heredar correctamente el meta.requiresAuth del padre
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth !== false)
 
   if (requiresAuth && !isAuthenticated) {
@@ -204,7 +203,6 @@ router.beforeEach((to, _from, next) => {
     })
   }
 
-  // Redirección por rol si intenta entrar a login estando autenticado
   if (isAuthenticated && PUBLIC_ROUTES.includes(to.path as any)) {
     const userRole = authStore.userRole
     const defaultRoute = userRole
@@ -222,5 +220,3 @@ declare module 'vue-router' {
     layout?: 'default' | 'auth' | 'error' | 'admin'
   }
 }
-
-export default router
