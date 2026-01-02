@@ -6,7 +6,7 @@ import type {UpdateUserFormData} from '@entities/user/model/validation/user.vali
 import ButtonComponent from '@shared/ui/components/atoms/ButtonComponent/ButtonComponent.vue'
 import CardComponent from '@shared/ui/components/atoms/CardComponent/CardComponent.vue'
 import UserForm from '@entities/user/ui/UserForm/UserForm.vue'
-import {getInitials} from '@shared/utils/format.utils'
+import {getInitials} from '@shared/lib/format.ts'
 import {useUserCrud} from "@entities/user/model/composables/useUserCrud.ts";
 
 const {loading} = useUserCrud()

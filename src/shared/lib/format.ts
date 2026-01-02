@@ -1,4 +1,4 @@
-import {LanguageCode, type LanguageCodeType} from '@shared/types/enums.types'
+import {LanguageCode, type LanguageCodeType} from '@shared/types/enums.types.ts'
 
 /**
  * Mapeo de LanguageCode a locale BCP 47

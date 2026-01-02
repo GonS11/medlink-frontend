@@ -1,4 +1,4 @@
-import httpClient from '@shared/lib/httpClient'
+import httpClient from '@shared/api/httpClient.ts'
 import type {ApiResponse} from '@shared/types/api.types'
 import type {
   LoginRequest,

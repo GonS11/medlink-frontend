@@ -1,5 +1,5 @@
 import {ApiResponse, PageResponse, PaginationParams} from "@shared/types/api.types.ts";
-import httpClient from "@shared/lib/httpClient.ts";
+import httpClient from "@shared/api/httpClient.ts";
 import {
   CreateHealthCenterRequest,
   HealthCenterResponse,

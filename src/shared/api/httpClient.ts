@@ -1,9 +1,9 @@
 import axios, {AxiosInstance, AxiosError, InternalAxiosRequestConfig} from 'axios'
-import type {ApiResponse} from '@shared/types/api.types'
-import {storage} from '@shared/utils/storage.utils'
-import {ROUTES} from "@shared/constants/routes.constants"
+import type {ApiResponse} from '@shared/types/api.types.ts'
+import {storage} from '@shared/lib/storage.ts'
+import {ROUTES} from "@shared/constants/routes.constants.ts"
 import {useUiStore} from '@app/stores/ui.store.ts'
-import {transformFromBackend, transformToBackend} from "@shared/lib/fields-transformers.ts";
+import {transformFromBackend, transformToBackend} from "@shared/api/fields-transformers.ts";
 import {APP_CONFIG, STORAGE_KEYS} from "@/app";
 
 const PUBLIC_API_PATHS = [

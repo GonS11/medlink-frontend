@@ -1,4 +1,4 @@
-import httpClient from "@shared/lib/httpClient.ts";
+import httpClient from "@shared/api/httpClient.ts";
 import {ApiResponse, PageResponse, PaginationParams} from "@shared/types/api.types.ts";
 import type {UserResponse, UpdateUserRequest} from "../model/types/user.types";
 import {RegisterRequest} from "@entities/auth/model/types/auth.types.ts";

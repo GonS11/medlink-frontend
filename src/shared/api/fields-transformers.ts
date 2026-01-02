@@ -11,7 +11,7 @@ import {
   HealthCenterLevel,
   HEALTH_CENTER_LEVEL_DISPLAY_NAMES,
   HEALTH_CENTER_LEVEL_FROM_DISPLAY,
-} from '@shared/types/enums.types'
+} from '@shared/types/enums.types.ts'
 
 // ========================================
 // TIPOS

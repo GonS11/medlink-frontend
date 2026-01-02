@@ -1,7 +1,7 @@
 import {defineStore} from 'pinia'
 import {ref, computed} from 'vue'
 import type {UserInfo} from '@entities/user/model/types/user.types'
-import {storage} from '@shared/utils/storage.utils'
+import {storage} from '@shared/lib/storage.ts'
 import {STORAGE_KEYS} from "@/app";
 
 export const useAuthStore = defineStore('auth', () => {

@@ -1,4 +1,4 @@
-import httpClient from "@shared/lib/httpClient.ts";
+import httpClient from "@shared/api/httpClient.ts";
 import {ChangePasswordRequest, LockAccountRequest} from "../model/types/user.types";
 
 export const changePassword = async (userId: number, data: ChangePasswordRequest) => {

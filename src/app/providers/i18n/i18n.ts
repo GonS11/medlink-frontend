@@ -1,7 +1,7 @@
 import {createI18n} from 'vue-i18n'
 import en from '@app/providers/i18n/locales/en.json'
 import es from '@app/providers/i18n/locales/es.json'
-import {storage} from '@shared/utils/storage.utils.ts'
+import {storage} from '@shared/lib/storage.ts'
 import {LanguageCode, type LanguageCodeType} from '@shared/types/enums.types.ts'
 import {LANGUAGE_CONFIG, STORAGE_KEYS} from "@/app";
 

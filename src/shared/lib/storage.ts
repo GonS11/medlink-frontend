@@ -1,4 +1,4 @@
-import {safeJsonParse} from './format.utils'
+import {safeJsonParse} from './format.ts'
 
 /**
  * Storage helpers
