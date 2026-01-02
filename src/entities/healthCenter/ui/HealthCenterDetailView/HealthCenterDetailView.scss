@@ -1,0 +1,136 @@
+@use '@/shared/styles/_variables' as *;
+
+.health-center-view {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xl;
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    gap: $spacing-xl;
+
+    @media (max-width: $breakpoint-sm) {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  }
+
+  &__icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    min-width: 80px;
+    border-radius: 50%;
+    background: var(--color-primary-light);
+    margin-right: 1.5rem;
+
+    @media (max-width: 768px) {
+      width: 60px;
+      height: 60px;
+      min-width: 60px;
+      margin-right: 1rem;
+    }
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    color: var(--color-primary);
+
+    @media (max-width: 768px) {
+      width: 36px;
+      height: 36px;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+      fill: currentColor;
+    }
+  }
+
+  &__title-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+  }
+
+  &__name {
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-bold;
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  &__subtitle {
+    font-size: $font-size-base;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  &__badges {
+    margin-top: $spacing-sm;
+    display: flex;
+    gap: $spacing-sm;
+    flex-wrap: wrap;
+
+    @media (max-width: $breakpoint-sm) {
+      justify-content: center;
+    }
+  }
+
+  &__divider {
+    border: 0;
+    border-top: 1px solid var(--border-color-light);
+    margin: 0;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-xl;
+
+    @media (min-width: $breakpoint-lg) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &__section--full {
+    grid-column: 1 / -1;
+  }
+
+  &__services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: $spacing-md;
+  }
+
+  &__link {
+    color: var(--color-primary);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__accreditations {
+    margin: 0;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    white-space: pre-wrap;
+  }
+}
+
+.mb-2 {
+  margin-bottom: $spacing-sm;
+}

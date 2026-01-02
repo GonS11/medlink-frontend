@@ -1,0 +1,64 @@
+.health-centers-table {
+  &__code-cell {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+  }
+
+  &__name-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  &__name {
+    font-weight: 500;
+    color: var(--color-text-primary);
+  }
+
+  &__subtitle {
+    font-size: 0.75rem;
+    color: var(--color-text-tertiary);
+  }
+
+  &__location {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  &__location-main {
+    font-weight: 500;
+    color: var(--color-text-primary);
+  }
+
+  &__location-sub {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+  }
+
+  &__services {
+    display: flex;
+    gap: 0.25rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  &__no-services {
+    color: var(--color-text-tertiary);
+    font-size: 0.875rem;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 0.25rem;
+    justify-content: flex-end;
+  }
+
+  &__action-btn {
+    &--danger:hover {
+      color: var(--color-error);
+    }
+  }
+}

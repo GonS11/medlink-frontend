@@ -1,0 +1,46 @@
+@use '@/shared/styles/_variables' as *;
+
+.health-center-detail-page {
+  // Estado vacío: "No encontrado"
+  &__empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-3xl;
+    text-align: center;
+    background-color: var(--bg-surface);
+    border-radius: $radius-lg;
+    border: 1px dashed var(--border-color);
+  }
+
+  &__icon {
+    font-size: 4rem;
+    margin-bottom: $spacing-md;
+  }
+
+  &__title {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    color: var(--text-primary);
+    margin: 0 0 $spacing-sm;
+  }
+
+  &__description {
+    color: var(--text-secondary);
+    margin-bottom: $spacing-lg;
+    max-width: 500px;
+  }
+
+  // Placeholder para estadísticas
+  &__statistics-placeholder {
+    padding: $spacing-2xl;
+    text-align: center;
+    color: var(--text-secondary);
+
+    p {
+      font-size: $font-size-lg;
+      margin: 0;
+    }
+  }
+}
