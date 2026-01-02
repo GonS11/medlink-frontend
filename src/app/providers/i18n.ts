@@ -3,35 +3,133 @@ import en from './locales/en.json'
 import es from './locales/es.json'
 import {LANGUAGE_CONFIG, STORAGE_KEYS} from '@shared/constants/app.constants'
 import {storage} from '@shared/utils/storage.utils'
+import {LanguageCode, type LanguageCodeType} from '@shared/types/enums.types'
 
-type SupportedLocale = (typeof LANGUAGE_CONFIG.supportedLanguages)[number]
+// ========================================
+// MAPEO: LanguageCode ↔ i18n locale
+// ========================================
 
-const savedLanguage = (storage.get<string>(STORAGE_KEYS.LANGUAGE) || LANGUAGE_CONFIG.defaultLanguage) as SupportedLocale
+/**
+ * Mapeo de LanguageCode (mayúsculas) a locale de i18n (minúsculas)
+ * LanguageCode.ES -> 'es'
+ */
+const LANGUAGE_CODE_TO_LOCALE: Record<LanguageCodeType, string> = {
+  [LanguageCode.ES]: 'es',
+  [LanguageCode.EN]: 'en',
+  [LanguageCode.CA]: 'ca',
+  [LanguageCode.EU]: 'eu',
+  [LanguageCode.GL]: 'gl',
+}
+
+/**
+ * Mapeo inverso: locale de i18n (minúsculas) a LanguageCode (mayúsculas)
+ * 'es' -> LanguageCode.ES
+ */
+const LOCALE_TO_LANGUAGE_CODE: Record<string, LanguageCodeType> = {
+  'es': LanguageCode.ES,
+  'en': LanguageCode.EN,
+  'ca': LanguageCode.CA,
+  'eu': LanguageCode.EU,
+  'gl': LanguageCode.GL,
+}
+
+/**
+ * Convierte LanguageCode a locale de i18n
+ */
+export function languageCodeToLocale(code: LanguageCodeType): string {
+  return LANGUAGE_CODE_TO_LOCALE[code] || 'en'
+}
+
+/**
+ * Convierte locale de i18n a LanguageCode
+ */
+export function localeToLanguageCode(locale: string): LanguageCodeType {
+  return LOCALE_TO_LANGUAGE_CODE[locale] || LanguageCode.EN
+}
+
+// ========================================
+// CONFIGURACIÓN i18n
+// ========================================
+
+/**
+ * Tipos soportados de locale para i18n (minúsculas)
+ */
+type SupportedLocale = 'en' | 'es' | 'ca' | 'eu' | 'gl'
+
+/**
+ * Obtiene el idioma guardado y lo convierte a locale de i18n
+ */
+const getSavedLocale = (): SupportedLocale => {
+  const savedLanguageCode = storage.get<LanguageCodeType>(STORAGE_KEYS.LANGUAGE)
+
+  if (savedLanguageCode) {
+    return languageCodeToLocale(savedLanguageCode) as SupportedLocale
+  }
+
+  return languageCodeToLocale(LANGUAGE_CONFIG.defaultLanguage) as SupportedLocale
+}
+
+const initialLocale = getSavedLocale()
+
+// ========================================
+// INSTANCIA i18n
+// ========================================
 
 export const i18n = createI18n({
   legacy: false,
-  locale: savedLanguage,
-  fallbackLocale: LANGUAGE_CONFIG.defaultLanguage,
+  locale: initialLocale,
+  fallbackLocale: languageCodeToLocale(LANGUAGE_CONFIG.defaultLanguage),
   messages: {
     en,
     es,
+    // ca, eu, gl se pueden agregar cuando estén disponibles
   },
   globalInjection: true,
 })
 
+// ========================================
+// FUNCIONES DE GESTIÓN DE IDIOMA
+// ========================================
+
 /**
- * Cambia el idioma de la aplicación y lo guarda en el almacenamiento.
- * @param locale La cadena de idioma (ej. 'en', 'es').
+ * Cambia el idioma de la aplicación usando LanguageCode
+ * @param languageCode - Código de idioma del enum LanguageCode
+ *
+ * @example
+ * setLanguage(LanguageCode.ES)
+ * setLanguage(LanguageCode.EN)
  */
-export function setLanguage(locale: string) {
-  // Aseguramos que el locale sea uno de los soportados
-  if (LANGUAGE_CONFIG.supportedLanguages.includes(locale)) {
-    const supportedLocale = locale as SupportedLocale
-    i18n.global.locale.value = supportedLocale
-    storage.set(STORAGE_KEYS.LANGUAGE, supportedLocale)
-    document.documentElement.lang = supportedLocale
+export function setLanguage(languageCode: LanguageCodeType): void {
+  // Validar que el idioma esté soportado
+  if (!LANGUAGE_CONFIG.supportedLanguages.includes(languageCode)) {
+    console.warn(`Language ${languageCode} not supported, falling back to ${LANGUAGE_CONFIG.defaultLanguage}`)
+    languageCode = LANGUAGE_CONFIG.defaultLanguage
   }
+  // Convertir LanguageCode a locale de i18n
+  const locale = languageCodeToLocale(languageCode) as SupportedLocale
+  // Actualizar i18n
+  i18n.global.locale.value = locale
+  // Guardar en storage (guardamos el LanguageCode, no el locale)
+  storage.set(STORAGE_KEYS.LANGUAGE, languageCode)
+  // Actualizar atributo lang del documento
+  document.documentElement.lang = locale
 }
 
-// Inicializamos el atributo 'lang' del documento
-document.documentElement.lang = savedLanguage
+/**
+ * Obtiene el LanguageCode actual
+ * @returns El código de idioma actual
+ */
+export function getCurrentLanguageCode(): LanguageCodeType {
+  const currentLocale = i18n.global.locale.value
+  return localeToLanguageCode(currentLocale)
+}
+
+/**
+ * Obtiene el locale actual de i18n
+ * @returns El locale actual
+ */
+export function getCurrentLocale(): string {
+  return i18n.global.locale.value
+}
+
+document.documentElement.lang = initialLocale

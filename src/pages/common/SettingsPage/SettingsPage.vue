@@ -1,23 +1,30 @@
 <script setup lang="ts">
 import {computed} from 'vue'
 import {useI18n} from 'vue-i18n'
-import {setLanguage} from '@app/providers/i18n'
+import {getCurrentLanguageCode, setLanguage} from '@app/providers/i18n'
 import {useRouter} from 'vue-router'
 
 import ButtonComponent from '@shared/ui/components/atoms/ButtonComponent/ButtonComponent.vue'
 import CardComponent from '@shared/ui/components/atoms/CardComponent/CardComponent.vue'
 import ChangePasswordForm from '@features/password/ui/ChangePasswordForm/ChangePasswordForm.vue'
+import {LanguageCode, LanguageCodeType} from "@shared/types/enums.types.ts";
 
-const {locale, t} = useI18n()
+const {t} = useI18n()
 const router = useRouter()
 
 const languages = [
-  {code: 'en', name: 'English'},
-  {code: 'es', name: 'Español'},
+  {code: LanguageCode.EN, name: 'English'},
+  {code: LanguageCode.ES, name: 'Español'},
+  {code: LanguageCode.CA, name: 'Català'},
+  {code: LanguageCode.EU, name: 'Euskara'},
+  {code: LanguageCode.GL, name: 'Galego'},
 ]
 
-const currentLanguage = computed(() => locale.value)
-const changeLanguage = (langCode: string) => setLanguage(langCode)
+const currentLanguage = computed(() => getCurrentLanguageCode())
+
+const changeLanguage = (langCode: LanguageCodeType) => {
+  setLanguage(langCode)
+}
 </script>
 
 <template>

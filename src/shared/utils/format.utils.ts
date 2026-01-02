@@ -1,11 +1,40 @@
+import {LanguageCode, type LanguageCodeType} from '@shared/types/enums.types'
+
+/**
+ * Mapeo de LanguageCode a locale BCP 47
+ * LanguageCode es para el backend, locale es para formateo de fechas/números
+ */
+const LANGUAGE_TO_LOCALE: Record<LanguageCodeType, string> = {
+  [LanguageCode.ES]: 'es-ES',
+  [LanguageCode.EN]: 'en-US',
+  [LanguageCode.CA]: 'ca-ES',
+  [LanguageCode.EU]: 'eu-ES',
+  [LanguageCode.GL]: 'gl-ES',
+}
+
+/**
+ * Obtiene el locale correspondiente al código de idioma
+ */
+export function getLocaleFromLanguageCode(languageCode: LanguageCodeType): string {
+  return LANGUAGE_TO_LOCALE[languageCode] || 'en-US'
+}
+
 /**
  * Format date to locale string
+ * @param date - Fecha a formatear
+ * @param languageCode - Código de idioma (opcional, usa 'es-ES' por defecto)
  */
-export function formatDate(date: Date | string | null | undefined, locale = 'es-ES'): string {
+export function formatDate(
+  date: Date | string | null | undefined,
+  languageCode?: LanguageCodeType
+): string {
   if (!date) {
     return '-'
   }
+
+  const locale = languageCode ? getLocaleFromLanguageCode(languageCode) : 'es-ES'
   const dateObj = typeof date === 'string' ? new Date(date) : date
+
   return dateObj.toLocaleDateString(locale, {
     year: 'numeric',
     month: 'long',
@@ -15,12 +44,20 @@ export function formatDate(date: Date | string | null | undefined, locale = 'es-
 
 /**
  * Format date time to locale string
+ * @param date - Fecha a formatear
+ * @param languageCode - Código de idioma (opcional, usa 'es-ES' por defecto)
  */
-export function formatDateTime(date: Date | string | null | undefined, locale = 'es-ES'): string {
+export function formatDateTime(
+  date: Date | string | null | undefined,
+  languageCode?: LanguageCodeType
+): string {
   if (!date) {
     return '-'
   }
+
+  const locale = languageCode ? getLocaleFromLanguageCode(languageCode) : 'es-ES'
   const dateObj = typeof date === 'string' ? new Date(date) : date
+
   return dateObj.toLocaleString(locale, {
     year: 'numeric',
     month: 'long',
