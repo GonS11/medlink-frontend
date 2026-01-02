@@ -1,7 +1,9 @@
 <script setup lang="ts">
-defineProps<{
-  label: string;
-}>();
+withDefaults(defineProps<{
+  label?: string
+}>(), {
+  label: 'Check icon'
+})
 </script>
 
 <template>

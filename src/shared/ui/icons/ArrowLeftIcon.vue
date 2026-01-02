@@ -1,7 +1,9 @@
 <script setup lang="ts">
-defineProps<{
+withDefaults(defineProps<{
   label?: string
-}>()
+}>(), {
+  label: 'Arrow left icon'
+})
 </script>
 
 <template>

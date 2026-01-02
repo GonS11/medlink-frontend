@@ -6,6 +6,9 @@
       "register": "Start caring smarter today"
     }
   },
+  "modal": {
+    "close": "Close modal"
+  },
   "common": {
     "errorOccurred": "An error occurred",
     "lightTheme": "Light theme activated",
@@ -40,6 +43,8 @@
     "inactive": "Inactive",
     "all": "All",
     "noDataFound": "No data found",
+    "goBack": "Go Back",
+    "export": "Export",
     "entity": {
       "create": "Create {entity} successfully",
       "update": "Update {entity} successfully",
@@ -61,24 +66,53 @@
   },
   "fields": {
     "id": "ID",
+    "code": "Code",
     "name": "Name",
     "firstName": "First Name",
     "lastName": "Last Name",
-    "language": "Language",
     "secondLastName": "Second Last Name",
     "email": "Email",
     "password": "Password",
     "confirmPassword": "Confirm password",
     "phone": "Phone",
     "mobile": "Mobile Phone",
+    "mobilePhone": "Mobile Phone",
+    "emergencyPhone": "Emergency Phone",
     "role": "Role",
+    "language": "Language",
     "preferredLanguage": "Preferred Language",
     "emailVerified": "Email Verified",
     "lastLogin": "Last Login",
     "createdAt": "Created At",
     "updatedAt": "Updated At",
     "status": "Status",
-    "isActive": "Account Status"
+    "isActive": "Account Status",
+    "type": "Type",
+    "level": "Level",
+    "autonomousCommunity": "Autonomous Community",
+    "address": "Address",
+    "city": "City",
+    "province": "Province",
+    "postalCode": "Postal Code",
+    "website": "Website",
+    "location": "Location",
+    "beds": "Beds",
+    "totalBeds": "Total Beds",
+    "icuBeds": "ICU Beds",
+    "emergencyBeds": "Emergency Beds",
+    "bedsDetail": "Bed Distribution",
+    "hasEmergency": "Has Emergency Service",
+    "emergency": "Emergency",
+    "hasICU": "Has ICU",
+    "icu": "ICU",
+    "hasHeliport": "Has Heliport",
+    "heliport": "Heliport",
+    "isTeachingHospital": "Teaching Hospital",
+    "teaching": "Teaching",
+    "isPublic": "Public Institution",
+    "ownership": "Ownership",
+    "accreditations": "Accreditations",
+    "services": "Services"
   },
   "auth": {
     "login": "Login",
@@ -107,6 +141,64 @@
     "EN": "English",
     "ES": "Spanish"
   },
+  "autonomousCommunities": {
+    "ANDALUCIA": "Andalusia",
+    "Andalucía": "Andalusia",
+    "ARAGON": "Aragon",
+    "Aragón": "Aragon",
+    "ASTURIAS": "Asturias",
+    "BALEARES": "Balearic Islands",
+    "CANARIAS": "Canary Islands",
+    "CANTABRIA": "Cantabria",
+    "CASTILLA_LA_MANCHA": "Castilla-La Mancha",
+    "CASTILLA_Y_LEON": "Castilla y León",
+    "CATALUNA": "Catalonia",
+    "Cataluña": "Catalonia",
+    "COMUNIDAD_VALENCIANA": "Valencian Community",
+    "EXTREMADURA": "Extremadura",
+    "GALICIA": "Galicia",
+    "MADRID": "Madrid",
+    "MURCIA": "Murcia",
+    "NAVARRA": "Navarre",
+    "PAIS_VASCO": "Basque Country",
+    "País Vasco": "Basque Country",
+    "LA_RIOJA": "La Rioja",
+    "CEUTA": "Ceuta",
+    "MELILLA": "Melilla"
+  },
+  "healthCenter": {
+    "name": "Health Center",
+    "plural": "Health Centers",
+    "types": {
+      "HOSPITAL": "Hospital",
+      "Hospital": "Hospital",
+      "PRIMARY_CARE_CENTER": "Primary Care Center",
+      "Primary care center": "Primary Care Center",
+      "SPECIALIZED_CENTER": "Specialized Center",
+      "Specialized center": "Specialized Center",
+      "EMERGENCY_CENTER": "Emergency Center",
+      "Emergency center": "Emergency Center",
+      "MENTAL_HEALTH_CENTER": "Mental Health Center",
+      "Mental health center": "Mental Health Center",
+      "REHABILITATION_CENTER": "Rehabilitation Center",
+      "Rehabilitation center": "Rehabilitation Center"
+    },
+    "levels": {
+      "PRIMARY": "Primary",
+      "Primary": "Primary",
+      "SECONDARY": "Secondary",
+      "Secondary": "Secondary",
+      "TERTIARY": "Tertiary",
+      "Tertiary": "Tertiary"
+    },
+    "public": "Public",
+    "private": "Private",
+    "statistics": "Statistics",
+    "globalStatistics": "Global Statistics",
+    "statisticsComingSoon": "Statistics feature coming soon",
+    "manageDepartments": "Manage Departments",
+    "noHealthCenters": "No health centers found"
+  },
   "entities": {
     "user": {
       "name": "User",
@@ -117,6 +209,7 @@
       "delete": "Delete User",
       "details": "User Details",
       "notFound": "User not found",
+      "notFoundDesc": "The user you're looking for doesn't exist or has been deleted.",
       "noUsers": "No users found",
       "manage": "Manage system users",
       "management": "User Management",
@@ -137,6 +230,8 @@
       "updateProfile": "Update Profile",
       "profileUpdated": "Profile updated successfully",
       "fetchFailed": "Failed to fetch current user",
+      "security": "Security",
+      "securityDescription": "Password and security settings",
       "lock": {
         "action": "Lock Account",
         "duration": "Lock Duration (minutes)",
@@ -164,6 +259,37 @@
         "title": "Change Password",
         "subtitle": "Enter and confirm your new password."
       }
+    },
+    "healthCenter": {
+      "name": "Health Center",
+      "plural": "Health Centers",
+      "view": "View Health Center",
+      "create": "Create Health Center",
+      "edit": "Edit Health Center",
+      "delete": "Delete Health Center",
+      "details": "Health Center Details",
+      "notFound": "Health Center not found",
+      "notFoundDesc": "The health center you're looking for doesn't exist or has been deleted.",
+      "noHealthCenters": "No health centers found",
+      "noData": "No health centers found",
+      "manage": "Manage health centers",
+      "management": "Health Center Management",
+      "managementDescription": "Oversee and manage medical facilities",
+      "deleteConfirm": "Are you sure you want to delete {name}?",
+      "deleteHospitalWarning": "Are you sure you want to delete the hospital {name}? This action cannot be undone.",
+      "basicInfo": "Basic Information",
+      "basicInfoDescription": "General details about the facility",
+      "locationInfo": "Location & Address",
+      "locationInfoDescription": "Geographic and contact location",
+      "contactInfo": "Contact Information",
+      "contactInfoDescription": "Phone numbers and communication details",
+      "capacityInfo": "Capacity & Infrastructure",
+      "capacityDescription": "Information about beds and infrastructure",
+      "services": "Available Services",
+      "servicesDescription": "Medical services and facilities offered",
+      "characteristics": "Characteristics",
+      "characteristicsDescription": "Additional institutional information",
+      "accreditations": "Accreditations & Certifications"
     }
   },
   "dashboard": {
@@ -231,8 +357,16 @@
     "invalidValue": "Invalid value",
     "required": "{field} is required",
     "invalid": "{field} must be valid",
-    "minLength": "{field} must be at least {min} characters long",
+    "invalidPostalCode": "Postal code must be 5 digits",
+    "invalidUrl": "Please enter a valid URL",
+    "mustBeInteger": "Must be an integer",
+    "minValue": "{field} must be at least {min}",
     "maxLength": "{field} must not exceed {max} characters",
+    "minLength": "{field} must be at least {min} characters long",
+    "icuBedsRequired": "ICU beds are required when ICU service is enabled",
+    "emergencyBedsRequired": "Emergency beds are required when emergency service is enabled",
+    "icuBedsCantExceedTotal": "ICU beds cannot exceed total beds",
+    "emergencyBedsCantExceedTotal": "Emergency beds cannot exceed total beds",
     "password": {
       "lowercase": "Must contain at least one lowercase letter",
       "uppercase": "Must contain at least one uppercase letter",
@@ -252,6 +386,7 @@
     },
     "users": {
       "view": "View users",
+      "manage": "Manage users",
       "create": "Create users",
       "edit": "Edit users",
       "delete": "Delete users",
@@ -296,6 +431,7 @@
     },
     "healthCenters": {
       "view": "View health centers",
+      "manage": "Manage health centers",
       "create": "Create centers",
       "edit": "Edit centers",
       "delete": "Delete centers"
@@ -331,7 +467,8 @@
     },
     "settings": {
       "view": "View settings",
-      "edit": "Edit settings"
+      "edit": "Edit settings",
+      "languageDescription": "Choose your preferred language for the application interface"
     },
     "profile": {
       "view": "View profile",
@@ -375,6 +512,12 @@
     "seePassword": "See password icon",
     "hidePassword": "Hide password icon",
     "phone": "Phone icon",
-    "x": "X icon"
+    "x": "X icon",
+    "statistics": "Statistics icon",
+    "departments": "Departments icon",
+    "export": "Export icon",
+    "heliport": "Heliport icon",
+    "emergency": "Emergency icon",
+    "icu": "ICU icon"
   }
 }
