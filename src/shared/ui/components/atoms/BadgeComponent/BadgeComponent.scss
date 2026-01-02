@@ -8,25 +8,68 @@
   white-space: nowrap;
   border-radius: $radius-sm;
   line-height: 1;
+  max-width: 100%;
+  overflow: hidden;
 
+  // Icon styles
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    line-height: 0; // Importante para eliminar espacio extra
+
+    :deep(svg) {
+      display: block;
+      width: 1em;
+      height: 1em;
+
+      // Aplicar color heredado a todos los elementos del SVG
+      * {
+        fill: currentColor;
+        stroke: currentColor;
+      }
+    }
+  }
+
+  // Sizes
   &--sm {
     padding: $spacing-xs $spacing-sm;
     font-size: $font-size-xs;
     gap: $spacing-xs;
+    min-height: 1.75rem;
+
+    .badge__icon :deep(svg) {
+      width: 0.875em;
+      height: 0.875em;
+    }
   }
 
   &--md {
     padding: $spacing-sm $spacing-md;
     font-size: $font-size-sm;
     gap: $spacing-sm;
+    min-height: 2rem;
+
+    .badge__icon :deep(svg) {
+      width: 1em;
+      height: 1em;
+    }
   }
 
   &--lg {
     padding: $spacing-sm $spacing-lg;
     font-size: $font-size-base;
     gap: $spacing-sm;
+    min-height: 2.5rem;
+
+    .badge__icon :deep(svg) {
+      width: 1.25em;
+      height: 1.25em;
+    }
   }
 
+  // Variants
   &--primary {
     background-color: var(--badge-primary-bg);
     color: var(--badge-primary-text);

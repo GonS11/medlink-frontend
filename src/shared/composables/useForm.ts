@@ -8,7 +8,7 @@ const isZodValidationError = (error: unknown): error is ZodValidationError => {
 
 export function useForm<T extends Record<string, any>>(
   initialValues: T,
-  schema?: ZodType<T>,
+  schema?: ZodType<any>,
   t?: (key: string) => string
 ) {
   const form = reactive<T>({...initialValues})
@@ -50,7 +50,6 @@ export function useForm<T extends Record<string, any>>(
       (errors as ErrorRecord<T>)[field] = undefined
       return true
     } catch (error) {
-      // Solo mostrar error si el campo ha sido tocado
       if (!isTouched) {
         return false
       }
@@ -83,18 +82,21 @@ export function useForm<T extends Record<string, any>>(
     })
 
     try {
-      (schema as ZodType<T>).parse(form)
+      (schema as ZodType<any>).parse(form)
       return true
     } catch (error) {
       if (isZodValidationError(error)) {
-        error.errors.forEach(err => {
-          if (err.path.length > 0) {
-            const field = err.path[0] as keyof T
-            (errors as ErrorRecord<T>)[field] = err.message
-          }
-        })
+        if (error.errors && Array.isArray(error.errors)) {
+          error.errors.forEach(err => {
+            if (err.path && err.path.length > 0) {
+              const field = err.path[0] as keyof T
+              (errors as ErrorRecord<T>)[field] = err.message
+            }
+          })
+        }
         return false
       }
+
       return false
     }
   }

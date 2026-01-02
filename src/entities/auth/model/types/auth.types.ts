@@ -1,5 +1,5 @@
-import type {Languages, UserRoleType} from '@shared/types/api.types.ts'
 import type {UserInfo} from '@entities/user/model/types/user.types.ts'
+import {Languages, UserRoleType} from "@shared/types/enums.types.ts";
 
 // Auth Response Types
 export interface AuthResponse {

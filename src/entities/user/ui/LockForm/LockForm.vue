@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {reactive} from 'vue'
+import {reactive, computed} from 'vue'
 import {LockFormData} from "@entities/user/model/types/user.ui.types.ts"
 import FormComponent from '@shared/ui/components/atoms/FormComponent/FormComponent.vue'
 import FormSection from '@shared/ui/components/atoms/FormSection/FormSection.vue'
@@ -7,6 +7,7 @@ import FormLayout from '@shared/ui/components/atoms/FormLayout/FormLayout.vue'
 import InputComponent from '@shared/ui/components/atoms/InputComponent/InputComponent.vue'
 import TextAreaComponent from '@shared/ui/components/atoms/TextAreaComponent/TextAreaComponent.vue'
 import ButtonComponent from '@shared/ui/components/atoms/ButtonComponent/ButtonComponent.vue'
+import CheckboxComponent from '@shared/ui/components/atoms/CheckBoxComponent/CheckboxComponent.vue'
 
 interface Props {
   loading?: boolean
@@ -22,13 +23,19 @@ const emit = defineEmits<{
 }>()
 
 const form = reactive({
+  isIndefinite: false,
   duration: 30,
   reason: ''
 })
 
+// ✅ MEJORADO: Computed para determinar si el bloqueo es indefinido
+const effectiveDuration = computed(() => {
+  return form.isIndefinite ? undefined : (form.duration || undefined)
+})
+
 const handleSubmit = () => {
   emit('submit', {
-    durationMinutes: form.duration || undefined,
+    durationMinutes: effectiveDuration.value,
     reason: form.reason || undefined
   })
 }
@@ -48,7 +55,14 @@ const handleSubmit = () => {
       variant="filled"
     >
       <FormLayout gap="lg">
-        <div class="lock-form__duration-wrapper">
+        <!-- ✅ AGREGADO: Checkbox para bloqueo indefinido -->
+        <CheckboxComponent
+          v-model="form.isIndefinite"
+          :label="$t('entities.user.lock.indefinite')"
+        />
+
+        <!-- ✅ MEJORADO: Solo mostrar campo de duración si no es indefinido -->
+        <div v-if="!form.isIndefinite" class="lock-form__duration-wrapper">
           <InputComponent
             v-model="form.duration"
             type="number"
@@ -57,7 +71,7 @@ const handleSubmit = () => {
             :placeholder="$t('entities.user.lock.durationPlaceholder')"
           />
           <span class="lock-form__hint">
-            {{ $t('entities.user.lock.indefiniteNote') }}
+            {{ $t('entities.user.lock.durationHint') }}
           </span>
         </div>
 

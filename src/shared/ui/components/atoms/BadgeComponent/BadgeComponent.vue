@@ -9,6 +9,9 @@ withDefaults(defineProps<BadgeProps>(), {
 
 <template>
   <span :class="['badge', `badge--${variant}`, `badge--${size}`]">
+    <span v-if="icon" class="badge__icon">
+      <component :is="icon"/>
+    </span>
     <slot/>
   </span>
 </template>

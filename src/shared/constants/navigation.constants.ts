@@ -60,7 +60,7 @@ export const MAIN_NAV_ITEMS: NavigationItem[] = [
   // === CENTROS DE SALUD (admin) ===
   {
     id: 'healthCenters',
-    route: ROUTES.ADMIN_HEALTH_CENTERS,
+    route: ROUTES.HEALTH_CENTERS,
     label: 'nav.items.healthCenters',
     icon: HealthCareCenterIcon,
     permissions: ['healthCenters.view'],
@@ -69,7 +69,7 @@ export const MAIN_NAV_ITEMS: NavigationItem[] = [
   // === DEPARTAMENTOS (admin) ===
   {
     id: 'departments',
-    route: ROUTES.ADMIN_DEPARTMENTS,
+    route: ROUTES.DEPARTMENTS,
     label: 'nav.items.departments',
     icon: DepartmentIcon,
     permissions: ['departments.view'],

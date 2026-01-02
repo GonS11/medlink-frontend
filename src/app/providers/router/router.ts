@@ -65,18 +65,24 @@ const routes: RouteRecordRaw[] = [
 
       // === CENTROS DE SALUD (solo admin) ===
       {
-        path: ROUTES.ADMIN_HEALTH_CENTERS,
+        path: ROUTES.HEALTH_CENTERS,
         name: 'HealthCenters',
-        component: () => import('@pages/admin/HealthCentersPage/HealthCentersPage.vue'),
+        component: () => import('@pages/common/HealthCenter/HealthCenterPage/HealthCenterPage.vue'),
         meta: {
           requiresAuth: true,
         },
         beforeEnter: createPermissionGuard('healthCenters.view'),
       },
+      {
+        path: 'health-centers/:id',
+        name: 'HealthCenterDetail',
+        component: () => import('@pages/common/HealthCenter/HealthCenterDetailPage/HealthCenterDetailPage.vue'),
+        beforeEnter: createPermissionGuard('healthCenters.view'),
+      },
 
       // === DEPARTAMENTOS (solo admin) ===
       {
-        path: ROUTES.ADMIN_DEPARTMENTS,
+        path: ROUTES.DEPARTMENTS,
         name: 'Departments',
         component: () => import('@pages/admin/DepartmentsPage/DepartmentsPage.vue'),
         meta: {

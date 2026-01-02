@@ -1,7 +1,7 @@
 import {ref} from 'vue'
 import {useNotification} from '@shared/lib/notification'
-import {useI18n} from "vue-i18n";
-import {AsyncActionOptions} from "@shared/types/composables.types.ts";
+import {useI18n} from "vue-i18n"
+import {AsyncActionOptions} from "@shared/types/composables.types.ts"
 
 export function useAsyncAction() {
   const loading = ref(false)
@@ -49,7 +49,7 @@ export function useAsyncAction() {
         onError(err)
       }
 
-      throw err
+      return null
     } finally {
       loading.value = false
     }

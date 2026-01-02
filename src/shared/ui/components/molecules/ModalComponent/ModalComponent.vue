@@ -2,9 +2,12 @@
 import {watch, onUnmounted} from 'vue'
 import ButtonComponent from '@shared/ui/components/atoms/ButtonComponent/ButtonComponent.vue'
 import XIcon from "@shared/ui/icons/XIcon.vue"
-import {ModalProps} from "@shared/types/component.molecules.types.ts";
-import {ButtonVariant} from "@shared/types/component.atoms.types.ts";
+import {ModalProps} from "@shared/types/component.molecules.types.ts"
+import {ButtonVariant} from "@shared/types/component.atoms.types.ts"
 
+defineOptions({
+  inheritAttrs: false
+})
 
 const props = withDefaults(defineProps<ModalProps>(), {
   variant: 'primary',
@@ -40,7 +43,9 @@ watch(() => props.show, (isShow) => {
 onUnmounted(() => unlockScroll())
 
 const handleBackdrop = () => {
-  if (props.closeOnBackdrop) closeModal()
+  if (props.closeOnBackdrop) {
+    closeModal()
+  }
 }
 </script>
 
@@ -67,10 +72,10 @@ const handleBackdrop = () => {
               :iconPosition="'right'"
               class="modal__close"
               @click="closeModal"
+              :disabled="loading"
               :aria-label="$t('modal.close')"
               :icon="XIcon"
             />
-
           </header>
 
           <div class="modal__body">

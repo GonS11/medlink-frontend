@@ -40,7 +40,7 @@ const handleSubmit = (event: Event) => {
         <SpinnerIcon :label="$t('icons.spinner')" class="form__loader-icon"/>
       </div>
 
-      <form class="form__body" @submit="handleSubmit">
+      <form class="form__body" @submit.prevent="handleSubmit">
         <div class="form__content">
           <slot/>
         </div>

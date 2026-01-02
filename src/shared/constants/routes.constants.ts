@@ -21,11 +21,11 @@ export const ROUTES = {
   USERS_DETAIL: (id: number) => `/users/${id}`,
 
   // === ADMINISTRACIÓN ===
-  ADMIN_HEALTH_CENTERS: '/admin/health-centers',
-  ADMIN_HEALTH_CENTERS_DETAIL: (id: number) => `/admin/health-centers/${id}`,
+  HEALTH_CENTERS: '/health-centers',
+  HEALTH_CENTERS_DETAIL: (id: number) => `/health-centers/${id}`,
 
-  ADMIN_DEPARTMENTS: '/admin/departments',
-  ADMIN_DEPARTMENTS_DETAIL: (id: number) => `/admin/departments/${id}`,
+  DEPARTMENTS: '/departments',
+  DEPARTMENTS_DETAIL: (id: number) => `/departments/${id}`,
 
   ADMIN_SPECIALTIES: '/admin/specialties',
   ADMIN_SPECIALTIES_DETAIL: (id: number) => `/admin/specialties/${id}`,
@@ -62,8 +62,8 @@ export const PROTECTED_ROUTES = [
   ROUTES.PROFILE,
   ROUTES.SETTINGS,
   ROUTES.USERS,
-  ROUTES.ADMIN_HEALTH_CENTERS,
-  ROUTES.ADMIN_DEPARTMENTS,
+  ROUTES.HEALTH_CENTERS,
+  ROUTES.DEPARTMENTS,
   ROUTES.ADMIN_SPECIALTIES,
 ] as const
 

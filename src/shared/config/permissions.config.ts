@@ -196,6 +196,7 @@ export const ROLE_PERMISSIONS: Record<UserRoleType, Partial<Record<Permission, b
     // Usuarios - solo ver y editar PACIENTES
     'users.view': true,
     'users.edit': true,  // Pero con restricción en useUserPermissions
+    'users.create': true,
 
     // Turnos
     'shifts.view': true,

@@ -28,7 +28,7 @@ defineEmits<{
       @back="$emit('back')"
     >
       <template #actions>
-        <slot name="header-actions"/>
+        <slot name="actions"/>
 
         <div class="detail-layout__actions">
           <ButtonComponent
@@ -59,6 +59,8 @@ defineEmits<{
         <slot/>
       </CardComponent>
     </main>
+
+    <slot name="modals"/>
   </div>
 </template>
 
