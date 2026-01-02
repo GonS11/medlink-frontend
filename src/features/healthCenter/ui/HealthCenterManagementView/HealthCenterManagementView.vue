@@ -7,7 +7,7 @@ import ButtonComponent from '@shared/ui/components/atoms/ButtonComponent/ButtonC
 import type {HealthCenterTableAction} from '@features/healthCenter/model/types/healthCenter.feature.types'
 import ModalComponent from "@shared/ui/components/molecules/ModalComponent/ModalComponent.vue"
 import {useHealthCenterManagement} from "@features/healthCenter/model/composables/useHealtCenterManagement.ts";
-import EntityManagementWrapper from "@shared/ui/components/layout/EntityManagementWrapper/EntityManagementWrapper.vue";
+import ManagementWrapper from "@shared/ui/components/layout/ManagementWrapper/ManagementWrapper.vue";
 
 const management = useHealthCenterManagement()
 
@@ -30,7 +30,7 @@ const handleTableAction = (action: HealthCenterTableAction) => {
 </script>
 
 <template>
-  <EntityManagementWrapper
+  <ManagementWrapper
     :title="$t('entities.healthCenter.management')"
     :subtitle="$t('entities.healthCenter.managementDescription')"
     :show-create-button="management.permissions.canCreate.value"
@@ -106,5 +106,5 @@ const handleTableAction = (action: HealthCenterTableAction) => {
         />
       </ModalComponent>
     </template>
-  </EntityManagementWrapper>
+  </ManagementWrapper>
 </template>

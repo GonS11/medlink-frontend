@@ -26,7 +26,7 @@ export interface DetailPageLayoutProps {
   showDelete?: boolean
 }
 
-export interface EntityDetailPageWrapperProps {
+export interface DetailPageLayoutProps {
   title: string
   subtitle?: string
   backRoute: string
@@ -38,7 +38,7 @@ export interface EntityDetailPageWrapperProps {
   showEmpty?: boolean
 }
 
-export interface EntityManagementWrapperProps {
+export interface ManagementPageLayoutProps {
   title: string
   subtitle: string
   showCreateButton?: boolean

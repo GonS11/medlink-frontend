@@ -11,7 +11,7 @@ import type {UserResponse} from '@entities/user/model/types/user.types'
 import UserDetailView from '@entities/user/ui/UserDetailView/UserDetailView.vue'
 import UserForm from '@entities/user/ui/UserForm/UserForm.vue'
 import ModalComponent from "@shared/ui/components/molecules/ModalComponent/ModalComponent.vue"
-import EntityDetailPageWrapper from "@shared/ui/components/layout/EntityDetailPageWrapper/EntityDetailPageWrapper.vue"
+import DetailPageWrapper from "@shared/ui/components/layout/DetailPageWrapper/DetailPageWrapper.vue"
 import UserIcon from "@shared/ui/icons/UserIcon.vue";
 
 const {t} = useI18n()
@@ -64,7 +64,7 @@ const handleDelete = async () => {
 </script>
 
 <template>
-  <EntityDetailPageWrapper
+  <DetailPageWrapper
     :title="user?.fullName || $t('entities.user.details')"
     :subtitle="user?.email"
     :back-route="ROUTES.USERS"
@@ -97,5 +97,5 @@ const handleDelete = async () => {
         />
       </ModalComponent>
     </template>
-  </EntityDetailPageWrapper>
+  </DetailPageWrapper>
 </template>

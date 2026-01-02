@@ -12,7 +12,7 @@ import ButtonComponent from '@shared/ui/components/atoms/ButtonComponent/ButtonC
 import {useHealthCenterPermissions} from "@features/healthCenter/model/composables/useHealtCenterPermissions.ts"
 import HealthCenterDetailView from "@entities/healthCenter/ui/HealthCenterDetailView/HealthCenterDetailView.vue"
 import HealthCenterForm from "@entities/healthCenter/ui/HealthCenterForm/HealthCenterForm.vue"
-import EntityDetailPageWrapper from "@shared/ui/components/layout/EntityDetailPageWrapper/EntityDetailPageWrapper.vue"
+import DetailPageWrapper from "@shared/ui/components/layout/DetailPageWrapper/DetailPageWrapper.vue"
 import DepartmentIcon from "@shared/ui/icons/DepartmentIcon.vue"
 import StatsIcon from "@shared/ui/icons/StatsIcon.vue"
 
@@ -97,7 +97,7 @@ const handleManageDepartments = () => {
 </script>
 
 <template>
-  <EntityDetailPageWrapper
+  <DetailPageWrapper
     :title="healthCenter?.name || $t('entities.healthCenter.details')"
     :subtitle="subtitle"
     :back-route="ROUTES.HEALTH_CENTERS"
@@ -172,5 +172,5 @@ const handleManageDepartments = () => {
         </div>
       </ModalComponent>
     </template>
-  </EntityDetailPageWrapper>
+  </DetailPageWrapper>
 </template>

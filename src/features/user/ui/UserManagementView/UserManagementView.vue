@@ -6,7 +6,7 @@ import UserForm from '@entities/user/ui/UserForm/UserForm.vue'
 import UserDetailView from '@entities/user/ui/UserDetailView/UserDetailView.vue'
 import type {UserTableAction} from '@features/user/model/types/user.feature.types'
 import ModalComponent from "@shared/ui/components/molecules/ModalComponent/ModalComponent.vue"
-import EntityManagementWrapper from "@shared/ui/components/layout/EntityManagementWrapper/EntityManagementWrapper.vue";
+import ManagementWrapper from "@shared/ui/components/layout/ManagementWrapper/ManagementWrapper.vue";
 
 const management = useUserManagement()
 
@@ -28,7 +28,7 @@ const handleTableAction = (action: UserTableAction) => {
 </script>
 
 <template>
-  <EntityManagementWrapper
+  <ManagementWrapper
     :title="$t('entities.user.management')"
     :subtitle="$t('entities.user.managementDescription')"
     :show-create-button="management.permissions.canCreate.value"
@@ -92,5 +92,5 @@ const handleTableAction = (action: UserTableAction) => {
         />
       </ModalComponent>
     </template>
-  </EntityManagementWrapper>
+  </ManagementWrapper>
 </template>
