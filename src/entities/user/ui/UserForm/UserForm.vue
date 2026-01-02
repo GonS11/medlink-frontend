@@ -9,7 +9,7 @@ import InputComponent from '@shared/ui/components/atoms/InputComponent/InputComp
 import SelectComponent from '@shared/ui/components/atoms/SelectComponent/SelectComponent.vue'
 import CheckboxComponent from '@shared/ui/components/atoms/CheckBoxComponent/CheckboxComponent.vue'
 import ButtonComponent from '@shared/ui/components/atoms/ButtonComponent/ButtonComponent.vue'
-import {UserRoleArray} from "@shared/types/enums.types.ts";
+import {LanguageCode, UserRoleArray} from "@shared/types/enums.types.ts"
 
 const props = defineProps<UserFormProps>()
 const emit = defineEmits<{
@@ -32,9 +32,11 @@ const roleOptions = UserRoleArray.map(role => ({
 }))
 
 const languageOptions = [
-  {value: 'es', label: 'Español'},
-  {value: 'en', label: 'English'},
-  {value: 'fr', label: 'Français'},
+  {value: LanguageCode.ES, label: 'Español'},
+  {value: LanguageCode.EN, label: 'English'},
+  {value: LanguageCode.CA, label: 'Català'},
+  {value: LanguageCode.EU, label: 'Euskara'},
+  {value: LanguageCode.GL, label: 'Galego'},
 ]
 </script>
 
@@ -66,6 +68,16 @@ const languageOptions = [
           @blur="handleBlur('lastName')"
         />
       </FormLayout>
+
+      <FormLayout>
+        <InputComponent
+          :model-value="form.secondLastName"
+          :label="$t('fields.secondLastName')"
+          :error="errors.secondLastName"
+          @update:model-value="handleInput('secondLastName', $event)"
+          @blur="handleBlur('secondLastName')"
+        />
+      </FormLayout>
     </FormSection>
 
     <FormSection :title="$t('entities.user.contactInfo')" variant="bordered">
@@ -76,6 +88,7 @@ const languageOptions = [
           :error="errors.email"
           type="email"
           required
+          :disabled="mode === 'edit'"
           @update:model-value="handleInput('email', $event)"
           @blur="handleBlur('email')"
         />
@@ -90,12 +103,43 @@ const languageOptions = [
           @update:model-value="handleInput('phone', $event)"
           @blur="handleBlur('phone')"
         />
+        <InputComponent
+          :model-value="form.mobilePhone"
+          :label="$t('fields.mobilePhone')"
+          :error="errors.mobilePhone"
+          type="tel"
+          @update:model-value="handleInput('mobilePhone', $event)"
+          @blur="handleBlur('mobilePhone')"
+        />
+      </FormLayout>
+
+      <FormLayout>
         <SelectComponent
           :model-value="form.preferredLanguage"
           :label="$t('fields.language')"
           :error="errors.preferredLanguage"
           :options="languageOptions"
           @update:model-value="handleInput('preferredLanguage', $event)"
+        />
+      </FormLayout>
+    </FormSection>
+
+    <!-- ✅ CRÍTICO: Sección de seguridad solo en modo CREATE -->
+    <FormSection
+      v-if="mode === 'create'"
+      :title="$t('entities.user.security')"
+      variant="bordered"
+    >
+      <FormLayout>
+        <InputComponent
+          :model-value="form.password"
+          :label="$t('fields.password')"
+          :error="errors.password"
+          type="password"
+          required
+          autocomplete="new-password"
+          @update:model-value="handleInput('password', $event)"
+          @blur="handleBlur('password')"
         />
       </FormLayout>
     </FormSection>
@@ -107,6 +151,7 @@ const languageOptions = [
           :label="$t('fields.role')"
           :error="errors.role"
           :options="roleOptions"
+          :disabled="mode === 'edit'"
           required
           @update:model-value="handleInput('role', $event)"
         />

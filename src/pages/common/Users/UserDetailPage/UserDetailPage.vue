@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {onMounted, ref, computed} from 'vue'
-import {useRoute, useRouter} from 'vue-router'
+import {useRoute} from 'vue-router'
 import {useI18n} from 'vue-i18n'
 import {useUserCrud} from '@entities/user/model/composables/useUserCrud'
 import {useUserPermissions} from '@features/user/model/composables/useUserPermissions'
@@ -8,15 +8,14 @@ import {useModal} from '@shared/composables/useModal'
 import {useConfirm} from '@shared/composables/useConfirm'
 import {ROUTES} from "@shared/constants/routes.constants.ts"
 import type {UserResponse} from '@entities/user/model/types/user.types'
-import DetailPageLayout from '@shared/ui/components/layout/PageLayout/DetailPageLayout.vue'
 import UserDetailView from '@entities/user/ui/UserDetailView/UserDetailView.vue'
 import UserForm from '@entities/user/ui/UserForm/UserForm.vue'
 import ModalComponent from "@shared/ui/components/molecules/ModalComponent/ModalComponent.vue"
-import ButtonComponent from '@shared/ui/components/atoms/ButtonComponent/ButtonComponent.vue'
+import EntityDetailPageWrapper from "@shared/ui/components/layout/EntityDetailPageWrapper/EntityDetailPageWrapper.vue"
+import UserIcon from "@shared/ui/icons/UserIcon.vue";
 
 const {t} = useI18n()
 const route = useRoute()
-const router = useRouter()
 const {confirm} = useConfirm()
 const editModal = useModal()
 
@@ -26,9 +25,9 @@ const permissions = useUserPermissions()
 const user = ref<UserResponse | null>(null)
 const userId = Number(route.params.id)
 
-const canEdit = computed(() => user.value && permissions.canEditUser(user.value.role))
-const canDelete = computed(() => user.value && permissions.canDeleteUser(user.value.role))
-const userNotFound = computed(() => !loading.value && !user.value)
+const canEdit = computed<boolean>(() => !!(user.value && permissions.canEditUser(user.value.role)))
+const canDelete = computed<boolean>(() => !!(user.value && permissions.canDeleteUser(user.value.role)))
+const showEmpty = computed<boolean>(() => !loading.value && !user.value)
 
 onMounted(async () => {
   const result = await fetchById(userId)
@@ -60,55 +59,43 @@ const handleDelete = async () => {
 
   if (confirmed) {
     await remove(userId)
-    router.push(ROUTES.USERS)
   }
 }
 </script>
 
 <template>
-  <DetailPageLayout
-    class="user-detail-page"
+  <EntityDetailPageWrapper
     :title="user?.fullName || $t('entities.user.details')"
     :subtitle="user?.email"
+    :back-route="ROUTES.USERS"
     :loading="loading"
-    :show-edit="!!canEdit"
-    :show-delete="!!canDelete"
-    @back="router.push(ROUTES.USERS)"
+    :show-edit="canEdit"
+    :show-delete="canDelete"
+    :show-empty="showEmpty"
+    entity-name="user"
+    :empty-state-icon="UserIcon"
     @edit="handleEdit"
     @delete="handleDelete"
   >
-    <UserDetailView
-      v-if="user || loading"
-      :user="user!"
-      :loading="loading"
-    />
+    <UserDetailView v-if="user || loading" :user="user!" :loading="loading"/>
 
-    <div v-else-if="userNotFound" class="user-detail-page__empty-state">
-      <div class="user-detail-page__icon">🕵️‍♂️</div>
-      <h3 class="user-detail-page__title">{{ $t('entities.user.notFound') }}</h3>
-      <p class="user-detail-page__description">{{ $t('entities.user.notFoundDesc') }}</p>
-      <ButtonComponent @click="router.push(ROUTES.USERS)">
-        {{ $t('common.goBack') }}
-      </ButtonComponent>
-    </div>
-
-    <ModalComponent
-      :show="editModal.show.value"
-      :title="$t('entities.user.edit')"
-      size="lg"
-      :show-footer="false"
-      @update:show="editModal.show.value = $event"
-    >
-      <UserForm
-        v-if="user"
-        :user="user"
-        mode="edit"
-        :loading="loading"
-        @submit="handleEditSubmit"
-        @cancel="editModal.close"
-      />
-    </ModalComponent>
-  </DetailPageLayout>
+    <template #modals>
+      <ModalComponent
+        :show="editModal.show.value"
+        :title="$t('entities.user.edit')"
+        size="lg"
+        :show-footer="false"
+        @update:show="editModal.show.value = $event"
+      >
+        <UserForm
+          v-if="user"
+          :user="user"
+          mode="edit"
+          :loading="loading"
+          @submit="handleEditSubmit"
+          @cancel="editModal.close"
+        />
+      </ModalComponent>
+    </template>
+  </EntityDetailPageWrapper>
 </template>
-
-<style scoped lang="scss" src="./UserDetailPage.scss"></style>

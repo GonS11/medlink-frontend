@@ -1,4 +1,4 @@
-import {Languages, UserRoleType} from "@shared/types/enums.types.ts";
+import {LanguageCode, UserRoleType} from "@shared/types/enums.types.ts";
 
 export interface UserResponse {
   id: number
@@ -15,7 +15,7 @@ export interface UserResponse {
   requiresPasswordChange: boolean
   failedLoginAttempts?: number
   lockedUntil?: string
-  preferredLanguage: Languages
+  preferredLanguage: LanguageCode
   lastLogin?: string
   isAccountLocked?: boolean
   lockReason?: string
@@ -29,7 +29,7 @@ export interface UpdateUserRequest {
   secondLastName?: string
   phone?: string
   mobilePhone?: string
-  preferredLanguage?: Languages
+  preferredLanguage?: LanguageCode
   isActive?: boolean
 }
 
@@ -56,7 +56,7 @@ export interface UserInfo {
   isActive: boolean
   emailVerified: boolean
   requiresPasswordChange: boolean
-  preferredLanguage: Languages
+  preferredLanguage: LanguageCode
   roleData?: RoleData
 }
 

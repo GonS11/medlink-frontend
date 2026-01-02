@@ -14,7 +14,7 @@ export const getUserById = async (userId: number) => {
 };
 
 export const createUser = async (data: RegisterRequest) => {
-  const response = await httpClient.post<ApiResponse<UserResponse>>('/users', data);
+  const response = await httpClient.post<ApiResponse<UserResponse>>('/auth/register', data);
   return response.data.data!;
 };
 

@@ -18,50 +18,94 @@ export function useUserPermissions() {
   const canViewSensitiveData = computed(() => can('users.viewSensitiveData'))
 
   // --- Permisos Específicos (lógica de negocio adicional) ---
-
   /**
-   * Verifica si puede editar un usuario específico
-   * Regla: RECEPTIONIST solo puede editar PATIENT
+   * Verifica si puede crear usuario con un rol específico
+   * Regla: Solo ADMIN puede crear usuarios
    */
-  const canEditUser = (targetUserRole: UserRoleType): boolean => {
-    // Si no tiene permiso general, no puede editar a nadie
-    if (!canEditUsers.value) return false
+  const canCreateUserWithRole = (targetUserRole: UserRoleType): boolean => {
+    if (!canCreateUsers.value) return false
 
-    // ADMIN puede editar todos
+    // ADMIN puede crear cualquier rol
     if (isAdmin.value) return true
 
-    // RECEPTIONIST solo puede editar PATIENT
+    // RECEPTIONIST solo puede crear PATIENT
     if (isReceptionist.value) {
       return targetUserRole === 'PATIENT'
     }
 
+    // Otros roles no pueden crear usuarios
     return false
   }
 
   /**
+   * Verifica si puede editar un usuario específico
+   * Reglas:
+   * - ADMIN puede editar todos
+   * - RECEPTIONIST solo puede editar PATIENT
+   * - Otros roles: según permiso general
+   */
+  const canEditUser = (targetUserRole: UserRoleType): boolean => {
+    if (!canEditUsers.value) return false
+
+    if (isAdmin.value) return true
+
+    if (isReceptionist.value) {
+      return targetUserRole === 'PATIENT'
+    }
+
+    // Para otros roles con permiso general
+    return true
+  }
+
+  /**
    * Verifica si puede eliminar un usuario específico
-   * Regla: Solo ADMIN puede eliminar, pero no puede eliminar otros ADMIN
+   * Reglas:
+   * - Solo ADMIN puede eliminar
+   * - ADMIN no puede eliminar otros ADMIN (protección)
    */
   const canDeleteUser = (targetUserRole: UserRoleType): boolean => {
-    // Si no tiene permiso general, no puede eliminar a nadie
     if (!canDeleteUsers.value) return false
 
-    // No permitir eliminar otros ADMIN (protección adicional)
-    return targetUserRole !== 'ADMIN';
+    // No permitir eliminar otros ADMIN
+    return targetUserRole !== 'ADMIN'
   }
 
   /**
    * Verifica si puede bloquear un usuario específico
-   * Regla: No se puede bloquear a otros ADMIN
+   * Reglas:
+   * - Solo ADMIN puede bloquear (según config)
+   * - No se puede bloquear otros ADMIN
    */
   const canLockUser = (targetUserRole: UserRoleType): boolean => {
-    // Si no tiene permiso general, no puede bloquear a nadie
     if (!canLockUsers.value) return false
 
-    // No permitir bloquear otros ADMIN
-    return targetUserRole !== 'ADMIN';
+    return targetUserRole !== 'ADMIN'
+  }
 
+  /**
+   * Verifica si puede desbloquear un usuario específico
+   * Regla: Solo ADMIN puede desbloquear
+   */
+  const canUnlockUser = (targetUserRole: UserRoleType): boolean => {
+    if (!canUnlockUsers.value) return false
 
+    return targetUserRole !== 'ADMIN'
+  }
+
+  /**
+   * Verifica si puede cambiar la contraseña de un usuario
+   * Reglas:
+   * - ADMIN puede cambiar a todos excepto otros ADMIN
+   * - Usuarios pueden cambiar su propia contraseña (esto se maneja en el componente)
+   */
+  const canChangeUserPassword = (targetUserRole: UserRoleType): boolean => {
+    if (!canChangePassword.value) return false
+
+    if (isAdmin.value) {
+      return targetUserRole !== 'ADMIN'
+    }
+
+    return false
   }
 
   return {
@@ -79,5 +123,8 @@ export function useUserPermissions() {
     canEditUser,
     canDeleteUser,
     canLockUser,
+    canUnlockUser,
+    canChangeUserPassword,
+    canCreateUserWithRole,
   }
 }

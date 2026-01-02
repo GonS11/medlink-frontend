@@ -27,8 +27,6 @@ export function useUserManagement() {
 
   // --- Estado Local ---
   const selectedUser = ref<UserResponse | null>(null)
-
-  // ✅ AGREGAR: Estado de sorting
   const sortConfig = ref<SortConfig | null>(null)
 
   // --- Computed Permissions ---
@@ -44,7 +42,6 @@ export function useUserManagement() {
       size: crud.currentPageSize.value
     }
 
-    // ✅ AGREGAR: Incluir sorting si existe
     if (sortConfig.value) {
       params.sortBy = sortConfig.value.key
       params.direction = sortConfig.value.order === 'asc' ? 'ASC' : 'DESC'
@@ -89,7 +86,10 @@ export function useUserManagement() {
     })
 
     if (confirmed) {
-      await crud.remove(user.id)
+      const result = await crud.remove(user.id)
+      if (result) {
+        await refetchCurrentPage()
+      }
     }
   }
 
@@ -142,11 +142,12 @@ export function useUserManagement() {
   // --- Submit Handlers ---
   const handleSubmitCreate = async (data: RegisterRequest) => {
     if (!canCreate.value) {
-      console.warn('No tienes permiso para crear usuarios')
+      console.warn('❌ [handleSubmitCreate] No permission to create')
       return
     }
 
     const result = await crud.create(data)
+
     if (result) {
       createModal.close()
       await refetchCurrentPage()
@@ -155,12 +156,12 @@ export function useUserManagement() {
 
   const handleSubmitEdit = async (data: any) => {
     if (!selectedUser.value) {
-      console.warn('No hay usuario seleccionado para editar')
+      console.warn('❌ [handleSubmitEdit] No user selected')
       return
     }
 
     if (!permissions.canEditUser(selectedUser.value.role)) {
-      console.warn(`No tienes permiso para editar usuarios con rol ${selectedUser.value.role}`)
+      console.warn(`❌ [handleSubmitEdit] No permission for role ${selectedUser.value.role}`)
       return
     }
 
@@ -195,7 +196,6 @@ export function useUserManagement() {
       size: crud.currentPageSize.value
     }
 
-    // ✅ AGREGAR: Incluir sorting si existe
     if (sortConfig.value) {
       params.sortBy = sortConfig.value.key
       params.direction = sortConfig.value.order === 'asc' ? 'ASC' : 'DESC'
@@ -204,11 +204,10 @@ export function useUserManagement() {
     await crud.fetchAll(params)
   }
 
-  // ✅ CORREGIR: Handler de sorting
+  // --- Sorting ---
   const handleSort = async (config: SortConfig) => {
     sortConfig.value = config
 
-    // Reset a primera página con sorting aplicado
     const params: PaginationParams = {
       page: 0,
       size: crud.currentPageSize.value,

@@ -1,6 +1,6 @@
 import {z} from 'zod';
 import {createCommonValidations, TranslationFunction} from '@shared/validation/common.validation';
-import {Languages, UserRoleArray} from "@shared/types/enums.types.ts";
+import {LanguageCodeArray, UserRoleArray} from "@shared/types/enums.types.ts";
 
 export const createUserSchemas = (t: TranslationFunction) => {
   const v = createCommonValidations(t);
@@ -11,7 +11,7 @@ export const createUserSchemas = (t: TranslationFunction) => {
     secondLastName: v.optionalName,
     phone: v.phone.optional().or(z.literal('')),
     mobilePhone: v.phone.optional().or(z.literal('')),
-    preferredLanguage: z.enum(Languages).optional(),
+    preferredLanguage: z.enum(LanguageCodeArray).optional(),
   };
 
   const createUserSchema = z.object({

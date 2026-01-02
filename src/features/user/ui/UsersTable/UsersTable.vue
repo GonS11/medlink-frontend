@@ -14,6 +14,9 @@ import {USER_ROLE_VARIANTS} from "@entities/user/model/config/useUserConfig.ts"
 import EditIcon from "@shared/ui/icons/EditIcon.vue"
 import DeleteIcon from "@shared/ui/icons/DeleteIcon.vue"
 import type {SortConfig} from '@shared/types/table.types'
+import DetailsIcon from "@shared/ui/icons/DetailsIcon.vue";
+import LockIcon from "@shared/ui/icons/LockIcon.vue";
+import UnlockIcon from "@shared/ui/icons/UnlockIcon.vue";
 
 withDefaults(defineProps<UserTableProps>(), {
   loading: false,
@@ -104,9 +107,9 @@ const handleSort = (config: SortConfig) => {
         <BadgeComponent
           v-if="userFormattersStatic.isLocked(row)"
           variant="error"
+          :icon="LockIcon"
           size="sm"
-        >
-          🔒 {{ $t('entities.user.locked') }}
+        >{{ $t('entities.user.locked') }}
         </BadgeComponent>
       </div>
     </template>
@@ -117,55 +120,50 @@ const handleSort = (config: SortConfig) => {
           variant="ghost"
           size="sm"
           class="users-table__action-btn"
+          :icon="DetailsIcon"
           @click="handleAction('view', row, $event)"
           :title="$t('common.view')"
-        >
-          👁️
-        </ButtonComponent>
+        />
 
         <ButtonComponent
           v-if="canEditUser(row)"
           variant="ghost"
           size="sm"
           class="users-table__action-btn"
+          :icon="EditIcon"
           @click="handleAction('edit', row, $event)"
           :title="$t('common.edit')"
-        >
-          <EditIcon :label="$t('icons.edit')"/>
-        </ButtonComponent>
+        />
 
         <ButtonComponent
           v-if="canLockUser(row) && !userFormattersStatic.isLocked(row)"
           variant="ghost"
           size="sm"
           class="users-table__action-btn"
+          :icon="UnlockIcon"
           @click="handleAction('lock', row, $event)"
           :title="$t('entities.user.lock.action')"
-        >
-          🔒
-        </ButtonComponent>
+        />
 
         <ButtonComponent
           v-if="showUnlock(row)"
           variant="ghost"
           size="sm"
           class="users-table__action-btn"
+          :icon="LockIcon"
           @click="handleAction('unlock', row, $event)"
           :title="$t('entities.user.unlock')"
-        >
-          🔓
-        </ButtonComponent>
+        />
 
         <ButtonComponent
           v-if="canDeleteUser(row)"
           variant="ghost"
           size="sm"
           class="users-table__action-btn users-table__action-btn--danger"
+          :icon="DeleteIcon"
           @click="handleAction('delete', row, $event)"
           :title="$t('common.delete')"
-        >
-          <DeleteIcon :label="$t('icons.delete')"/>
-        </ButtonComponent>
+        />
       </div>
     </template>
   </DataTable>

@@ -3,6 +3,7 @@ import {useForm} from '@shared/composables/useForm'
 import {useI18n} from 'vue-i18n'
 import {createUserSchemas} from '@entities/user/model/validation/user.validation'
 import type {UseUserFormOptions} from '@entities/user/model/types/user.composables.types'
+import {LanguageCode} from "@shared/types/enums.types.ts";
 
 export function useUserForm(options: UseUserFormOptions) {
   const {mode, user, onSubmit, onCancel} = options
@@ -18,7 +19,7 @@ export function useUserForm(options: UseUserFormOptions) {
     role: user?.role || 'PATIENT',
     phone: user?.phone || '',
     mobilePhone: user?.mobilePhone || '',
-    preferredLanguage: user?.preferredLanguage || 'es',
+    preferredLanguage: user?.preferredLanguage || LanguageCode.ES,
     isActive: user?.isActive ?? true,
   })
 
@@ -43,7 +44,7 @@ export function useUserForm(options: UseUserFormOptions) {
         role: newUser.role,
         phone: newUser.phone || '',
         mobilePhone: newUser.mobilePhone || '',
-        preferredLanguage: newUser.preferredLanguage || 'es',
+        preferredLanguage: newUser.preferredLanguage || LanguageCode.ES,
         isActive: newUser.isActive,
       })
     }
