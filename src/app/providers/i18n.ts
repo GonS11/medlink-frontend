@@ -54,7 +54,7 @@ export function localeToLanguageCode(locale: string): LanguageCodeType {
 /**
  * Tipos soportados de locale para i18n (minúsculas)
  */
-type SupportedLocale = 'en' | 'es' | 'ca' | 'eu' | 'gl'
+type SupportedLocale = 'en' | 'es' //| 'ca' | 'eu' | 'gl'
 
 /**
  * Obtiene el idioma guardado y lo convierte a locale de i18n

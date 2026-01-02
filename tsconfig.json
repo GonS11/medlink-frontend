@@ -39,7 +39,10 @@
       "@shared/*": [
         "./src/shared/*"
       ]
-    }
+    },
+    "types": [
+      "vite/client"
+    ]
   },
   "include": [
     "src/**/*.ts",
