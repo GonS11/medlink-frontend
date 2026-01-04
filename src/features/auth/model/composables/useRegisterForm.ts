@@ -4,7 +4,7 @@ import {useForm} from '@shared/composables/useForm'
 import {createAuthSchemas, type RegisterFormData} from '@entities/auth/model/validation/auth.validation'
 import type {RegisterRequest} from '@entities/auth/model/types/auth.types'
 import {UseRegisterFormOptions} from "@features/auth/model/types/auth.feature.types.ts";
-import {Languages, UserRoleArray} from "@shared/types/enums.types.ts";
+import {LanguageCode, UserRoleArray} from "@shared/types/enums.types.ts";
 
 export function useRegisterForm(options: UseRegisterFormOptions) {
   const {onSubmit} = options
@@ -19,7 +19,7 @@ export function useRegisterForm(options: UseRegisterFormOptions) {
   )
 
   const languageOptions = computed(() =>
-    Object.values(Languages).map(lang => ({
+    Object.values(LanguageCode).map(lang => ({
       value: lang,
       label: t(`languages.${lang}`)
     }))

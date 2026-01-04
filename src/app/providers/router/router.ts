@@ -93,13 +93,13 @@ const routes: RouteRecordRaw[] = [
 
       // === ESPECIALIDADES (solo admin) ===
       {
-        path: ROUTES.ADMIN_SPECIALTIES,
-        name: 'Specialties',
-        component: () => import('@pages/admin/SpecialtiesPage/SpecialtiesPage.vue'),
+        path: ROUTES.SPECIALTIES,
+        name: 'MedicalSpeciality',
+        component: () => import('@pages/common/MedicalSpecialtiesPage/MedicalSpecialitiesPage.vue'),
         meta: {
           requiresAuth: true,
         },
-        beforeEnter: createPermissionGuard('specialties.view'),
+        beforeEnter: createPermissionGuard('medicalRecords.view'),
       },
 
       // === RUTAS FUTURAS (Comentadas - Descomentar cuando implementes) ===

@@ -1,7 +1,9 @@
 <script setup lang="ts">
-defineProps<{
-  label: string;
-}>();
+withDefaults(defineProps<{
+  label?: string
+}>(), {
+  label: 'Users icon'
+})
 </script>
 
 <template>

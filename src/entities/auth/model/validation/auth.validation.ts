@@ -1,6 +1,6 @@
 import {z} from 'zod';
 import {createCommonValidations, TranslationFunction} from '@shared/validation/common.validation';
-import {Languages, UserRoleArray} from "@shared/types/enums.types.ts";
+import {LanguageCodeArray, UserRoleArray} from "@shared/types/enums.types.ts";
 
 export const createAuthSchemas = (t: TranslationFunction) => {
   const validation = createCommonValidations(t);
@@ -22,7 +22,7 @@ export const createAuthSchemas = (t: TranslationFunction) => {
     role: z.enum(UserRoleArray, {
       message: t('validation.required',{field:t('fields.role')}),
     }),
-    preferredLanguage: z.enum(Languages).optional(),
+    preferredLanguage: z.enum(LanguageCodeArray).optional(),
   })
     .refine((data) => data.password === data.confirmPassword, {
       message: t('validation.password.match'),

@@ -1,11 +1,6 @@
 // ========================================
-// LANGUAGES ENUM
+// LANGUAGES
 // ========================================
-
-/**
- * Language codes (ISO 639-1)
- * Frontend usa códigos, backend usa displayNames
- */
 export enum LanguageCode {
   ES = 'ES',
   CA = 'CA',
@@ -14,9 +9,6 @@ export enum LanguageCode {
   EN = 'EN',
 }
 
-/**
- * Mapeo entre códigos y displayNames del backend
- */
 export const LANGUAGE_DISPLAY_NAMES: Record<LanguageCode, string> = {
   [LanguageCode.ES]: 'Spanish',
   [LanguageCode.CA]: 'Catalan',
@@ -25,9 +17,6 @@ export const LANGUAGE_DISPLAY_NAMES: Record<LanguageCode, string> = {
   [LanguageCode.EN]: 'English',
 } as const
 
-/**
- * Mapeo inverso: displayName -> código
- */
 export const LANGUAGE_CODE_FROM_DISPLAY: Record<string, LanguageCode> = {
   'Spanish': LanguageCode.ES,
   'Catalan': LanguageCode.CA,
@@ -36,23 +25,13 @@ export const LANGUAGE_CODE_FROM_DISPLAY: Record<string, LanguageCode> = {
   'English': LanguageCode.EN,
 } as const
 
-/**
- * Array de códigos para validación Zod
- */
 export const LanguageCodeArray = Object.values(LanguageCode) as [LanguageCode, ...LanguageCode[]]
 
-/**
- * Tipo para códigos de idioma
- */
 export type LanguageCodeType = typeof LanguageCode[keyof typeof LanguageCode]
 
 // ========================================
 // AUTONOMOUS COMMUNITY ENUM
 // ========================================
-
-/**
- * Claves de comunidades autónomas
- */
 export enum AutonomousCommunity {
   ANDALUCIA = "ANDALUCIA",
   ARAGON = "ARAGON",
@@ -75,9 +54,6 @@ export enum AutonomousCommunity {
   MELILLA = "MELILLA"
 }
 
-/**
- * Mapeo entre enum keys y displayNames del backend
- */
 export const COMMUNITY_DISPLAY_NAMES: Record<AutonomousCommunity, string> = {
   [AutonomousCommunity.ANDALUCIA]: 'Andalucía',
   [AutonomousCommunity.ARAGON]: 'Aragón',
@@ -100,9 +76,6 @@ export const COMMUNITY_DISPLAY_NAMES: Record<AutonomousCommunity, string> = {
   [AutonomousCommunity.MELILLA]: 'Melilla',
 } as const
 
-/**
- * Mapeo inverso: displayName -> enum key
- */
 export const COMMUNITY_KEY_FROM_DISPLAY: Record<string, AutonomousCommunity> = {
   'Andalucía': AutonomousCommunity.ANDALUCIA,
   'Aragón': AutonomousCommunity.ARAGON,
@@ -125,13 +98,10 @@ export const COMMUNITY_KEY_FROM_DISPLAY: Record<string, AutonomousCommunity> = {
   'Melilla': AutonomousCommunity.MELILLA,
 } as const
 
-/**
- * Array para validación Zod
- */
 export const AutonomousCommunityArray = Object.values(AutonomousCommunity) as [AutonomousCommunity, ...AutonomousCommunity[]]
 
 // ========================================
-// HEALTH CENTER TYPE ENUM
+// HEALTH CENTER TYPE
 // ========================================
 
 export enum HealthCenterType {
@@ -143,9 +113,6 @@ export enum HealthCenterType {
   REHABILITATION_CENTER = "REHABILITATION_CENTER"
 }
 
-/**
- * Mapeo entre enum keys y displayNames del backend
- */
 export const HEALTH_CENTER_TYPE_DISPLAY_NAMES: Record<HealthCenterType, string> = {
   [HealthCenterType.HOSPITAL]: 'Hospital',
   [HealthCenterType.PRIMARY_CARE_CENTER]: 'Primary care center',
@@ -155,9 +122,6 @@ export const HEALTH_CENTER_TYPE_DISPLAY_NAMES: Record<HealthCenterType, string> 
   [HealthCenterType.REHABILITATION_CENTER]: 'Rehabilitation center',
 } as const
 
-/**
- * Mapeo inverso: displayName -> enum key
- */
 export const HEALTH_CENTER_TYPE_FROM_DISPLAY: Record<string, HealthCenterType> = {
   'Hospital': HealthCenterType.HOSPITAL,
   'Primary care center': HealthCenterType.PRIMARY_CARE_CENTER,
@@ -167,48 +131,60 @@ export const HEALTH_CENTER_TYPE_FROM_DISPLAY: Record<string, HealthCenterType> =
   'Rehabilitation center': HealthCenterType.REHABILITATION_CENTER,
 } as const
 
-/**
- * Array para validación Zod
- */
 export const HealthCenterTypeArray = Object.values(HealthCenterType) as [HealthCenterType, ...HealthCenterType[]]
 
 // ========================================
-// HEALTH CENTER LEVEL ENUM
+// HEALTH CENTER LEVEL
 // ========================================
-
 export enum HealthCenterLevel {
   PRIMARY = "PRIMARY",
   SECONDARY = "SECONDARY",
   TERTIARY = "TERTIARY"
 }
 
-/**
- * Mapeo entre enum keys y displayNames del backend
- */
 export const HEALTH_CENTER_LEVEL_DISPLAY_NAMES: Record<HealthCenterLevel, string> = {
   [HealthCenterLevel.PRIMARY]: 'Primary',
   [HealthCenterLevel.SECONDARY]: 'Secondary',
   [HealthCenterLevel.TERTIARY]: 'Tertiary',
 } as const
 
-/**
- * Mapeo inverso: displayName -> enum key
- */
 export const HEALTH_CENTER_LEVEL_FROM_DISPLAY: Record<string, HealthCenterLevel> = {
   'Primary': HealthCenterLevel.PRIMARY,
   'Secondary': HealthCenterLevel.SECONDARY,
   'Tertiary': HealthCenterLevel.TERTIARY,
 } as const
 
-/**
- * Array para validación Zod
- */
 export const HealthCenterLevelArray = Object.values(HealthCenterLevel) as [HealthCenterLevel, ...HealthCenterLevel[]]
+
+// ========================================
+// SPECIALITY CATEGORY
+// ========================================
+export enum SpecialityCategory {
+  MEDICAL = "MEDICAL",
+  SURGICAL = "SURGICAL",
+  LABORATORY = "LABORATORY",
+  PRIMARY_CARE = "PRIMARY_CARE"
+}
+
+export const SPECIALITY_CATEGORY_DISPLAY_NAMES:Record<SpecialityCategory, string> = {
+  [SpecialityCategory.MEDICAL]: 'Medical',
+  [SpecialityCategory.SURGICAL]: 'Surgical',
+  [SpecialityCategory.LABORATORY]: 'Laboratory',
+  [SpecialityCategory.PRIMARY_CARE]: 'Primary Care',
+}
+
+export const SPECIALITY_CATEGORY_FROM_DISPLAY:Record<string, SpecialityCategory> = {
+  'Medical': SpecialityCategory.MEDICAL,
+  'Surgical': SpecialityCategory.SURGICAL,
+  'Laboratory': SpecialityCategory.LABORATORY,
+  'Primary Care': SpecialityCategory.PRIMARY_CARE,
+} as const
+
+export const SpecialityCategoryArray = Object.values(SpecialityCategory) as [SpecialityCategory, ...SpecialityCategory[]]
 
 // ========================================
 // USER ROLES
 // ========================================
-
 export const UserRoleObject = {
   ADMIN: 'ADMIN',
   DOCTOR: 'DOCTOR',

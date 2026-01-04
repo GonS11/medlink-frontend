@@ -27,7 +27,7 @@ export const ROUTES = {
   DEPARTMENTS: '/departments',
   DEPARTMENTS_DETAIL: (id: number) => `/departments/${id}`,
 
-  ADMIN_SPECIALTIES: '/admin/specialties',
+  SPECIALTIES: '/admin/specialties',
   ADMIN_SPECIALTIES_DETAIL: (id: number) => `/admin/specialties/${id}`,
 
   // === RUTAS FUTURAS (Descomentar cuando implementes) ===
@@ -64,7 +64,7 @@ export const PROTECTED_ROUTES = [
   ROUTES.USERS,
   ROUTES.HEALTH_CENTERS,
   ROUTES.DEPARTMENTS,
-  ROUTES.ADMIN_SPECIALTIES,
+  ROUTES.SPECIALTIES,
 ] as const
 
 export const DEFAULT_ROUTE_BY_ROLE = {

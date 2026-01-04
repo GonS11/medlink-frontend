@@ -24,8 +24,8 @@ export type Permission =
   | 'healthCenters.manage'
   | 'departments.view'
   | 'departments.manage'
-  | 'specialties.view'
-  | 'specialties.manage'
+  | 'medicalSpeciality.view'
+  | 'medicalSpeciality.manage'
 
   // === Gestión Clínica ===
   | 'appointments.view'
@@ -75,8 +75,8 @@ export const ROLE_PERMISSIONS: Record<UserRoleType, Partial<Record<Permission, b
     'healthCenters.manage': true,
     'departments.view': true,
     'departments.manage': true,
-    'specialties.view': true,
-    'specialties.manage': true,
+    'medicalSpeciality.view': true,
+    'medicalSpeciality.manage': true,
 
     // Citas
     'appointments.view': true,
@@ -138,7 +138,7 @@ export const ROLE_PERMISSIONS: Record<UserRoleType, Partial<Record<Permission, b
     // Ver centros/departamentos
     'healthCenters.view': true,
     'departments.view': true,
-    'specialties.view': true,
+    'medicalSpeciality.view': true,
 
     // Configuración
     'settings.view': true,
@@ -175,7 +175,7 @@ export const ROLE_PERMISSIONS: Record<UserRoleType, Partial<Record<Permission, b
     // Ver centros/departamentos
     'healthCenters.view': true,
     'departments.view': true,
-    'specialties.view': true,
+    'medicalSpeciality.view': true,
 
     // Configuración
     'settings.view': true,
@@ -204,7 +204,7 @@ export const ROLE_PERMISSIONS: Record<UserRoleType, Partial<Record<Permission, b
     // Ver centros/departamentos
     'healthCenters.view': true,
     'departments.view': true,
-    'specialties.view': true,
+    'medicalSpeciality.view': true,
 
     // Configuración
     'settings.view': true,

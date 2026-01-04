@@ -8,7 +8,6 @@ export const useHealthCenterStore = defineStore('healthCenter', () => {
   const healthCenters = ref<HealthCenterResponse[]>([]);
   const pagination = ref<PageResponse<HealthCenterResponse> | null>(null);
 
-  // Computed seguro que devuelve 0 si no hay paginación
   const totalHealthCenters = computed(() => pagination.value?.totalElements ?? 0);
 
   async function getAllHealthCenters(params?: PaginationParams) {
@@ -26,14 +25,14 @@ export const useHealthCenterStore = defineStore('healthCenter', () => {
   }
 
   function updateHealthCenter(updatedHealthCenter: HealthCenterResponse) {
-    const index = healthCenters.value.findIndex(item => item.id === updatedHealthCenter.id);
+    const index = healthCenters.value.findIndex(healthCenter => healthCenter.id === updatedHealthCenter.id);
     if (index !== -1) {
       healthCenters.value[index] = updatedHealthCenter;
     }
   }
 
   function removeHealthCenter(healthCenterId: number) {
-    healthCenters.value = healthCenters.value.filter(item => item.id !== healthCenterId);
+    healthCenters.value = healthCenters.value.filter(healthCenter => healthCenter.id !== healthCenterId);
   }
 
   return {

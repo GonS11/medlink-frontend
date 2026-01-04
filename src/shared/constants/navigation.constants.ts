@@ -44,7 +44,7 @@ export const MAIN_NAV_ITEMS: NavigationItem[] = [
     label: 'divider',
     icon: null,
     isDivider: true,
-    permissions: ['users.view', 'healthCenters.view', 'departments.view', 'specialties.view'],
+    permissions: ['users.view', 'healthCenters.view', 'departments.view', 'medicalSpeciality.view'],
     requireAll: false, // Mostrar si tiene AL MENOS uno de estos permisos
   },
 
@@ -77,11 +77,11 @@ export const MAIN_NAV_ITEMS: NavigationItem[] = [
 
   // === ESPECIALIDADES (admin) ===
   {
-    id: 'specialties',
-    route: ROUTES.ADMIN_SPECIALTIES,
-    label: 'nav.items.specialties',
+    id: 'medicalSpecialities',
+    route: ROUTES.SPECIALTIES,
+    label: 'nav.items.medicalSpecialities',
     icon: MedicalSimbolIcon,
-    permissions: ['specialties.view'],
+    permissions: ['medicalSpeciality.view'],
   },
 ]
 

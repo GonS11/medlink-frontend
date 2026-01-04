@@ -45,6 +45,11 @@
     "noDataFound": "No data found",
     "goBack": "Go Back",
     "export": "Export",
+    "selected": "selected",
+    "scrollForMore": "Scroll for more",
+    "years": "years",
+    "loadMore": "Load more",
+    "noData": "No data available",
     "entity": {
       "create": "Create {entity} successfully",
       "update": "Update {entity} successfully",
@@ -61,7 +66,8 @@
     "table": {
       "showing": "Showing",
       "of": "of",
-      "page": "page"
+      "page": "page",
+      "noData": "No data available"
     }
   },
   "fields": {
@@ -89,6 +95,7 @@
     "isActive": "Account Status",
     "type": "Type",
     "level": "Level",
+    "category": "Category",
     "autonomousCommunity": "Autonomous Community",
     "address": "Address",
     "city": "City",
@@ -112,7 +119,13 @@
     "isPublic": "Public Institution",
     "ownership": "Ownership",
     "accreditations": "Accreditations",
-    "services": "Services"
+    "services": "Services",
+    "requiresMIR": "Requires MIR",
+    "yearsOfTraining": "Years of Training"
+  },
+  "placeholders": {
+    "medicalSpecialityName": "E.g: Cardiology",
+    "yearsOfTraining": "E.g: 4"
   },
   "auth": {
     "login": "Login",
@@ -139,7 +152,10 @@
   },
   "languages": {
     "EN": "English",
-    "ES": "Spanish"
+    "ES": "Spanish",
+    "CA": "Catalan",
+    "EU": "Basque",
+    "GL": "Galician"
   },
   "autonomousCommunities": {
     "ANDALUCIA": "Andalusia",
@@ -198,6 +214,14 @@
     "statisticsComingSoon": "Statistics feature coming soon",
     "manageDepartments": "Manage Departments",
     "noHealthCenters": "No health centers found"
+  },
+  "medicalSpeciality": {
+    "categories": {
+      "MEDICAL": "Medical",
+      "SURGICAL": "Surgical",
+      "LABORATORY": "Laboratory",
+      "PRIMARY_CARE": "Primary Care"
+    }
   },
   "entities": {
     "user": {
@@ -290,6 +314,22 @@
       "characteristics": "Characteristics",
       "characteristicsDescription": "Additional institutional information",
       "accreditations": "Accreditations & Certifications"
+    },
+    "medicalSpeciality": {
+      "name": "Medical Speciality",
+      "plural": "Medical Specialities",
+      "view": "View Medical Specialities",
+      "create": "Create Medical Speciality",
+      "edit": "Edit Medical Speciality",
+      "delete": "Delete Medical Speciality",
+      "details": "Medical Speciality Details",
+      "notFound": "Medical Speciality not found",
+      "notFoundDesc": "The medical speciality you're looking for doesn't exist or has been deleted.",
+      "noMedicalSpecialities": "No medical specialities available",
+      "manage": "Manage medical specialities",
+      "management": "Medical Specialities Management",
+      "managementDescription": "Oversee and manage medical specialities",
+      "deleteConfirm": "Are you sure you want to delete the speciality {name}?"
     }
   },
   "dashboard": {
@@ -299,7 +339,8 @@
     "totalUsers": "Total users",
     "healthCenters": "Health centers",
     "departments": "Departments",
-    "specialties": "Specialties",
+    "specialties": "Medical Specialities",
+    "medicalSpecialities": "Medical Specialities",
     "recentActivity": "Recent activity",
     "noRecentActivity": "No recent activity"
   },
@@ -338,7 +379,7 @@
       "settings": "Settings",
       "healthCenters": "Health Centers",
       "departments": "Departments",
-      "specialties": "Specialties",
+      "medicalSpecialities": "Medical Specialities",
       "appointments": "Appointments",
       "medicalRecords": "Medical Records",
       "prescriptions": "Prescriptions",
@@ -361,6 +402,8 @@
     "invalidUrl": "Please enter a valid URL",
     "mustBeInteger": "Must be an integer",
     "minValue": "{field} must be at least {min}",
+    "min": "{field} must be at least {min}",
+    "max": "{field} must not exceed {max}",
     "maxLength": "{field} must not exceed {max} characters",
     "minLength": "{field} must be at least {min} characters long",
     "icuBedsRequired": "ICU beds are required when ICU service is enabled",
@@ -489,6 +532,7 @@
     "delete": "Delete icon",
     "edit": "Edit icon",
     "check": "Check icon",
+    "X": "X icon",
     "clearButton": "Clear button icon",
     "chevronDown": "Down arrow icon",
     "arrowLeft": "Left arrow icon",

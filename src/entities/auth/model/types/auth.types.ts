@@ -1,5 +1,5 @@
 import type {UserInfo} from '@entities/user/model/types/user.types.ts'
-import {Languages, UserRoleType} from "@shared/types/enums.types.ts";
+import {LanguageCodeType, UserRoleType} from "@shared/types/enums.types.ts";
 
 // Auth Response Types
 export interface AuthResponse {
@@ -36,5 +36,5 @@ export interface RegisterRequest {
   phone?: string
   mobilePhone?: string
   role: UserRoleType
-  preferredLanguage?: Languages
+  preferredLanguage?: LanguageCodeType
 }
